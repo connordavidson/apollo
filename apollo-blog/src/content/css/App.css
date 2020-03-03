@@ -1,0 +1,136 @@
+
+
+@media all and (min-width: 480px) {
+  .account-form {
+    background-color: white ;
+    padding: 60px 0;
+  }
+
+  .account-form form {
+    margin: 0 auto;
+    max-width: 450px;
+  }
+}
+
+
+
+a.article-link:link
+{
+   color: black;
+   text-decoration: none;
+}
+a.article-link:visited
+{
+   color: black;
+   text-decoration: none;
+}
+a.article-link:hover
+{
+   color: black;
+   text-decoration: none;
+}
+a.article-link:active
+{
+   color: black;
+   text-decoration: none;
+}
+
+
+
+.max-width-800px{
+  max-width: 800px ;
+}
+
+
+.width-250px{
+  width: 250px ;
+}
+
+
+
+
+.editor_form_control {
+  height: 200px;
+  margin-bottom:20px ;
+  width: 100%;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+
+}
+
+
+.margin-bottom-75px{
+  margin-bottom: 75px;
+}
+
+.font-size-2-5em{
+  font-size: 2.5em ;
+}
+
+
+.font-size-1-25em{
+  font-size: 1.25em ;
+}
+
+.font-size-10px{
+  font-size: "10pt";
+}
+
+.float-right{
+  float: right ;
+}
+
+.times-new-roman-font{
+  font-family: "Times New Roman" , "Times" , "Serif";
+}
+
+.verdana-font{
+  font-family: "Verdana", "Geneva", "sans-serif" ;
+}
+
+.tahoma-font{
+  font-family: "Tahoma", "Geneva", "sans-serif" ;
+}
+
+.red-text{
+  color: "red";
+}
+
+
+.padding-left-10px{
+  padding-left:10px;
+}
+
+
+
+.width-100-percent {
+  width: 100% ;
+}
+.footer {
+  padding-top: 10%;
+  /* position:absolute;
+  left:0;
+  bottom:0;
+  right:0; */
+}
+
+.app-background {
+  /* background-color: lightgrey ; */
+}
+
+.bg-navbar {
+  background-color: #34a1eb ;
+}
+
+
+.BeforeScroll {
+  /* display: none; */
+  visibility: hidden;
+}
+
+
+.AfterScroll {
+  /* display:block; */
+  visibility: visible;
+}
