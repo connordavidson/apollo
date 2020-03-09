@@ -19,7 +19,7 @@ class NavigationBar extends React.Component {
 
     return (
       <React.Fragment>
-        <div>
+
             <Navbar expand="lg" variant="light" bg="light" >
               <Navbar.Brand
                 onClick={() => this.props.history.push('/')}
@@ -29,7 +29,8 @@ class NavigationBar extends React.Component {
                   Apollo
                 </h4>
               </Navbar.Brand>
-              <Navbar.Collapse className="justify-content-end ">
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse className="justify-content-end " id="basic-navbar-nav">
                   {
                     authenticated ?
                       <React.Fragment>
@@ -44,7 +45,7 @@ class NavigationBar extends React.Component {
                   }
               </Navbar.Collapse>
             </Navbar>
-        </div>
+
         <br/>
       </React.Fragment>
     );
