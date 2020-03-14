@@ -12,6 +12,7 @@ from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
     CreateAPIView,
+    GenericAPIView ,
 
 )
 
@@ -27,6 +28,7 @@ from rest_auth.views import (
 
 )
 from django.views.generic import View
+from django.views.decorators.debug import sensitive_post_parameters
 from rest_auth.registration.views import RegisterView
 from rest_framework.authentication import TokenAuthentication
 #for getting the token of the user that is logging in
@@ -37,6 +39,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import os
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 
 
 from .models import (
@@ -53,23 +56,27 @@ from .serializers import (
     CreateCommentSerializer ,
     CreateUpvoteSerializer ,
     PasswordResetSerializer ,
-    # CustomPasswordResetConfirmSerializer ,
+    PasswordChangeSerializer ,
 
 )
 
 
 # Create your views here.
 
-
+# sensitive_post_parameters_m = method_decorator(
+#     sensitive_post_parameters(
+#         'password', 'old_password', 'new_password1', 'new_password2'
+#     )
+# )
 
 
 # from -> https://medium.com/@zackliutju/building-react-and-django-web-application-and-deploy-it-on-google-cloud-545f06eb5521
 class FrontendAppView(View):
-    print('frontendapp view !!!')
+    # print('frontendapp view !!!')
     def get(self, request):
-            print (os.path.join(settings.REACT_APP_DIR, 'build', 'index.html'))
+            # print (os.path.join(settings.REACT_APP_DIR, 'build', 'index.html'))
             try:
-                print("frontendappview inside TRY ")
+                # print("frontendappview inside TRY ")
                 with open(os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')) as f:
                     return HttpResponse(f.read())
             except FileNotFoundError:
@@ -87,10 +94,8 @@ class FrontendAppView(View):
 
 
 class ArticleListView(ListAPIView):
-    print("article LIST view")
     permission_classes = (AllowAny, )
     serializer_class = ArticleSerializer
-    print(Article.objects.all())
 
     #[::-1] reverses the list. the email popover kept glitching out the order of the articles so i just reversed the list on the backend
     #.order_by('-created_date') reverses the order by the date that they were created
@@ -98,7 +103,6 @@ class ArticleListView(ListAPIView):
 
 
 class ArticlePageView(RetrieveAPIView):
-    print("article page view")
     permission_classes = (AllowAny, )
     serializer_class = ArticleSerializer
     def get_queryset(self):
@@ -112,7 +116,6 @@ class ArticlePageView(RetrieveAPIView):
 
 
 class CreateArticleView(CreateAPIView):
-    print("create article view")
     #only allows an article to be created by an admin user
     permission_classes = (IsAdminUser, )
 
@@ -205,11 +208,66 @@ class CustomPasswordResetView(PasswordResetView):
             status=HTTP_200_OK
         )
 
-    print("END LOAD OF PAGE")
-    print("")
-    print("")
-    print("")
-    print("")
+
+
+
+
+#not using this
+class PasswordChangeView(GenericAPIView):
+    print("inside password change view")
+    """
+    Calls Django Auth SetPasswordForm save method.
+    Accepts the following POST parameters: new_password1, new_password2
+    Returns the success/fail message.
+    """
+    serializer_class = PasswordChangeSerializer
+    permission_classes = (IsAuthenticated,)
+
+    # @sensitive_post_parameters_m
+    def dispatch(self, *args, **kwargs):
+        return super(PasswordChangeView, self).dispatch(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        print("inside post")
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": _("New password has been saved.")})
+
+
+
+
+
+
+
+
+
+# class UserDetailsView(RetrieveUpdateAPIView):
+#     """
+#     Reads and updates UserModel fields
+#     Accepts GET, PUT, PATCH methods.
+#     Default accepted fields: username, first_name, last_name
+#     Default display fields: pk, username, email, first_name, last_name
+#     Read-only fields: pk, email
+#     Returns UserModel fields.
+#     """
+#     serializer_class = UserDetailsSerializer
+#     permission_classes = (AllowAny,)
+#
+#     def get_object(self):
+#         return self.request.user
+#
+#     def get_queryset(self):
+#         """
+#         Adding this method since it is sometimes called when using
+#         django-rest-swagger
+#         https://github.com/Tivix/django-rest-auth/issues/275
+#         """
+#         return get_user_model().objects.none()
+
+
+
+
 
 #
 # class CustomPasswordResetConfirmView(PasswordResetConfirmView):

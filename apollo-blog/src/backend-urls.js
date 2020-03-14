@@ -18,4 +18,10 @@ export const create_upvote_url = endpoint+`create-upvote/` ;
 
 export const reset_password_url = endpoint+`password-reset/`;
 
-export const set_new_password_url = `http://127.0.0.1:8000/rest-auth/password/reset/confirm/` ; 
+export const set_new_password_url = `http://127.0.0.1:8000/rest-auth/password/reset/confirm/` ;
+
+export const get_user_info_url = `http://127.0.0.1:8000/rest-auth/user/` ;
+
+
+
+export const change_password_url = `http://127.0.0.1:8000/password-change/` ;

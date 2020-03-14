@@ -13,6 +13,8 @@ from .views import (
     CustomPasswordResetView ,
     # CustomPasswordResetConfirmView ,
     FrontendAppView ,
+    PasswordChangeView ,
+
 )
 
 urlpatterns = [
@@ -26,7 +28,7 @@ urlpatterns = [
     path('create-upvote/' , CreateUpvoteView.as_view(), name='create-upvote') ,
     path('password-reset/' , CustomPasswordResetView.as_view() , name='password-reset') ,
     # path('password-reset-confirm/' , CustomPasswordResetConfirmView.as_view() , name='password-reset-confirm')
-
+    path('password-change/' , PasswordChangeView.as_view() , name='password-change') ,
 
     # path( '', FrontendAppView.as_view() )
 ]

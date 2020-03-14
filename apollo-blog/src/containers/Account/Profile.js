@@ -21,6 +21,7 @@ import ChangePassword from './ChangePassword'
 
 
 
+
 class Profile extends React.Component {
   state = {
     error : null , //holds the error
@@ -34,11 +35,10 @@ class Profile extends React.Component {
     console.log('token: ' + this.props.token)
     this.setState({
       loading: true ,
-      token : this.props.token ,
-
+      // token : this.props.token ,
     })
 
-    this.handleGetAccount() ;
+    // this.handleGetAccount() ;
   }
 
   handleGetAccount = () => {
@@ -46,46 +46,94 @@ class Profile extends React.Component {
       loading: true ,
 
     })
-
     console.log('username: ' + this.props.username)
+    // creates a new FormData object and adds all the form data to it
+    var article_data = new FormData();
+    article_data.append('username' , "connordavidson") ;
+    article_data.append('first_name' , "Connor") ;
+    article_data.append('last_name' , "Davidson") ;
+
     axios
-      .post( 'http://127.0.0.1:8000/rest-auth/user/' ,
+      .get( 'http://127.0.0.1:8000/rest-auth/user/' , article_data ,
         {
-          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to create an article
+          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
         }
       )
       .then(response => {
         console.log("response: " + response )
-        // this.setState({
-        //   account_info : response
-        // })
+        this.setState({
+          loading: false ,
+          //account_info : response
+        })
       })
       .catch(error => {
         console.log("error: " + error)
+        this.setState({
+          loading: false ,
+
+        })
       })
   }
+
+
+  handleChangePassword = () => {
+    this.setState({
+      loading: true
+    });
+
+    console.log("handle change password with hardcoded data")
+
+    var password_data = new FormData();
+    password_data.append('new_password1' , "password_11") ;
+    password_data.append('new_password2' , "password_11") ;
+    password_data.append('old_password' , "password_1") ;
+
+    axios
+      .post("http://127.0.0.1:8000/rest-auth/password/change/" , password_data ,
+        {
+          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
+        }
+      )
+      .then(response => {
+        console.log("response: " + response )
+        this.setState({
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log("error: " + error )
+      })
+
+
+  }
+
+
 
   handleProfileInfo = () => {
     switch(this.state.selected_button){
       case "info" :
         return(
-          <Container>
-            <h5>Change Your Password</h5>
-            <hr />
-            <Form.Group >
-              <Form.Label>Old Password</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-            <Form.Group >
-              <Form.Label>Confirm Old Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group >
-              <Form.Label>New Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button >Change Your Password </Button>
-          </Container>
+          <React.Fragment>
+            {/*<Container>
+              <h5>Change Your Password</h5>
+              <hr />
+              <Form.Group >
+                <Form.Label>Old Password</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" />
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>Confirm Old Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" />
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>New Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" />
+              </Form.Group>
+              <Button onClick={this.handleChangePassword}>Change Your Password </Button>
+            </Container>
+            */}
+            <ChangePassword />
+          </React.Fragment>
           )
         break ;
       case "email_preferences" :

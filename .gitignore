@@ -1,0 +1,14 @@
+apollo-blog/node_modules/
+
+.gcloudignore
+
+
+*.sqlite3
+
+
+migrations/
+
+__pycache__/
+
+
+/setup.cfg

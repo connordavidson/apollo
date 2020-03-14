@@ -157,6 +157,9 @@ REST_AUTH_SERIALIZERS = {
 }
 
 
+OLD_PASSWORD_FIELD_ENABLED = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
