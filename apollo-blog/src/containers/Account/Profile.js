@@ -32,7 +32,8 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
-    console.log('token: ' + this.props.token)
+    console.log('token CDM : ' + this.props.token)
+    console.log('username CDM: ' + this.props.username)
     this.setState({
       loading: true ,
       // token : this.props.token ,
@@ -48,15 +49,22 @@ class Profile extends React.Component {
     })
     console.log('username: ' + this.props.username)
     // creates a new FormData object and adds all the form data to it
-    var article_data = new FormData();
-    article_data.append('username' , "connordavidson") ;
-    article_data.append('first_name' , "Connor") ;
-    article_data.append('last_name' , "Davidson") ;
+    var account_data = new FormData();
+    account_data.append('username' , "connordavidson") ;
+    account_data.append('first_name' , "Connor") ;
+    account_data.append('last_name' , "Davidson") ;
 
+    for (var value of account_data.values()) {
+       console.log("value: " + value);
+    }
+
+    var auth_token = 'Token ' + this.props.token ;
+
+    console.log('auth token account info: ' + auth_token)
     axios
-      .get( 'http://127.0.0.1:8000/rest-auth/user/' , article_data ,
+      .post( 'http://127.0.0.1:8000/rest-auth/user/' , account_data ,
         {
-          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
+          headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
         }
       )
       .then(response => {
@@ -67,45 +75,45 @@ class Profile extends React.Component {
         })
       })
       .catch(error => {
-        console.log("error: " + error)
+        console.log("error: " + error.data)
         this.setState({
-          loading: false ,
-
+          loading : false ,
+          erorr : error.data
         })
       })
   }
 
 
-  handleChangePassword = () => {
-    this.setState({
-      loading: true
-    });
-
-    console.log("handle change password with hardcoded data")
-
-    var password_data = new FormData();
-    password_data.append('new_password1' , "password_11") ;
-    password_data.append('new_password2' , "password_11") ;
-    password_data.append('old_password' , "password_1") ;
-
-    axios
-      .post("http://127.0.0.1:8000/rest-auth/password/change/" , password_data ,
-        {
-          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
-        }
-      )
-      .then(response => {
-        console.log("response: " + response )
-        this.setState({
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log("error: " + error )
-      })
-
-
-  }
+  // handleChangePassword = () => {
+  //   this.setState({
+  //     loading: true
+  //   });
+  //
+  //   console.log("handle change password with hardcoded data")
+  //
+  //   var password_data = new FormData();
+  //   password_data.append('new_password1' , "password_11") ;
+  //   password_data.append('new_password2' , "password_11") ;
+  //   password_data.append('old_password' , "password_1") ;
+  //
+  //   axios
+  //     .post("http://127.0.0.1:8000/rest-auth/password/change/" , password_data ,
+  //       {
+  //         headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
+  //       }
+  //     )
+  //     .then(response => {
+  //       console.log("response: " + response )
+  //       this.setState({
+  //         loading: false
+  //       })
+  //     })
+  //     .catch(error => {
+  //       console.log("error: " + error )
+  //     })
+  //
+  //
+  // }
 
 
 
@@ -114,24 +122,15 @@ class Profile extends React.Component {
       case "info" :
         return(
           <React.Fragment>
-            {/*<Container>
-              <h5>Change Your Password</h5>
-              <hr />
-              <Form.Group >
-                <Form.Label>Old Password</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-              <Form.Group >
-                <Form.Label>Confirm Old Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-              <Form.Group >
-                <Form.Label>New Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-              <Button onClick={this.handleChangePassword}>Change Your Password </Button>
-            </Container>
-            */}
+            <h4>account info</h4>
+            {/*can't be in the CDM method bc the props aren't valid there.. they take a sec to load. this will be solved by putting "account info" into it's own component*/}
+            {this.handleGetAccount}
+          </React.Fragment>
+          )
+        break ;
+      case "change_password" :
+        return(
+          <React.Fragment>
             <ChangePassword />
           </React.Fragment>
           )
@@ -184,8 +183,8 @@ class Profile extends React.Component {
 
     } = this.props
 
-    console.log('username: ' + username)
-    console.log('token: ' + token)
+    // console.log('username: ' + username)
+    // console.log('token: ' + token)
 
 
     console.log(selected_button)
@@ -210,6 +209,18 @@ class Profile extends React.Component {
                         style={{cursor:"pointer"}}
                       >
                         Account Info
+                      </ListGroup.Item>
+                      <ListGroup.Item
+                        active={selected_button === "change_password"}
+                        onClick={() => {
+                            this.setState({
+                              selected_button : "change_password"
+                            })
+                          }
+                        }
+                        style={{cursor:"pointer"}}
+                      >
+                        Change Password
                       </ListGroup.Item>
                       <ListGroup.Item
                         active={selected_button === "email_preferences"}
@@ -247,14 +258,13 @@ const mapStateToProps = (state) => {
     username : state.auth.username ,
     token : state.auth.token ,
     authenticated: state.auth.token !== null ,
-
   }
 }
 
 export default
-  withRouter(
+  // withRouter(
     connect(
       mapStateToProps ,
 
-    )(Profile)
-  );
+    )(Profile) ;
+  // );

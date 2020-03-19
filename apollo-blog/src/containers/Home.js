@@ -134,22 +134,24 @@ class Home extends React.Component {
         <hr />
         <br />
 
-        <ListGroup variant="flush">
+        <ListGroup variant="flush" className="bg-app">
           {
             pinned_article !== null &&
-              <ListGroup.Item >
-                 <Link to={'blog/article/'+pinned_article.id} className="article-link">
-                   <Card className="width-100-percent margin-bottom-75px" id={pinned_article.id}>
-                     <Card.Body>
-                       <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
-                       <Card.Subtitle className="mb-2 text-muted">By <a href='#'>{pinned_article.author}</a> <Badge>{  new Date(pinned_article.created_date).toDateString() } </Badge></Card.Subtitle>
-                       <Card.Text >
-                          <RichText text={pinned_article.body +"..." } />
-                       </Card.Text>
-                     </Card.Body>
-                   </Card>
-                 </Link>
-                </ListGroup.Item>
+              <ListGroup.Item className="bg-app">
+                <Link to={'blog/article/'+pinned_article.id} className="article-link">
+                  <Card className="width-100-percent " id={pinned_article.id}>
+                    <Card.Body>
+                      <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        By <a href='#'>{pinned_article.author}</a> <Badge>{  new Date(pinned_article.created_date).toDateString() } </Badge>
+                      </Card.Subtitle>
+                      <Card.Text >
+                        <RichText text={pinned_article.body +"..." } />
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </ListGroup.Item>
           }
 
           {
@@ -159,7 +161,7 @@ class Home extends React.Component {
               articles.length > 0 ?
                 //reverse() makes the articles appear in reverse chronological order
                 articles.map(article =>  (
-                    <ListGroup.Item>
+                    <ListGroup.Item className="bg-app">
                       <Link to={'blog/article/'+article.id} className="article-link">
                         <Card className="width-100-percent" id={article.id}>
                           <Card.Body>
@@ -172,6 +174,7 @@ class Home extends React.Component {
                         </Card>
                       </Link>
                     </ListGroup.Item>
+
                   )
                 )
               :

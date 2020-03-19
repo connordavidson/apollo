@@ -18,9 +18,8 @@ class NavigationBar extends React.Component {
     const { error, loading , authenticated , username } = this.props;
 
     return (
-      <React.Fragment>
-
-            <Navbar expand="lg" variant="light" bg="light" >
+      <React.Fragment >
+            <Navbar expand="lg"  className="bg-navbar">
               <Navbar.Brand
                 onClick={() => this.props.history.push('/')}
                 style={{cursor: 'pointer'}}
@@ -34,18 +33,25 @@ class NavigationBar extends React.Component {
                   {
                     authenticated ?
                       <React.Fragment>
-                        <Nav.Link href="/profile">Hello, {username}!</Nav.Link>
-                        <Nav.Link onClick={ () => this.props.logout() }>Logout</Nav.Link>
+                        <Navbar.Text>
+                          <Nav.Link href="/profile">Hello, {username}!</Nav.Link>
+                        </Navbar.Text>
+                        <Navbar.Text>
+                          <Nav.Link onClick={ () => this.props.logout() }>Logout</Nav.Link>
+                        </Navbar.Text>
                       </React.Fragment>
                     :
                       <React.Fragment>
-                        <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/signup">Signup</Nav.Link>
+                        <Navbar.Text>
+                          <Nav.Link href="/login">Login</Nav.Link>
+                        </Navbar.Text>
+                        <Navbar.Text>
+                          <Nav.Link href="/signup">Signup</Nav.Link>
+                        </Navbar.Text>
                       </React.Fragment>
                   }
               </Navbar.Collapse>
             </Navbar>
-
         <br/>
       </React.Fragment>
     );

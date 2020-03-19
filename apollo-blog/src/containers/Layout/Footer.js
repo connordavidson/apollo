@@ -12,7 +12,7 @@ import "../../content/css/App.css";
 function Footer() {
 
   return (
-    <Container className="footer">
+    <Navbar sticky="bottom" className="footer">
       &copy; {new Date().getFullYear()}
       -
       Apollo
@@ -23,7 +23,7 @@ function Footer() {
       -
       <a href=""> Careers </a>
 
-    </Container>
+    </Navbar>
 
   );
 }

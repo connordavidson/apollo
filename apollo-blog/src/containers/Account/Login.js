@@ -70,7 +70,7 @@ class Login extends React.Component {
     return (
 
 
-      <div className="account-form">
+      <div className="account-form bg-app">
 
         <form onSubmit={this.handleSubmit}>
           <h3>Login </h3>

@@ -108,7 +108,7 @@ class  Signup extends React.Component  {
 
     console.log("error: " , error)
     return (
-      <div className="account-form">
+      <div className="account-form bg-app">
 
         <form onSubmit={this.handleSubmit}>
           <h3>Signup </h3>

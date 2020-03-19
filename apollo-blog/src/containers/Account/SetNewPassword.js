@@ -120,7 +120,7 @@ class SetNewPassword extends React.Component {
 
     return(
 
-      <div className="account-form">
+      <div className="account-form bg-app">
         <form>
           <h5>Enter New Password </h5>
 

@@ -51,13 +51,10 @@ class ChangePassword extends React.Component {
   }
 
 
-
-
   handleChangePassword = () => {
     this.setState({
       loading: true
     });
-
 
     var password_data = new FormData();
     password_data.append('new_password1' , this.state.new_password1) ;
@@ -69,9 +66,9 @@ class ChangePassword extends React.Component {
     }
     var auth_token = 'Token ' + this.props.token ;
     axios
-      .post("http://127.0.0.1:8000/rest-auth/password/change/" /*change_password_url*/ , password_data ,
+      .post( "http://127.0.0.1:8000/rest-auth/password/change/"  , password_data ,
         {
-          headers: { Authorization: auth_token } //'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
+          headers: { Authorization: auth_token } //DRF requires the token in the header to retrieve user's info
         }
       )
       .then(response => {
@@ -212,7 +209,6 @@ const mapStateToProps = (state) => {
     // username : state.auth.username ,
     token : state.auth.token ,
     // authenticated: state.auth.token !== null ,
-
   }
 }
 

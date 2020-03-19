@@ -133,10 +133,10 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
               <ListGroup
 
                 variant="flush"
-                className="sticky-top BeforeScroll"
+                className="sticky-top BeforeScroll "
               >
                 <div id="apollo_widget_left_sidebar">
-                  <ListGroup.Item>
+                  <ListGroup.Item className="bg-app">
                     <h4
                       className="verdana-font"
                       onClick={() => this.props.history.push('/')}
@@ -148,7 +148,7 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
 
                   {
                     !authenticated &&
-                    <ListGroup.Item>
+                    <ListGroup.Item className="bg-app">
                       <Link to="/signup" className="article-link">
                         <Badge >
                           Create an account

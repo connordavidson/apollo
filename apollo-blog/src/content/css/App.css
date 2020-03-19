@@ -115,12 +115,14 @@ a.article-link:active
   right:0; */
 }
 
-.app-background {
-  /* background-color: lightgrey ; */
+
+/*got these two colors from https://mycolor.space/?hex=%2334A1EB&sub=1 */
+.bg-app {
+  background-color: #FBFBF8 ;
 }
 
 .bg-navbar {
-  background-color: #34a1eb ;
+  background-color: lightblue ;
 }
 
 

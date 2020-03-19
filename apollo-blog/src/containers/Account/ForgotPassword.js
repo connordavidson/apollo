@@ -79,8 +79,8 @@ class ForgotPassword extends React.Component {
 
     return(
 
-      <div className="account-form">
-        
+      <div className="account-form bg-app">
+
           <h3>Reset Password </h3>
           <hr />
           <FormGroup controlId="email" bsSize="large">
@@ -122,7 +122,7 @@ class ForgotPassword extends React.Component {
                 {message}
               </Alert>
           }
-        
+
 
       </div>
 
