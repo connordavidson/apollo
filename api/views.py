@@ -13,6 +13,7 @@ from rest_framework.generics import (
     RetrieveAPIView,
     CreateAPIView,
     GenericAPIView ,
+    DestroyAPIView ,
 
 )
 
@@ -46,17 +47,21 @@ from .models import (
     Comment ,
     Article ,
     Email ,
-    Upvote ,
+    CommentUpvote ,
+    CommentDownvote ,
 
 )
+
 from .serializers import (
     ArticleSerializer ,
     EmailSerializer ,
     CommentSerializer ,
     CreateCommentSerializer ,
-    CreateUpvoteSerializer ,
+    CreateCommentUpvoteSerializer ,
     PasswordResetSerializer ,
     PasswordChangeSerializer ,
+    CommentUpvoteSerializer ,
+    CommentDownvoteSerializer ,
 
 )
 
@@ -155,10 +160,31 @@ class CreateCommentView(CreateAPIView):
     queryset = Comment.objects.all()
 
 
-class CreateUpvoteView(CreateAPIView):
-    permission_classes = (AllowAny, )
-    serializer_class = CreateUpvoteSerializer
-    queryset = Upvote.objects.all()
+
+
+
+
+class CommentUpvoteListView(ListAPIView):
+    permission_classes = (AllowAny , )
+    serializer_class = CommentUpvoteSerializer
+    def get_queryset(self):
+        comment_id = self.kwargs['comment_id']
+        qs = CommentUpvote.objects.all()
+        if comment_id is None :
+            return Http404("comment id not found")
+        return qs.filter(comment=comment_id)
+
+class CreateCommentUpvoteView(CreateAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CreateCommentUpvoteSerializer
+    queryset = CommentUpvote.objects.all()
+
+class RemoveCommentUpvoteView(DestroyAPIView):
+    permission_classes = (IsAuthenticated, )
+    queryset = CommentUpvote.objects.all()
+
+
+
 
 
 

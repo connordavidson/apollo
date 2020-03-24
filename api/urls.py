@@ -9,7 +9,13 @@ from .views import (
     CreateEmailView ,
     CreateCommentView ,
     CustomRegisterView ,
-    CreateUpvoteView ,
+
+
+    CreateCommentUpvoteView ,
+    RemoveCommentUpvoteView ,
+    CommentUpvoteListView ,
+
+
     CustomPasswordResetView ,
     # CustomPasswordResetConfirmView ,
     FrontendAppView ,
@@ -25,10 +31,15 @@ urlpatterns = [
     path('create-email/' , CreateEmailView.as_view() , name="create-email") ,
     path('create-comment/' , CreateCommentView.as_view() , name="create-comment") ,
     path('signup/' , CustomRegisterView.as_view() , name='register') ,
-    path('create-upvote/' , CreateUpvoteView.as_view(), name='create-upvote') ,
+
+
+    path('upvote/<comment_id>/' , CommentUpvoteListView.as_view() , name='comment-upvote-list-view') ,
+    path('create-upvote/' , CreateCommentUpvoteView.as_view(), name='create-comment-upvote') ,
+    path('remove-upvote/<pk>' , RemoveCommentUpvoteView.as_view() , name='remove-comment-upvote') ,
+
+
     path('password-reset/' , CustomPasswordResetView.as_view() , name='password-reset') ,
     # path('password-reset-confirm/' , CustomPasswordResetConfirmView.as_view() , name='password-reset-confirm')
     path('password-change/' , PasswordChangeView.as_view() , name='password-change') ,
-
     # path( '', FrontendAppView.as_view() )
 ]

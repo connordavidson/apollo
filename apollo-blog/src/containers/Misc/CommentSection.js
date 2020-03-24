@@ -19,6 +19,8 @@ import { connect } from "react-redux";
 
 
 import LoaderSpinner from './LoaderSpinner'
+import Upvote from './Upvote'
+import Downvote from './Downvote'
 import RichText from './RichText'
 import "../../content/css/App.css";
 import {
@@ -30,7 +32,6 @@ import {
 
 
 class CommentSection extends React.Component {
-
 
   state = {
     error : null , //stores any error that comes back from the database
@@ -90,31 +91,32 @@ class CommentSection extends React.Component {
 
 
 
-  handleUpvote = ( id , user_id , comment ) => {
-
-    console.log('upvote')
-    var voted = false
-    for(var i = 0 ;  i < comment.upvotes.length ; i++){
-      console.log(comment.upvotes[i].user)
-      if(comment.upvotes[i].user === user_id){
-        voted = true ;
-        break;
-      }
-    }
-    
-    var upvote_data = new FormData() ;
-    upvote_data.append('comment' , id )
-    upvote_data.append('user' , user_id)
-    // axios
-    //   .post(create_upvote_url , upvote_data)
-    //   .then(response => {
-    //     console.log('upvote created for ' + upvote_data.comment)
-    //
-    //   })
-    //   .catch(error => {
-    //     console.log('error creating upvote: ' + upvote_data.comment)
-    //   })
-  }
+  // handleUpvote = ( comment_id , user_id , comment ) => {
+  //
+  //   console.log('upvote')
+  //   var voted = false
+  //   for(var i = 0 ;  i < comment.upvotes.length ; i++){
+  //     console.log(comment.upvotes[i].user)
+  //     if(comment.upvotes[i].user === user_id){
+  //       voted = true ;
+  //       console.log('voted')
+  //       break;
+  //     }
+  //   }
+  //
+  //   var upvote_data = new FormData() ;
+  //   upvote_data.append('comment' , comment_id )
+  //   upvote_data.append('user' , user_id)
+  //   axios
+  //     .post(create_upvote_url , upvote_data)
+  //     .then(response => {
+  //       console.log('upvote created for ' + upvote_data.comment.author)
+  //
+  //     })
+  //     .catch(error => {
+  //       console.log('error creating upvote: ' + upvote_data.comment)
+  //     })
+  // }
 
 
 
@@ -133,10 +135,12 @@ class CommentSection extends React.Component {
     const {
       comments ,
       user_id ,
-
     } = this.props
 
+
+
     console.log(comments);
+    // console.log(user_id) ;
 
     return(
         <div >
@@ -146,6 +150,7 @@ class CommentSection extends React.Component {
                 {
                   comments  ?
                     comments.map(comment => (
+
                       <React.Fragment>
                         <Card >
                           <Card.Body>
@@ -159,20 +164,18 @@ class CommentSection extends React.Component {
                               <RichText text={comment.body} />
                             </Card.Text>
 
-                            <Badge
-                              onClick={() => this.handleUpvote(comment.id , user_id , comment)}
-                              style={{cursor: 'pointer' , }}
-                            >
-                              Upvote
-                            </Badge>
-                            <Badge>{comment.upvotes.length}</Badge>
-                            <br/>
-                            <Badge
+                            <Upvote upvotes={comment.upvotes} comment_id={comment.id} />
+                            {' '}
+
+                            <Downvote upvotes={comment.upvotes} comment_id={comment.id} />
+                            {/*
+                              <Badge
                               onClick={(id ,e) => this.handleUpvote(comment.id)}
                               style={{cursor: 'pointer' , }}
                             >
                               Downvote
                             </Badge>
+                            */}
 
                           </Card.Body>
                         </Card>

@@ -27,7 +27,7 @@ class Profile extends React.Component {
     error : null , //holds the error
     loading : true , //to determine if the page is loading
     account_info : [] , //holds the account info
-    selected_button : "info" , //changes whenever a user selected a button. is on the top button by default
+    selected_button : "change_password" , //changes whenever a user selected a button. is on the top button by default
 
   }
 
@@ -84,50 +84,8 @@ class Profile extends React.Component {
   }
 
 
-  // handleChangePassword = () => {
-  //   this.setState({
-  //     loading: true
-  //   });
-  //
-  //   console.log("handle change password with hardcoded data")
-  //
-  //   var password_data = new FormData();
-  //   password_data.append('new_password1' , "password_11") ;
-  //   password_data.append('new_password2' , "password_11") ;
-  //   password_data.append('old_password' , "password_1") ;
-  //
-  //   axios
-  //     .post("http://127.0.0.1:8000/rest-auth/password/change/" , password_data ,
-  //       {
-  //         headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to retrieve user's info
-  //       }
-  //     )
-  //     .then(response => {
-  //       console.log("response: " + response )
-  //       this.setState({
-  //         loading: false
-  //       })
-  //     })
-  //     .catch(error => {
-  //       console.log("error: " + error )
-  //     })
-  //
-  //
-  // }
-
-
-
   handleProfileInfo = () => {
     switch(this.state.selected_button){
-      case "info" :
-        return(
-          <React.Fragment>
-            <h4>account info</h4>
-            {/*can't be in the CDM method bc the props aren't valid there.. they take a sec to load. this will be solved by putting "account info" into it's own component*/}
-            {this.handleGetAccount}
-          </React.Fragment>
-          )
-        break ;
       case "change_password" :
         return(
           <React.Fragment>
@@ -193,11 +151,13 @@ class Profile extends React.Component {
         {
           authenticated  ?
             <Container>
-              <h4>Account info for {username}</h4>
+              <h4>Account Information for {username}</h4>
+              <hr />
               <Row>
                 <Col sm={{ span: 3 }}>
                   <Card>
                     <ListGroup variant="flush">
+                      {/*
                       <ListGroup.Item
                         active={selected_button === "info"}
                         onClick={() => {
@@ -210,18 +170,15 @@ class Profile extends React.Component {
                       >
                         Account Info
                       </ListGroup.Item>
+                      */}
                       <ListGroup.Item
-                        active={selected_button === "change_password"}
-                        onClick={() => {
-                            this.setState({
-                              selected_button : "change_password"
-                            })
-                          }
-                        }
+                        active={selected_button !== "change_password"}
+
                         style={{cursor:"pointer"}}
                       >
                         Change Password
                       </ListGroup.Item>
+                      {/*
                       <ListGroup.Item
                         active={selected_button === "email_preferences"}
                         onClick={() => {
@@ -234,6 +191,7 @@ class Profile extends React.Component {
                       >
                         Email Preferences
                       </ListGroup.Item>
+                      */}
                     </ListGroup>
                   </Card>
                 </Col>

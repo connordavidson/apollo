@@ -11,6 +11,7 @@ import {
   Badge ,
   Alert ,
   Row ,
+  Navbar ,
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
@@ -104,14 +105,18 @@ class Home extends React.Component {
     return(
 
       <React.Fragment>
-        <Container>
           <Row>
-            <Col sm={{span:4}}>
-              <h1 className="verdana-font">
-                The Apollo Blog
-              </h1>
-            </Col>
-            <Col sm={{offset:9}}>
+              <Navbar>
+                <Navbar.Brand>
+                  <h1 className="verdana-font">
+                    The Apollo Blog
+                  </h1>
+                </Navbar.Brand>
+                <Navbar.Text><h5 className="verdana-font">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
+              </Navbar>
+          </Row>
+          <Row>
+            <Col >
               {
                 authenticated ?
                   token === "8582b323219d80196bb1e017411808a67fe70365" &&
@@ -130,9 +135,8 @@ class Home extends React.Component {
             </Col>
           </Row>
 
-        </Container>
         <hr />
-        <br />
+
 
         <ListGroup variant="flush" className="bg-app">
           {
@@ -143,7 +147,7 @@ class Home extends React.Component {
                     <Card.Body>
                       <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
                       <Card.Subtitle className="mb-2 text-muted">
-                        By <a href='#'>{pinned_article.author}</a> <Badge>{  new Date(pinned_article.created_date).toDateString() } </Badge>
+                        By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
                       </Card.Subtitle>
                       <Card.Text >
                         <RichText text={pinned_article.body +"..." } />
@@ -166,7 +170,7 @@ class Home extends React.Component {
                         <Card className="width-100-percent" id={article.id}>
                           <Card.Body>
                             <Card.Title>{article.title}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">By <a href='#'>{article.author}</a> <Badge>{  new Date(article.created_date).toDateString() } </Badge></Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge></Card.Subtitle>
                             <Card.Text >
                               <RichText text={article.body.substring(0, 200) + '...'} />
                             </Card.Text>

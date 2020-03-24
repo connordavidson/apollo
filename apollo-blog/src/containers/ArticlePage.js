@@ -56,7 +56,7 @@ class ArticlePage extends React.Component  {
     axios
       .get(article_url(article_id) )
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         this.setState({
           loading: false ,
           article_data: response.data ,
@@ -188,24 +188,21 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                             {  article_data['title'] }
                           </h1>
 
-                            <h6 className="padding-left-10px">
-                              By { article_data['author']} <Badge>{ article_date }</Badge>
-                              <div className="float-right">
-                                <a href={twitter_link} >
-                                  <TwitterLogo />
-                                </a>
-
-
-                                <a href={facebook_link}>
-                                  <FacebookLogo />
-                                </a>
-                              </div>
-                            </h6>
-
+                          <h6 className="padding-left-10px">
+                            By { article_data['author']}, <Badge>{ article_date }</Badge>
+                            <div className="float-right">
+                              <a href={twitter_link} >
+                                <TwitterLogo />
+                              </a>
+                              <a href={facebook_link}>
+                                <FacebookLogo />
+                              </a>
+                            </div>
+                          </h6>
 
                           <hr />
-                          {/*Displays the body of the article in Rich Text*/}
 
+                          {/*Displays the body of the article in Rich Text*/}
                           <RichText  text={article_data['body']} classes="times-new-roman-font"/>
                         </React.Fragment>
                       :

@@ -24,11 +24,13 @@ class App extends React.Component {
     return(
       <div className="bg-app" >
         <Router >
-          <Container >
+
             <NavigationBar/>
-            <BaseRouter/>
-            <Footer className="footer"/>
-          </Container>
+              <Container >
+                <BaseRouter/>
+              </Container>
+            <Footer />
+
         </Router>
       </div>
     )

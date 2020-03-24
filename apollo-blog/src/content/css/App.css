@@ -35,7 +35,9 @@ a.article-link:active
    text-decoration: none;
 }
 
-
+.cursor-pointer {
+  cursor: pointer;
+}
 
 .max-width-800px{
   max-width: 800px ;
@@ -45,7 +47,6 @@ a.article-link:active
 .width-250px{
   width: 250px ;
 }
-
 
 
 
@@ -102,11 +103,10 @@ a.article-link:active
   padding-left:10px;
 }
 
-
-
 .width-100-percent {
   width: 100% ;
 }
+
 .footer {
   padding-top: 10%;
   /* position:absolute;
@@ -115,14 +115,33 @@ a.article-link:active
   right:0; */
 }
 
+.padding-top-3-percent {
+  padding-top: 3%;
+}
 
-/*got these two colors from https://mycolor.space/?hex=%2334A1EB&sub=1 */
 .bg-app {
   background-color: #FBFBF8 ;
 }
 
+.btn-main-color-blue {
+  background-color: #5fc9f8;
+  color: white;
+  border-color: #5fc9f8 ;
+
+}
+
+
 .bg-navbar {
-  background-color: lightblue ;
+  background-color: #5fc9f8 ;
+}
+
+
+
+.color-green {
+  color: green ;
+}
+.color-red {
+  color: red ;
 }
 
 

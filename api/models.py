@@ -12,12 +12,20 @@ from django.contrib.auth.models import User
 
 
 
-class Upvote(models.Model):
+class CommentUpvote(models.Model):
     comment = models.ForeignKey('Comment' , related_name='upvotes' , on_delete=models.CASCADE , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='updates' , on_delete=models.CASCADE , null =True , blank=True)
+    user = models.ForeignKey(User , related_name='comment_upvotes' , on_delete=models.CASCADE , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
-    def __str__(self):
-        return self.comment.author
+
+
+class CommentDownvote(models.Model):
+    comment = models.ForeignKey('Comment' , related_name='downvotes' , on_delete=models.CASCADE , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='comment_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    created_date = models.DateTimeField(auto_now_add=True , null=True)
+
+
+
+
 
 class Comment(models.Model):
     body = models.TextField()
@@ -57,6 +65,6 @@ class Email(models.Model):
 #stores a user's email preferences
 class EmailPreferences(models.Model):
     user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.CASCADE ,  null =True , blank=True)
-    
+
     def _str_(self):
         return self.user

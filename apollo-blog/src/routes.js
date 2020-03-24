@@ -12,6 +12,7 @@ import Signup from './containers/Account/Signup';
 import Profile from './containers/Account/Profile';
 import ForgotPassword from './containers/Account/ForgotPassword';
 import SetNewPassword from './containers/Account/SetNewPassword';
+import Careers from './containers/Careers';
 
 
 
@@ -31,6 +32,7 @@ const BaseRouter = () => (
     <Route exact path="/create-article" component={CreateArticle} />
     <Route exact path="/reset-password" component={ForgotPassword} />
     <Route exact path="/reset-password/:uid/:token" component={SetNewPassword}/>
+    <Route exact path="/careers" component={Careers} />
 
   </Hoc>
 );

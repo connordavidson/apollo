@@ -3,7 +3,8 @@ from .models import (
         Article,
         Comment ,
         Email ,
-        Upvote ,
+        CommentUpvote ,
+        CommentDownvote ,
         
     )
 # Register your models here.
@@ -15,4 +16,5 @@ from .models import (
 admin.site.register(Article)
 admin.site.register(Comment)
 admin.site.register(Email)
-admin.site.register(Upvote)
+admin.site.register(CommentUpvote)
+admin.site.register(CommentDownvote)

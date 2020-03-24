@@ -25,7 +25,9 @@ class ChangePassword extends React.Component {
     old_password : "" , //holds the old password from the user input
     new_password1 : "" , //holds the first password from the user input
     new_password2 : "" , //holds the confirm password from user input
-    reset_password : null , //holds the success message from the backend
+    reset_password : null , //holds the success message from the backen
+    passwords_match : true , //determines if the new passwords match
+
   }
 
 
@@ -37,17 +39,38 @@ class ChangePassword extends React.Component {
   }
 
   handlePassword = (text) => {
-    console.log("new password 1 :" + text.target.value)
-    this.setState({
-      new_password1: text.target.value
-    });
+    if(this.state.confirm_password != text.target.value)
+    {
+      this.setState({
+        passwords_match : false ,
+        new_password1 : text.target.value
+      });
+    }else{
+      this.setState({
+        passwords_match : true ,
+        new_password1 : text.target.value
+      });
+    }
   }
 
   handleConfirmPassword = (text) => {
-    console.log("new password 2 :" + text.target.value)
-    this.setState({
-      new_password2: text.target.value
-    });
+
+    if(this.state.password != text.target.value)
+    {
+      this.setState({
+        passwords_match : false ,
+        new_password2 : text.target.value
+      });
+    }else{
+      this.setState({
+        passwords_match : true ,
+        new_password2 : text.target.value
+      });
+    }
+    // console.log("new password 2 :" + text.target.value)
+    // this.setState({
+    //   new_password2: text.target.value
+    // });
   }
 
 
@@ -76,14 +99,16 @@ class ChangePassword extends React.Component {
         this.setState({
           loading : false ,
           error : null ,
-          reset_password : response.data.detail
+          reset_password : response.data.detail ,
+          passwords_match : true ,
         })
       })
       .catch(error => {
         console.log("error: " + error.response.data )
         this.setState({
           loading: false ,
-          error : error.response.data
+          error : error.response.data ,
+          passwords_match : true ,
         })
       })
   }
@@ -102,6 +127,7 @@ class ChangePassword extends React.Component {
       new_password2 ,
       old_password ,
       reset_password ,
+      passwords_match ,
 
     } = this.state ;
 
@@ -171,6 +197,10 @@ class ChangePassword extends React.Component {
 
         <br/>
         <br />
+        {
+          !passwords_match &&
+          <Alert variant="danger">Your passwords must match</Alert>
+        }
 
         {
           reset_password &&

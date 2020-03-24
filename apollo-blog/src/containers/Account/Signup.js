@@ -150,7 +150,7 @@ class  Signup extends React.Component  {
             />
           </FormGroup>
 
-          <Button block bsSize="large" disabled={!this.handleValidated()} type="submit">
+          <Button block bsSize="large" disabled={!this.handleValidated()} type="submit" >
             Signup
           </Button>
           <Badge> Already have an account? <NavLink to="/login">Login </NavLink> </Badge>

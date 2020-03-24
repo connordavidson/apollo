@@ -13,18 +13,15 @@ function Footer() {
 
   return (
     <Navbar sticky="bottom" className="footer">
-      &copy; {new Date().getFullYear()}
-      -
-      Apollo
-      -
-      <a href="" > Legal </a>
-      -
-      <a href="" > Privacy </a>
-      -
-      <a href=""> Careers </a>
-
+      <Container>
+        <Navbar.Text >&copy; {new Date().getFullYear()} - Apollo</Navbar.Text>
+        <Nav>
+          <Navbar.Text ><Nav.Link href="#">Legal</Nav.Link></Navbar.Text>
+          <Navbar.Text ><Nav.Link href="#">Privacy</Nav.Link></Navbar.Text>
+          <Navbar.Text ><Nav.Link href="/careers">Careers</Nav.Link></Navbar.Text>
+        </Nav>
+      </Container>
     </Navbar>
-
   );
 }
 

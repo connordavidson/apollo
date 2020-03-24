@@ -8,7 +8,8 @@ from .models import (
     Comment ,
     Article ,
     Email ,
-    Upvote ,
+    CommentUpvote ,
+    CommentDownvote ,
 
 )
 
@@ -17,17 +18,42 @@ from .models import (
 
 
 
-class UpvoteSerializer(serializers.ModelSerializer):
+class CommentUpvoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Upvote
+        model = CommentUpvote
+        fields = (
+            'id' ,
+            'user' ,
+            # 'comment'
+        )
+
+class CreateCommentUpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentUpvote
         fields = (
             'comment',
             'user' ,
         )
+    def create(self, validated_data):
+        return CommentUpvote.objects.create(**validated_data)
+
+
+class CommentDownvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentDownvote
+        fields = (
+            'id' ,
+            'user' ,
+            # 'comment'
+        )
+
+
+
+
+
 
 class CommentSerializer(serializers.ModelSerializer):
-    upvotes = UpvoteSerializer(many=True , read_only=True)
-
+    upvotes = CommentUpvoteSerializer(many=True , read_only=True)
     class Meta:
         model = Comment
         fields = (
@@ -40,9 +66,10 @@ class CommentSerializer(serializers.ModelSerializer):
             "article"
         )
 
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True , read_only=True)
-
     class Meta:
         model = Article
         fields = (
@@ -54,6 +81,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'comments' ,
             'pinned' ,
         )
+
 
 class EmailSerializer(serializers.ModelSerializer):
 
@@ -80,15 +108,7 @@ class CreateCommentSerializer(serializers.ModelSerializer):
         return Comment.objects.create(**validated_data)
 
 
-class CreateUpvoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Upvote
-        fields = (
-            'comment',
-            'user' ,
-        )
-    def create(self, validated_data):
-        return Upvote.objects.create(**validated_data)
+
 
 
 

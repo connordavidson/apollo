@@ -181,28 +181,16 @@ class CreateArticle extends React.Component  {
               (
                 <React.Fragment>
                 <Card >
-                  <Card.Header><h3>Add an Article</h3></Card.Header>
+                  <Card.Header as="h3">Add an Article</Card.Header>
                   <Card.Body>
                     <Card.Text>
                       <Form>
-                        {/*
-                          <Form.Row>
-                            <Form.Label>Your Name:</Form.Label>
-                            <Form.Control
-                              required
-                              type="text"
-                              placeholder="Enter Name"
-                              // onChange = {this.handleAuthor}
-                            />
-                          </Form.Row>
-                        */}
-                        <br />
                         <Form.Row>
                           <Form.Label>Article Title:</Form.Label>
                           <Form.Control
                             required
                             type="text"
-                            placeholder="Enter Name"
+                            placeholder="Enter Title"
                             onChange = {this.handleTitle}
                           />
                         </Form.Row>
