@@ -19,8 +19,8 @@ import { connect } from "react-redux";
 
 
 import LoaderSpinner from './LoaderSpinner'
-import Upvote from './Upvote'
-import Downvote from './Downvote'
+import CommentUpvote from './CommentUpvote'
+import CommentDownvote from './CommentDownvote'
 import RichText from './RichText'
 import "../../content/css/App.css";
 import {
@@ -90,37 +90,6 @@ class CommentSection extends React.Component {
 
 
 
-
-  // handleUpvote = ( comment_id , user_id , comment ) => {
-  //
-  //   console.log('upvote')
-  //   var voted = false
-  //   for(var i = 0 ;  i < comment.upvotes.length ; i++){
-  //     console.log(comment.upvotes[i].user)
-  //     if(comment.upvotes[i].user === user_id){
-  //       voted = true ;
-  //       console.log('voted')
-  //       break;
-  //     }
-  //   }
-  //
-  //   var upvote_data = new FormData() ;
-  //   upvote_data.append('comment' , comment_id )
-  //   upvote_data.append('user' , user_id)
-  //   axios
-  //     .post(create_upvote_url , upvote_data)
-  //     .then(response => {
-  //       console.log('upvote created for ' + upvote_data.comment.author)
-  //
-  //     })
-  //     .catch(error => {
-  //       console.log('error creating upvote: ' + upvote_data.comment)
-  //     })
-  // }
-
-
-
-
   render(){
 
     const {
@@ -144,7 +113,7 @@ class CommentSection extends React.Component {
 
     return(
         <div >
-          <h1 className="tahoma-font">Article Comments</h1>
+          <h2 className="tahoma-font">Article Comments</h2>
           <hr />
           <Container>
                 {
@@ -156,27 +125,18 @@ class CommentSection extends React.Component {
                           <Card.Body>
                             <Card.Title>{comment.author}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">
-                              {
-                                 new Date(comment.created_date).toDateString()
-                              }
+                              { new Date(comment.created_date).toDateString() }
                             </Card.Subtitle>
+
                             <Card.Text>
                               <RichText text={comment.body} />
                             </Card.Text>
 
-                            <Upvote upvotes={comment.upvotes} comment_id={comment.id} />
+                            <CommentUpvote comment_id={comment.id} />
                             {' '}
-
-                            <Downvote upvotes={comment.upvotes} comment_id={comment.id} />
-                            {/*
-                              <Badge
-                              onClick={(id ,e) => this.handleUpvote(comment.id)}
-                              style={{cursor: 'pointer' , }}
-                            >
-                              Downvote
-                            </Badge>
-                            */}
-
+                            <CommentDownvote comment_id={comment.id} />
+                            {' '}
+                            {/*<Alert variant="dark"> You must sign in to do that </Alert>*/}
                           </Card.Body>
                         </Card>
                         <hr />

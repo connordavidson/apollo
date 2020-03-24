@@ -5,19 +5,21 @@ import {
   Badge ,
 
 } from 'react-bootstrap';
+import { ChevronUp } from 'react-bootstrap-icons';
+
 import { connect } from "react-redux";
 
 import {
-  create_upvote_url ,
-  remove_upvote_url ,
-  get_upvotes_url ,
+  create_comment_upvote_url ,
+  remove_comment_upvote_url ,
+  get_comment_upvotes_url ,
 
 } from "../../backend-urls.js" ;
 //should get triggered if the user enteres a URL that is nonexistant..
 //if they enter "apollo.com/buystuff" it'll redirect here. try something with wildcards?? idk
 // or with something like this.  <Route exact path="*" component={Error} />
 
-class Upvote extends React.Component {
+class CommentUpvote extends React.Component {
 
   state = {
     upvoted : false , //if the user has given this comment an upvote
@@ -34,9 +36,9 @@ class Upvote extends React.Component {
 
   handleGetUpvotes = () => {
     axios
-      .get(get_upvotes_url(this.props.comment_id))
+      .get(get_comment_upvotes_url(this.props.comment_id))
       .then(response => {
-        console.log("response: " + response.data )
+        // console.log("response: " + response.data )
         response.data.forEach( upvote => {
           if(upvote.user === parseInt(this.props.user_id) ){
             this.setState({
@@ -60,22 +62,6 @@ class Upvote extends React.Component {
 
 
 
-  //used when the upvotes get passed in as props
-  // handleUpvoted = () => {
-  //   //loops through all the upvotes and determines if the user_id matches one of the user fields from the upvotes
-  //   // this.props.upvotes.forEach( upvote => { //works when the upvotes get passed in as a prop
-  //   this.state.upvotes.forEach( upvote => {
-  //     if(upvote.user === parseInt(this.props.user_id) ){
-  //       this.setState({
-  //         upvoted : true ,
-  //         upvote_id : upvote.id
-  //       })
-  //     }
-  //   })
-  //
-  // }
-
-
 
 
   handleUpvoteClick = ( text ) => {
@@ -84,7 +70,7 @@ class Upvote extends React.Component {
     if(this.state.upvoted){
 
       axios
-        .delete( remove_upvote_url(this.state.upvote_id) ,
+        .delete( remove_comment_upvote_url(this.state.upvote_id) ,
           {
             headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
           }
@@ -108,7 +94,7 @@ class Upvote extends React.Component {
       upvote_data.append('user' , this.props.user_id)
 
       axios
-        .post(create_upvote_url , upvote_data ,
+        .post(create_comment_upvote_url , upvote_data ,
           {
             headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
           }
@@ -138,14 +124,14 @@ class Upvote extends React.Component {
       user_id ,
     } = this.props
 
-    console.log( "number_of_upvotes : " + number_of_upvotes )
+    // console.log( "number_of_upvotes : " + number_of_upvotes )
     return(
 
       <Badge
         onClick={this.handleUpvoteClick}
         className={(upvoted ? "cursor-pointer color-green " : "cursor-pointer" )}
         >
-        Upvote { number_of_upvotes}
+        <ChevronUp size={25}/> {number_of_upvotes}
       </Badge>
 
     )
@@ -167,4 +153,4 @@ export default
   connect(
     mapStateToProps ,
 
-  )(Upvote) ;
+  )(CommentUpvote) ;

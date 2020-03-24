@@ -23,10 +23,6 @@ class CommentDownvote(models.Model):
     user = models.ForeignKey(User , related_name='comment_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
-
-
-
-
 class Comment(models.Model):
     body = models.TextField()
     #automatically fills the value when it gets inserted
@@ -39,6 +35,24 @@ class Comment(models.Model):
     def __str__(self):
         return self.author
 
+
+
+
+
+class ArticleUpvote(models.Model):
+    article = models.ForeignKey('Article' , related_name='upvotes' , on_delete=models.CASCADE , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='article_upvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    created_date = models.DateTimeField(auto_now_add=True , null=True)
+
+class ArticleDownvote(models.Model):
+    article = models.ForeignKey('Article' , related_name='downvotes' , on_delete=models.CASCADE , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='article_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    created_date = models.DateTimeField(auto_now_add=True , null=True)
+
+
+
+
+
 class Article(models.Model):
     title = models.CharField(max_length=140)
     body = models.TextField()
@@ -49,6 +63,7 @@ class Article(models.Model):
     pinned = models.BooleanField(default=False)
     def __str__(self):
         return self.title
+
 
 
 

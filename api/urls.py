@@ -15,6 +15,17 @@ from .views import (
     RemoveCommentUpvoteView ,
     CommentUpvoteListView ,
 
+    CommentDownvoteListView ,
+    CreateCommentDownvoteView ,
+    RemoveCommentDownvoteView ,
+
+    ArticleUpvoteListView ,
+    CreateArticleUpvoteView ,
+    RemoveArticleUpvoteView ,
+
+    ArticleDownvoteListView ,
+    CreateArticleDownvoteView ,
+    RemoveArticleDownvoteView ,
 
     CustomPasswordResetView ,
     # CustomPasswordResetConfirmView ,
@@ -32,10 +43,21 @@ urlpatterns = [
     path('create-comment/' , CreateCommentView.as_view() , name="create-comment") ,
     path('signup/' , CustomRegisterView.as_view() , name='register') ,
 
+    path('comment-upvote/<comment_id>/' , CommentUpvoteListView.as_view() , name='comment-upvote-list-view') ,
+    path('create-comment-upvote/' , CreateCommentUpvoteView.as_view(), name='create-comment-upvote') ,
+    path('remove-comment-upvote/<pk>' , RemoveCommentUpvoteView.as_view() , name='remove-comment-upvote') ,
 
-    path('upvote/<comment_id>/' , CommentUpvoteListView.as_view() , name='comment-upvote-list-view') ,
-    path('create-upvote/' , CreateCommentUpvoteView.as_view(), name='create-comment-upvote') ,
-    path('remove-upvote/<pk>' , RemoveCommentUpvoteView.as_view() , name='remove-comment-upvote') ,
+    path('comment-downvote/<comment_id>/' , CommentDownvoteListView.as_view() , name='comment-downvote-list-view') ,
+    path('create-comment-downvote/' , CreateCommentDownvoteView.as_view(), name='create-comment-downvote') ,
+    path('remove-comment-downvote/<pk>' , RemoveCommentDownvoteView.as_view() , name='remove-comment-downvote') ,
+
+    path('article-upvote/<article_id>/' , ArticleUpvoteListView.as_view() , name='article-upvote-list-view') ,
+    path('create-article-upvote/' , CreateArticleUpvoteView.as_view(), name='create-article-upvote') ,
+    path('remove-article-upvote/<pk>' , RemoveArticleUpvoteView.as_view() , name='remove-article-upvote') ,
+
+    path('article-downvote/<article_id>/' , ArticleDownvoteListView.as_view() , name='article-downvote-list-view') ,
+    path('create-article-downvote/' , CreateArticleDownvoteView.as_view(), name='create-article-downvote') ,
+    path('remove-article-downvote/<pk>' , RemoveArticleDownvoteView.as_view() , name='remove-article-downvote') ,
 
 
     path('password-reset/' , CustomPasswordResetView.as_view() , name='password-reset') ,

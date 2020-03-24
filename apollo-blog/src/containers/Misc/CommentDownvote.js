@@ -4,15 +4,17 @@ import {
   Badge ,
 
 } from 'react-bootstrap';
+import { ChevronDown } from 'react-bootstrap-icons';
+
 import { connect } from "react-redux";
 import {
-  create_upvote_url ,
-  remove_upvote_url ,
-  get_upvotes_url ,
+  create_comment_downvote_url ,
+  remove_comment_downvote_url ,
+  get_comment_downvotes_url ,
 
 } from "../../backend-urls.js" ;
 
-class Downvote extends React.Component {
+class CommentDownvote extends React.Component {
 
   state = {
     downvoted : false , //if the user has given this comment an upvote
@@ -30,10 +32,10 @@ class Downvote extends React.Component {
 
   handleGetDownvotes = () => {
     axios
-      .get(get_upvotes_url(this.props.comment_id))
+      .get(get_comment_downvotes_url(this.props.comment_id))
       .then(response => {
 
-        console.log("response: " + response.data )
+        // console.log("response: " + response.data )
         response.data.forEach( downvote => {
           if(downvote.user === parseInt(this.props.user_id) ){
             this.setState({
@@ -63,7 +65,7 @@ class Downvote extends React.Component {
     if(this.state.downvoted){
 
       axios
-        .delete( remove_upvote_url(this.state.downvote_id) ,
+        .delete( remove_comment_downvote_url(this.state.downvote_id) ,
           {
             headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
           }
@@ -87,7 +89,7 @@ class Downvote extends React.Component {
       downvote_data.append('user' , this.props.user_id)
 
       axios
-        .post(create_upvote_url , downvote_data ,
+        .post(create_comment_downvote_url , downvote_data ,
           {
             headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
           }
@@ -105,9 +107,6 @@ class Downvote extends React.Component {
   }
 
 
-
-
-
   render(){
     const {
       upvoted ,
@@ -121,17 +120,15 @@ class Downvote extends React.Component {
     } = this.props
 
 
-
     return(
       <Badge
         onClick={this.handleDownvoteClick}
         className={(this.state.downvoted ? "cursor-pointer color-red " : "cursor-pointer" )}
         >
-        Downvote { number_of_downvotes}
+        <ChevronDown size={25}/> {number_of_downvotes}
       </Badge>
     )
   }
-
 }
 
 
@@ -149,4 +146,4 @@ export default
   connect(
     mapStateToProps ,
 
-  )(Downvote) ;
+  )(CommentDownvote) ;

@@ -8,8 +8,12 @@ from .models import (
     Comment ,
     Article ,
     Email ,
+
     CommentUpvote ,
     CommentDownvote ,
+
+    ArticleUpvote ,
+    ArticleDownvote ,
 
 )
 
@@ -46,7 +50,15 @@ class CommentDownvoteSerializer(serializers.ModelSerializer):
             'user' ,
             # 'comment'
         )
-
+class CreateCommentDownvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentDownvote
+        fields = (
+            'comment',
+            'user' ,
+        )
+    def create(self, validated_data):
+        return CommentDownvote.objects.create(**validated_data)
 
 
 
@@ -65,6 +77,57 @@ class CommentSerializer(serializers.ModelSerializer):
             "upvotes" ,
             "article"
         )
+
+
+
+
+
+
+
+
+class ArticleUpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleUpvote
+        fields = (
+            'id' ,
+            'user' ,
+            # 'comment'
+        )
+
+class CreateArticleUpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleUpvote
+        fields = (
+            'article',
+            'user' ,
+        )
+    def create(self, validated_data):
+        return ArticleUpvote.objects.create(**validated_data)
+
+
+
+class ArticleDownvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleDownvote
+        fields = (
+            'id' ,
+            'user' ,
+            # 'comment'
+        )
+
+class CreateArticleDownvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleDownvote
+        fields = (
+            'article',
+            'user' ,
+        )
+    def create(self, validated_data):
+        return ArticleDownvote.objects.create(**validated_data)
+
+
+
+
 
 
 

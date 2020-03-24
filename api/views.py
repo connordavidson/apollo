@@ -49,19 +49,31 @@ from .models import (
     Email ,
     CommentUpvote ,
     CommentDownvote ,
+    ArticleUpvote ,
+    ArticleDownvote ,
 
 )
 
 from .serializers import (
     ArticleSerializer ,
     EmailSerializer ,
+
     CommentSerializer ,
     CreateCommentSerializer ,
-    CreateCommentUpvoteSerializer ,
+
     PasswordResetSerializer ,
     PasswordChangeSerializer ,
+
     CommentUpvoteSerializer ,
+    CreateCommentUpvoteSerializer ,
     CommentDownvoteSerializer ,
+    CreateCommentDownvoteSerializer ,
+
+    ArticleUpvoteSerializer ,
+    CreateArticleUpvoteSerializer ,
+
+    ArticleDownvoteSerializer ,
+    CreateArticleDownvoteSerializer ,
 
 )
 
@@ -129,6 +141,62 @@ class CreateArticleView(CreateAPIView):
     queryset = Article.objects.all()
 
 
+
+
+
+
+
+
+class ArticleUpvoteListView(ListAPIView):
+    permission_classes = (AllowAny , )
+    serializer_class = ArticleUpvoteSerializer
+    def get_queryset(self):
+        article_id = self.kwargs['article_id']
+        qs = ArticleUpvote.objects.all()
+        if article_id is None :
+            return Http404("article id not found")
+        return qs.filter(article=article_id)
+
+class CreateArticleUpvoteView(CreateAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CreateArticleUpvoteSerializer
+    queryset = ArticleUpvote.objects.all()
+
+class RemoveArticleUpvoteView(DestroyAPIView):
+    permission_classes = (IsAuthenticated, )
+    queryset = ArticleUpvote.objects.all()
+
+
+
+class ArticleDownvoteListView(ListAPIView):
+    permission_classes = (AllowAny , )
+    serializer_class = ArticleDownvoteSerializer
+    def get_queryset(self):
+        article_id = self.kwargs['article_id']
+        qs = ArticleDownvote.objects.all()
+        if article_id is None :
+            return Http404("article id not found")
+
+        return qs.filter(article=article_id)
+
+class CreateArticleDownvoteView(CreateAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CreateArticleDownvoteSerializer
+    queryset = ArticleDownvote.objects.all()
+
+class RemoveArticleDownvoteView(DestroyAPIView):
+    permission_classes = (IsAuthenticated, )
+    queryset = ArticleDownvote.objects.all()
+
+
+
+
+
+
+
+
+
+
 class CreateEmailView(CreateAPIView):
     #with no post def, this works
     serializer_class = EmailSerializer
@@ -182,6 +250,28 @@ class CreateCommentUpvoteView(CreateAPIView):
 class RemoveCommentUpvoteView(DestroyAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = CommentUpvote.objects.all()
+
+
+
+class CommentDownvoteListView(ListAPIView):
+    permission_classes = (AllowAny , )
+    serializer_class = CommentUpvoteSerializer
+    def get_queryset(self):
+        comment_id = self.kwargs['comment_id']
+        qs = CommentDownvote.objects.all()
+        if comment_id is None :
+            return Http404("comment id not found")
+        return qs.filter(comment=comment_id)
+
+class CreateCommentDownvoteView(CreateAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CreateCommentDownvoteSerializer
+    queryset = CommentDownvote.objects.all()
+
+class RemoveCommentDownvoteView(DestroyAPIView):
+    permission_classes = (IsAuthenticated, )
+    queryset = CommentDownvote.objects.all()
+
 
 
 

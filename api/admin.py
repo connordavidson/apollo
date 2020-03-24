@@ -5,11 +5,11 @@ from .models import (
         Email ,
         CommentUpvote ,
         CommentDownvote ,
-        
+        ArticleUpvote ,
+        ArticleDownvote ,
+
     )
 # Register your models here.
-
-
 
 
 
@@ -18,3 +18,5 @@ admin.site.register(Comment)
 admin.site.register(Email)
 admin.site.register(CommentUpvote)
 admin.site.register(CommentDownvote)
+admin.site.register(ArticleUpvote)
+admin.site.register(ArticleDownvote)

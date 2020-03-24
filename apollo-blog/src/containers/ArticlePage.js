@@ -22,6 +22,9 @@ import RegisterEmail from './Misc/RegisterEmail';
 import RichText from './Misc/RichText';
 import LoaderSpinner from './Misc/LoaderSpinner';
 import CommentSection from './Misc/CommentSection' ;
+import ArticleUpvote from './Misc/ArticleUpvote' ;
+import ArticleDownvote from './Misc/ArticleDownvote' ;
+
 import "../content/css/App.css";
 import {
   article_url,
@@ -37,6 +40,8 @@ class ArticlePage extends React.Component  {
     loading : false , //to determine if the page is loading
     error : null , //stores the error that comes from backend
     article_data: [] , //stores the article information
+    article_upvoted : false , //determines if the article is upvoted or not.
+    article_downvoted : false , //determines if the article is downvoted or not.
 
   }
 
@@ -71,6 +76,22 @@ class ArticlePage extends React.Component  {
   }
 
 
+  /***the following two functions (handleArticleUpvoteClick & handleArticleDownvoteClick) are used when a user has upvoted an article and then hits the downvote button (and vise versa)***/
+
+  //callback function for ArticleUpvote component. if the user is creating an upvote, it sets it to true. and false if the upvote is being removed (by the user hitting downvote)
+  handleArticleUpvoteClick = (value) => {
+    console.log("handleArticleUpvoted value : " + value)
+    this.setState({
+      article_upvoted : value ,
+    })
+  }
+  //callback function for ArticleDownvote component. if the user is creating a downvote, it sets it to true. and flase if the downvote is being removed (by the user hitting upvote)
+  handleArticleDownvoteClick = (value) => {
+    console.log("handleArticleDownvoted value : " + value )
+    this.setState({
+      article_downvoted : value ,
+    })
+  }
 
 
   render(){
@@ -78,6 +99,8 @@ class ArticlePage extends React.Component  {
     const {
       article_data ,
       loading ,
+      article_upvoted ,
+      article_downvoted ,
 
     } = this.state
 
@@ -95,7 +118,7 @@ class ArticlePage extends React.Component  {
     const article_date = new Date(article_data['created_date']).toDateString()  ;
 
     var apollo_div = document.getElementById("apollo_widget_left_sidebar")
-    var sm_div = document.getElementById("sm_links_left_sidebar")
+    // var sm_div = document.getElementById("sm_links_left_sidebar")
     //gets the first element with the tag name "body" aka, the entire page
     var body= document.getElementsByTagName("body")[0];
     body.onscroll = function(e){
@@ -108,12 +131,12 @@ class ArticlePage extends React.Component  {
         apollo_div.classList.remove("AfterScroll") ;
       }
 
-      if(document.documentElement.scrollTop >= 225)
-      {
-        sm_div.classList.add("AfterScroll");
-      }else{
-        sm_div.classList.remove("AfterScroll");
-      }
+      // if(document.documentElement.scrollTop >= 225)
+      // {
+      //   sm_div.classList.add("AfterScroll");
+      // }else{
+      //   sm_div.classList.remove("AfterScroll");
+      // }
 
 
     }
@@ -148,19 +171,28 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
 
                   {
                     !authenticated &&
-                    <ListGroup.Item className="bg-app">
-                      <Link to="/signup" className="article-link">
-                        <Badge >
-                          Create an account
-                        </Badge>
-                      </Link>
-                      <RegisterEmail text="Get email updates" direction="right"/>
-                    </ListGroup.Item>
+                      <ListGroup.Item className="bg-app">
+                        <Link to="/signup" className="article-link">
+                          <Badge >
+                            Create an account
+                          </Badge>
+                        </Link>
+                        <RegisterEmail text="Get email updates" direction="right"/>
+                      </ListGroup.Item>
                   }
-                </div>
 
-                  <ListGroup.Item >
-                    <div id="sm_links_left_sidebar">
+                  { /*checks that loading is false because if loading is false, then we know that article_data has actual information in it (as opposed to being empty. if it's empty, it can't get the upvote data)*/
+                    !loading &&
+                      (
+                        <ListGroup.Item className="bg-app">
+                          <div id="sm_links_left_sidebar">
+                            <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                            <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                          </div>
+                        </ListGroup.Item>
+                      )
+                  }
+                    <ListGroup.Item className="bg-app">
                       <a href={twitter_link} >
                         <TwitterLogo />
                       </a>
@@ -168,8 +200,13 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                       <a href={facebook_link}>
                         <FacebookLogo />
                       </a>
-                    </div>
-                  </ListGroup.Item>
+                    </ListGroup.Item>
+                </div>
+
+
+
+
+
 
               </ListGroup>
             </Col>
