@@ -17,12 +17,13 @@ import 'react-quill/dist/quill.snow.css';
 import { connect } from "react-redux";
 
 
-
+import ArticleComment from './ArticleComment'
 import LoaderSpinner from './LoaderSpinner'
 import CommentUpvote from './CommentUpvote'
 import CommentDownvote from './CommentDownvote'
 import RichText from './RichText'
 import "../../content/css/App.css";
+
 import {
   create_comment_url ,
   create_upvote_url ,
@@ -39,6 +40,8 @@ class CommentSection extends React.Component {
     commenter_name : "" , //stores the anme of the person that is writing the comment
     comment_body : "" , //stores the body of the comment
     comment_submitted : false , //determines if the comment has been submitted.
+    comment_upvoted : false , //determines if the comment is upvoted or not.
+    comment_downvoted : false , //determines if the comment is downvoted or not.
   }
 
 
@@ -90,6 +93,25 @@ class CommentSection extends React.Component {
 
 
 
+  /***the following two functions (handleCommentUpvoteClick & handleArticleDownvoteClick) are used when a user has upvoted a comment and then hits the downvote button (and vise versa)***/
+
+  //callback function for CommentUpvote component. if the user is creating an upvote, it sets it to true. and false if the upvote is being removed (by the user hitting downvote)
+  handleCommentUpvoteClick = (value) => {
+    console.log("handleCommentUpvoteClick value : " + value)
+    this.setState({
+      comment_upvoted : value ,
+    })
+  }
+  //callback function for CommentDownvote component. if the user is creating a downvote, it sets it to true. and flase if the downvote is being removed (by the user hitting upvote)
+  handleCommentDownvoteClick = (value) => {
+    console.log("handleCommentDownvoteClick value : " + value )
+    this.setState({
+      comment_downvoted : value ,
+    })
+  }
+
+
+
   render(){
 
     const {
@@ -98,60 +120,37 @@ class CommentSection extends React.Component {
       comment_body ,
       commenter_name ,
       comment_submitted ,
+      comment_downvoted ,
+      comment_upvoted ,
 
     } = this.state
 
     const {
       comments ,
       user_id ,
+
     } = this.props
 
 
 
     console.log(comments);
-    // console.log(user_id) ;
 
     return(
         <div >
           <h2 className="tahoma-font">Article Comments</h2>
           <hr />
           <Container>
-                {
-                  comments  ?
-                    comments.map(comment => (
-
-                      <React.Fragment>
-                        <Card >
-                          <Card.Body>
-                            <Card.Title>{comment.author}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">
-                              { new Date(comment.created_date).toDateString() }
-                            </Card.Subtitle>
-
-                            <Card.Text>
-                              <RichText text={comment.body} />
-                            </Card.Text>
-
-                            <CommentUpvote comment_id={comment.id} />
-                            {' '}
-                            <CommentDownvote comment_id={comment.id} />
-                            {' '}
-                            {/*<Alert variant="dark"> You must sign in to do that </Alert>*/}
-                          </Card.Body>
-                        </Card>
-                        <hr />
-                      </React.Fragment>
-                      )
-                    )
-                  :
-                    <Alert variant="dark">There are no comments yet! Leave one below</Alert>
-
-                }
-
-
-
+            {
+              comments  ?
+                comments.map(comment => (
+                    <ArticleComment comment={comment} />
+                  )
+                )
+              :
+                <Alert variant="dark">There are no comments yet! Leave one below</Alert>
+            }
             <Card >
-              <Card.Header><h3>Add a Comment</h3></Card.Header>
+              <Card.Header as="h3">Add a Comment</Card.Header>
               <Card.Body>
                 <Card.Text>
                   <Form>
@@ -168,7 +167,6 @@ class CommentSection extends React.Component {
                     <Form.Row>
                       <Col>
                         <Form.Label>Comment:</Form.Label>
-
                           <ReactQuill
                             placeholder="Start Writing..."
                             onChange={this.handleCommentBody}

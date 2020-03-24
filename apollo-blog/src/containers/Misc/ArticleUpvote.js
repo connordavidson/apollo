@@ -58,8 +58,6 @@ class ArticleUpvote extends React.Component {
           upvotes : response.data
         })
 
-
-
       })
       .catch(error => {
         console.log("error: " + error )

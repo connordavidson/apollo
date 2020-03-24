@@ -60,34 +60,35 @@ class CommentUpvote extends React.Component {
   }
 
 
-
-
-
-
-  handleUpvoteClick = ( text ) => {
+  handleRemoveUpvote = () => {
     var auth_token = 'Token ' + this.props.token ;
 
-    if(this.state.upvoted){
+    axios
+      .delete( remove_comment_upvote_url(this.state.upvote_id) ,
+        {
+          headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
+        }
+      )
+      .then(response => {
+        console.log('removed upvote ')
+        this.setState({
+          upvoted : false ,
+          number_of_upvotes : this.state.number_of_upvotes - 1 ,
 
-      axios
-        .delete( remove_comment_upvote_url(this.state.upvote_id) ,
-          {
-            headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
-          }
-        )
-        .then(response => {
-          console.log('removed upvote ')
-          this.setState({
-            upvoted : false ,
-            number_of_upvotes : this.state.number_of_upvotes - 1 ,
-
-          })
         })
-        .catch(error => {
-          console.log('error removing upvote' + error )
-        })
+      })
+      .catch(error => {
+        console.log('error removing upvote' + error )
+      })
 
-    }else{
+      //sets the CommentSection state var "comment_upvoted" to false
+      this.props.comment_upvoted(false)
+  }
+
+
+
+  handleCreateUpvote = () => {
+      var auth_token = 'Token ' + this.props.token ;
 
       var upvote_data = new FormData() ;
       upvote_data.append('comment' , this.props.comment_id )
@@ -105,10 +106,25 @@ class CommentUpvote extends React.Component {
         .catch(error => {
           console.log('error creating upvote: ' + error.code)
         })
+        //sets the CommentSection state var "comment_upvoted" to true
+        this.props.comment_upvoted(true) ;
+  }
 
+
+
+
+
+  handleUpvoteClick = ( text ) => {
+    if(this.props.user_id === 0)
+    {
+      alert("You need to sign in to do this.")
+    }else {
+      if(this.state.upvoted){
+        this.handleRemoveUpvote()
+      }else{
+        this.handleCreateUpvote()
+      }
     }
-
-
   }
 
 
@@ -124,7 +140,12 @@ class CommentUpvote extends React.Component {
       user_id ,
     } = this.props
 
-    // console.log( "number_of_upvotes : " + number_of_upvotes )
+
+    //used to determine if the user has already upvoted this article and has just hit the downvote button.. removes the upvote if true
+    if(this.props.comment_downvoted && upvoted){
+      this.handleRemoveUpvote() ;
+    }
+
     return(
 
       <Badge

@@ -154,7 +154,6 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
             <Col xs={2}>
 
               <ListGroup
-
                 variant="flush"
                 className="sticky-top BeforeScroll "
               >
@@ -202,11 +201,6 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                       </a>
                     </ListGroup.Item>
                 </div>
-
-
-
-
-
 
               </ListGroup>
             </Col>

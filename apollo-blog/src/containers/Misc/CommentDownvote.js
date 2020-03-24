@@ -56,60 +56,72 @@ class CommentDownvote extends React.Component {
       })
   }
 
+  handleRemoveDownvote = () => {
+    var auth_token = 'Token ' + this.props.token ;
+
+    axios
+      .delete( remove_comment_downvote_url(this.state.downvote_id) ,
+        {
+          headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
+        }
+      )
+      .then(response => {
+        console.log('removed downvote ')
+        this.setState({
+          downvoted : false ,
+          number_of_downvotes : this.state.number_of_downvotes - 1 ,
+
+        })
+      })
+      .catch(error => {
+        console.log('error removing downvote' + error )
+      })
+
+      //sets the CommentSection state var "comment_downvoted" to false
+      this.props.comment_downvoted(false) ;
+  }
+
+
+  handleCreateDownvote = () => {
+    var auth_token = 'Token ' + this.props.token ;
+
+    var downvote_data = new FormData() ;
+    downvote_data.append('comment' , this.props.comment_id )
+    downvote_data.append('user' , this.props.user_id)
+
+    axios
+      .post(create_comment_downvote_url , downvote_data ,
+        {
+          headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
+        }
+      )
+      .then(response => {
+        this.handleGetDownvotes()
+      })
+      .catch(error => {
+        console.log('error creating upvote: ' + error.code)
+      })
+
+      //sets the CommentSection state var "comment_downvoted" to true
+      this.props.comment_downvoted(true) ;
+  }
+
 
 
 
   handleDownvoteClick = ( text ) => {
-    var auth_token = 'Token ' + this.props.token ;
 
     if(this.state.downvoted){
-
-      axios
-        .delete( remove_comment_downvote_url(this.state.downvote_id) ,
-          {
-            headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
-          }
-        )
-        .then(response => {
-          console.log('removed downvote ')
-          this.setState({
-            downvoted : false ,
-            number_of_downvotes : this.state.number_of_downvotes - 1 ,
-
-          })
-        })
-        .catch(error => {
-          console.log('error removing downvote' + error )
-        })
-
+      this.handleRemoveDownvote()
     }else{
-
-      var downvote_data = new FormData() ;
-      downvote_data.append('comment' , this.props.comment_id )
-      downvote_data.append('user' , this.props.user_id)
-
-      axios
-        .post(create_comment_downvote_url , downvote_data ,
-          {
-            headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
-          }
-        )
-        .then(response => {
-          this.handleGetDownvotes()
-        })
-        .catch(error => {
-          console.log('error creating upvote: ' + error.code)
-        })
-
+      this.handleCreateDownvote()
     }
-
-
   }
 
 
   render(){
     const {
-      upvoted ,
+      downvoted ,
       number_of_downvotes ,
 
     } = this.state
@@ -118,6 +130,11 @@ class CommentDownvote extends React.Component {
       comment_id ,
       user_id ,
     } = this.props
+
+    //used to determine if the user has already downvoted this comment and has just hit the upvote button.. removes the downvote if true
+    if(this.props.comment_upvoted && downvoted){
+      this.handleRemoveDownvote() ;
+    }
 
 
     return(
