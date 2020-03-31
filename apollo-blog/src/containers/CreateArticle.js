@@ -76,11 +76,12 @@ class CreateArticle extends React.Component  {
     article_data.append('title' , this.state.title) ;
     article_data.append('body' , this.state.body) ;
 
-
+    var token = 'Token ' + this.props.token ;
+    console.log('token : ' + token  ) ;
     axios
       .post(create_article_url , article_data ,
         {
-          headers: { Authorization: 'Token ' + this.props.token } //DRF requires the token in the header to create an article
+          headers: { Authorization: token } //DRF requires the token in the header to create an article
         }
       )
       .then(response => {
@@ -227,7 +228,7 @@ class CreateArticle extends React.Component  {
                   error &&
                     <React.Fragment>
                       <br/>
-                      <meta http-equiv="refresh" content="3;url=/" />
+                      {/*<meta http-equiv="refresh" content="3;url=/" />*/}
                       <Alert variant="danger">
                         Nice try buddy
                       </Alert>

@@ -23,10 +23,19 @@ print(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f8kmnn)oext(x9#g*%w^vduzm1s4uogcw)(h83gt#5-ow2iqnt'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = [ '*' ]
+# SECURITY WARNING: don't run with debug turned on in production!
+# changes this bc of https://codeburst.io/beginners-guide-to-deploying-a-django-postgresql-project-on-google-cloud-s-flexible-app-engine-e3357b601b91
+DEBUG = True # environment vars are strings. "convert" to boolean. lol, Python
+
+
+
+# was *, changes bc of https://codeburst.io/beginners-guide-to-deploying-a-django-postgresql-project-on-google-cloud-s-flexible-app-engine-e3357b601b91
+ALLOWED_HOSTS = [
+    '*' ,
+    'apollo-blog-269301.appspot.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -87,15 +96,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apollo_blog_backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        'NAME': 'apollo',
+        'USER': 'postgres',
+        'PASSWORD': 'PLvK5AGsOqgKtotN',
     }
+
 }
 
 

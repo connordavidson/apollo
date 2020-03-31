@@ -91,6 +91,7 @@ class Home extends React.Component {
       error ,
       articles ,
       pinned_article ,
+      username ,
 
     } = this.state
 
@@ -119,7 +120,7 @@ class Home extends React.Component {
             <Col >
               {
                 authenticated ?
-                  token === "8582b323219d80196bb1e017411808a67fe70365" &&
+                  token === "8eb05e1e2a096148f4686c071328cd1fbdec1904" &&
                     <div className="float-right">
                       <Link to="/create-article" >
                         <Button variant="outline-secondary">Write an Article </Button>
@@ -139,30 +140,38 @@ class Home extends React.Component {
 
 
         <ListGroup variant="flush" className="bg-app">
-          {
-            pinned_article !== null &&
-              <ListGroup.Item className="bg-app">
-                <Link to={'blog/article/'+pinned_article.id} className="article-link">
-                  <Card className="width-100-percent " id={pinned_article.id}>
-                    <Card.Body>
-                      <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
-                      <Card.Subtitle className="mb-2 text-muted">
-                        By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
-                      </Card.Subtitle>
-                      <Card.Text >
-                        <RichText text={pinned_article.body +"..." } />
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Link>
-              </ListGroup.Item>
-          }
+
 
           {
+
+
+
+                    pinned_article !== null &&
+                      <ListGroup.Item className="bg-app">
+                        <Link to={'blog/article/'+pinned_article.id} className="article-link">
+                          <Card className="width-100-percent " id={pinned_article.id}>
+                            <Card.Body>
+                              <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
+                              <Card.Subtitle className="mb-2 text-muted">
+                                By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
+                              </Card.Subtitle>
+                              <Card.Text >
+                                <RichText text={pinned_article.body +"..." } />
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Link>
+                      </ListGroup.Item>
+            }
+
+            {
+
+
             loading === true ?
               <LoaderSpinner />
             :
               articles.length > 0 ?
+              (
                 //reverse() makes the articles appear in reverse chronological order
                 articles.map(article =>  (
                     <ListGroup.Item className="bg-app">
@@ -178,13 +187,13 @@ class Home extends React.Component {
                         </Card>
                       </Link>
                     </ListGroup.Item>
-
                   )
                 )
-              :
-                <Alert variant="dark">
-                  There was an error retrieving our articles
-                </Alert>
+              )
+            :
+              <Alert variant="dark">
+                There was an error retrieving our articles
+              </Alert>
 
 
           }
@@ -204,7 +213,7 @@ const mapStateToProps = (state) => {
   return {
     token : state.auth.token ,
     authenticated: state.auth.token !== null ,
-
+    username : state.auth.username
   }
 }
 

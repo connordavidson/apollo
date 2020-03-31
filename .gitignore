@@ -14,3 +14,13 @@ __pycache__/
 /setup.cfg
 
 apollo-blog/build/
+
+
+
+app.yaml
+
+pem-files/
+*.pem
+
+
+cloud_sql_proxy

@@ -134,9 +134,10 @@ class ArticlePageView(RetrieveAPIView):
 
 class CreateArticleView(CreateAPIView):
     #only allows an article to be created by an admin user
-    permission_classes = (IsAdminUser, )
-
+    # permission_classes = (IsAdminUser, )
     authentication_classes = (TokenAuthentication,)
+
+    # authentication_classes = (TokenAuthentication,)
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 
@@ -282,12 +283,12 @@ class RemoveCommentDownvoteView(DestroyAPIView):
 
 class CustomRegisterView(RegisterView):
     def create(self, request, *args, **kwargs):
-        subject = 'Thank you for creating an account with Apollo!'
-        message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
-        Sincerely, The Team at Apollo'''
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email_address,]
-        send_mail(subject, message, email_from, recipient_list)
+        # subject = 'Thank you for creating an account with Apollo!'
+        # message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
+        # Sincerely, The Team at Apollo'''
+        # email_from = settings.EMAIL_HOST_USER
+        # recipient_list = [email_address,]
+        # send_mail(subject, message, email_from, recipient_list)
 
         response = super().create(request, *args, **kwargs)
         return response
