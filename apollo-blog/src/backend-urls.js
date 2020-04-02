@@ -1,6 +1,9 @@
 
 
-export const endpoint = `http://127.0.0.1:8000/api/`;
+//export const endpoint_without_api = `http://127.0.0.1:8000/` ;
+// export const endpoint = `http://127.0.0.1:8000/api/`;
+export const endpoint = `/api/`;
+
 
 
 export const all_articles_url =     endpoint+`all-articles/` ;
@@ -34,10 +37,10 @@ export const get_article_downvotes_url = (article_id) => endpoint+'article-downv
 
 
 export const reset_password_url = endpoint+`password-reset/`;
-export const set_new_password_url = `http://127.0.0.1:8000/rest-auth/password/reset/confirm/` ;
-
-export const get_user_info_url = `http://127.0.0.1:8000/rest-auth/user/` ;
 
 
+export const set_new_password_url =  `http://127.0.0.1:8000/rest-auth/password/reset/confirm/` ;
 
-export const change_password_url = `http://127.0.0.1:8000/password-change/` ;
+export const get_user_info_url =  `http://127.0.0.1:8000/rest-auth/user/` ;
+
+export const change_password_url =  `http://127.0.0.1:8000/password-change/` ;

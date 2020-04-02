@@ -14,7 +14,6 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -100,15 +99,26 @@ WSGI_APPLICATION = 'apollo_blog_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    ##connect to local sqlite db
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
 
+    ##connect to gcloud from local machine
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    #     'NAME': 'apollo',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'PLvK5AGsOqgKtotN',
+    # }
 
+    ##connect to gcloud on app engine
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '127.0.0.1',
+        'HOST': '/cloudsql/apollo-blog-269301:us-central1:apollo-psql',
         'PORT': '5432',
         'NAME': 'apollo',
         'USER': 'postgres',
@@ -139,6 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    # 'https://apollo-blog-269301.appspot.com' ,
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
