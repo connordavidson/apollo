@@ -106,15 +106,17 @@ class Home extends React.Component {
     return(
 
       <React.Fragment>
+        <Container>
           <Row>
-              <Navbar>
-                <Navbar.Brand>
-                  <h1 className="verdana-font">
-                    The Apollo Blog
-                  </h1>
-                </Navbar.Brand>
-                <Navbar.Text><h5 className="verdana-font">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
-              </Navbar>
+            <h1 className="verdana-font">
+              The Apollo Blog
+            </h1>
+          </Row>
+          <Row>
+            {/*this nav with the class is used to make the text grey*/}
+            <nav className="navbar-light">
+              <Navbar.Text><h5 className="verdana-font ">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
+            </nav>
           </Row>
           <Row>
             <Col >
@@ -130,80 +132,61 @@ class Home extends React.Component {
                   <div className="float-right">
                     <RegisterEmail text="Sign up for email updates" direction="left"/>
                   </div>
-
               }
-
             </Col>
           </Row>
-
+        </Container>
         <hr />
-
-
+        
         <ListGroup variant="flush" className="bg-app">
 
-
-          {
-
-
-
-                    pinned_article !== null &&
+            {/* cannot put this inside the "loading === true" ternary below for some reason*/
+            loading === false &&
+              pinned_article !== null &&
+                <ListGroup.Item className="bg-app">
+                  <Link to={'blog/article/'+pinned_article.id} className="article-link">
+                    <Card className="width-100-percent " id={pinned_article.id}>
+                      <Card.Body>
+                        <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
+                        </Card.Subtitle>
+                        <Card.Text >
+                          <RichText text={pinned_article.body +"..." } />
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </ListGroup.Item>
+            }
+            {
+              loading === true ?
+                <LoaderSpinner />
+              :
+                articles.length > 0 ?
+                  articles.map(article =>  (
                       <ListGroup.Item className="bg-app">
-                        <Link to={'blog/article/'+pinned_article.id} className="article-link">
-                          <Card className="width-100-percent " id={pinned_article.id}>
+                        <Link to={'blog/article/'+article.id} className="article-link">
+                          <Card className="width-100-percent" id={article.id}>
                             <Card.Body>
-                              <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
-                              <Card.Subtitle className="mb-2 text-muted">
-                                By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
-                              </Card.Subtitle>
+                              <Card.Title>{article.title}</Card.Title>
+                              <Card.Subtitle className="mb-2 text-muted">By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge></Card.Subtitle>
                               <Card.Text >
-                                <RichText text={pinned_article.body +"..." } />
+                                <RichText text={article.body.substring(0, 200) + '...'} />
                               </Card.Text>
                             </Card.Body>
                           </Card>
                         </Link>
                       </ListGroup.Item>
-            }
-
-            {
-
-
-            loading === true ?
-              <LoaderSpinner />
-            :
-              articles.length > 0 ?
-              (
-                //reverse() makes the articles appear in reverse chronological order
-                articles.map(article =>  (
-                    <ListGroup.Item className="bg-app">
-                      <Link to={'blog/article/'+article.id} className="article-link">
-                        <Card className="width-100-percent" id={article.id}>
-                          <Card.Body>
-                            <Card.Title>{article.title}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge></Card.Subtitle>
-                            <Card.Text >
-                              <RichText text={article.body.substring(0, 200) + '...'} />
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </Link>
-                    </ListGroup.Item>
+                    )
                   )
-                )
-              )
-            :
-              <Alert variant="dark">
-                There was an error retrieving our articles
-              </Alert>
-
-
+                :
+                  <Alert variant="dark">
+                    There was an error retrieving our articles
+                  </Alert>
           }
-
         </ListGroup>
-
-
       </ React.Fragment>
-
-
     )
   }
 }

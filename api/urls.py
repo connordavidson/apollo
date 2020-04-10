@@ -32,6 +32,16 @@ from .views import (
     FrontendAppView ,
     PasswordChangeView ,
 
+    UserDetailsView ,
+
+    UserArticleUpvoteListView ,
+    UserArticleDownvoteListView ,
+    UserCommentUpvoteListView ,
+    UserCommentDownvoteListView ,
+
+    CreateUserReadArticleView ,
+    UserReadArticleListView ,
+
 )
 
 urlpatterns = [
@@ -58,6 +68,22 @@ urlpatterns = [
     path('article-downvote/<article_id>/' , ArticleDownvoteListView.as_view() , name='article-downvote-list-view') ,
     path('create-article-downvote/' , CreateArticleDownvoteView.as_view(), name='create-article-downvote') ,
     path('remove-article-downvote/<pk>' , RemoveArticleDownvoteView.as_view() , name='remove-article-downvote') ,
+
+    path('create-user-read-article/' , CreateUserReadArticleView.as_view(), name='create-user-read-article') ,
+    path('user-read-article/<user_id>/' , UserReadArticleListView.as_view(), name='user-read-article') ,
+
+
+
+    path('user-article-upvote/<user_id>/' , UserArticleUpvoteListView.as_view() , name='user-article-upvote-list-view') ,
+    path('user-article-downvote/<user_id>/' , UserArticleDownvoteListView.as_view() , name='user-article-downvote-list-view') ,
+
+    path('user-comment-upvote/<user_id>/' , UserCommentUpvoteListView.as_view() , name='user-comment-upvote-list-view') ,
+    path('user-comment-downvote/<user_id>/' , UserCommentDownvoteListView.as_view() , name='user-comment-downvote-list-view') ,
+
+
+
+    path('user-details/' , UserDetailsView.as_view() , name='user-details') ,
+
 
 
     path('password-reset/' , CustomPasswordResetView.as_view() , name='password-reset') ,

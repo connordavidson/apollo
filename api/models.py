@@ -1,14 +1,28 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User , AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 # Create your models here.
 
 
+
+#getting changes to user profile and the following methods from https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 # class UserProfile(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     one_click_purchasing = models.BooleanField(default=False)
-#     email = models.CharField(max_length=30, null=True)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE , related_name="profile")
+#     email_updates = models.BooleanField(default=True)
+#     # email = models.CharField(max_length=30, null=True)
 #     def __str__(self):
 #         return self.user.username
+#
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
 
 
@@ -49,6 +63,12 @@ class ArticleDownvote(models.Model):
     user = models.ForeignKey(User , related_name='article_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
+
+#used to track when a user reads an article.
+class UserReadArticle(models.Model):
+    article = models.ForeignKey('Article' , related_name='user_articles' ,  on_delete=models.CASCADE , default=None , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='user_articles' , on_delete=models.CASCADE , null=True , blank=True)
+    created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 
 

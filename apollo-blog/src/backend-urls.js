@@ -35,8 +35,20 @@ export const create_article_downvote_url = endpoint+`create-article-downvote/` ;
 export const remove_article_downvote_url = (downvote) => endpoint+`remove-article-downvote/` + downvote ;
 export const get_article_downvotes_url = (article_id) => endpoint+'article-downvote/' + article_id + '/';
 
+export const get_user_details_url = endpoint+`user-details/` ;
+export const get_user_article_upvotes_url = (user_id) => endpoint + 'user-article-upvote/' + user_id + '/' ;
+export const get_user_article_downvotes_url = (user_id) => endpoint + 'user-article-downvote/' + user_id + '/' ;
+export const get_user_comment_upvotes_url = (user_id) => endpoint + 'user-comment-upvote/' + user_id + '/' ;
+export const get_user_comment_downvotes_url = (user_id) => endpoint + 'user-comment-downvote/' + user_id + '/' ;
+
+
+export const create_user_read_article_url = endpoint+`create-user-read-article/` ;
+export const get_user_read_article_url = (user_id) => endpoint+`user-read-article/`+user_id+'/' ;
+
 
 export const reset_password_url = endpoint+`password-reset/`;
+
+
 
 
 export const set_new_password_url =  `http://127.0.0.1:8000/rest-auth/password/reset/confirm/` ;

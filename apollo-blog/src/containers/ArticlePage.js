@@ -28,6 +28,7 @@ import ArticleDownvote from './Misc/ArticleDownvote' ;
 import "../content/css/App.css";
 import {
   article_url,
+  create_user_read_article_url ,
 
 } from "../backend-urls.js" ;
 
@@ -51,6 +52,7 @@ class ArticlePage extends React.Component  {
     })
 
     this.handleGetArticle() ;
+    this.handleCreateUserReadArticle() ;
 
   }
 
@@ -72,6 +74,33 @@ class ArticlePage extends React.Component  {
           error: error ,
           loading : false
         })
+      })
+  }
+
+  handleCreateUserReadArticle = () => {
+
+    // var user_id = null ;
+    //gets the user_id from local storage. difficulty getting user_id from redux-store
+
+
+    var user_read_article_data = new FormData() ;
+    user_read_article_data.append('article' , this.props.match.params.article_id )
+    if(localStorage.getItem("user_id") != null){
+      // user_id = localStorage.getItem("user_id")
+      user_read_article_data.append('user' , localStorage.getItem("user_id"))
+    }
+
+    console.log("this.props.match.params.article_id : " + this.props.match.params.article_id) ;
+    // console.log("this.props.user_id : " + user_id) ;
+
+    axios
+      .post(create_user_read_article_url , user_read_article_data)
+      .then( response => {
+        console.log("Create userreadarticle: " + response.data)
+
+      })
+      .catch(error => {
+        console.log("error userreadarticle: " + error.data )
       })
   }
 
@@ -126,6 +155,7 @@ class ArticlePage extends React.Component  {
       if( document.documentElement.scrollTop >= 70){
         //makes the "apollo" thing appear after they scroll more than 70 px. (approx the height of the nav bar)
         apollo_div.classList.add("AfterScroll")  ;
+
       }else {
         //removes the "apollo" thing if the navbar comes into view
         apollo_div.classList.remove("AfterScroll") ;
@@ -182,14 +212,13 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
 
                   { /*checks that loading is false because if loading is false, then we know that article_data has actual information in it (as opposed to being empty. if it's empty, it can't get the upvote data)*/
                     !loading &&
-                      (
-                        <ListGroup.Item className="bg-app">
-                          <div id="sm_links_left_sidebar">
-                            <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                            <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                          </div>
-                        </ListGroup.Item>
-                      )
+                      <ListGroup.Item className="bg-app">
+                        <div id="sm_links_left_sidebar">
+                          <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                          <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                        </div>
+                      </ListGroup.Item>
+
                   }
                     <ListGroup.Item className="bg-app">
                       <a href={twitter_link} >

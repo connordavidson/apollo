@@ -6,6 +6,7 @@ import {
   Form ,
   Button ,
   Alert ,
+  Card ,
 
 } from 'react-bootstrap';
 import {
@@ -142,86 +143,83 @@ class ChangePassword extends React.Component {
 
 
       <Container>
-        <h5>Change Your Password</h5>
-        <hr />
-        <Form.Group >
-          <Form.Label>Old Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter old password"
-            onChange={this.handleOldPassword}
-          />
-        </Form.Group>
-        <Form.Group >
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="New Password"
-            onChange={this.handlePassword}
-           />
-        </Form.Group>
-        <Form.Group >
-          <Form.Label>Confirm New Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            onChange={this.handleConfirmPassword}
-           />
-        </Form.Group>
+        <Card>
+          <Card.Body>
+            <Card.Title><h5>Change Your Password</h5></Card.Title>
+            <hr />
+            <Form.Group >
+              <Form.Label>Old Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter old password"
+                onChange={this.handleOldPassword}
+              />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="New Password"
+                onChange={this.handlePassword}
+               />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Confirm New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm Password"
+                onChange={this.handleConfirmPassword}
+               />
+            </Form.Group>
+            {
+              loading ?
+                <Button
+                  block
+                  bsSize="large"
+                  disabled={
+                    !(this.handleValidated())
+                  }
+                  onClick={this.handleChangePassword}
+                >
+                  <LoaderSpinner />
+                </Button>
+              :
+                <Button
+                  block
+                  bsSize="large"
+                  disabled={
+                    !(this.handleValidated())
+                  }
+                  onClick={this.handleChangePassword}
+                >
+                  Change Your Password
+                </Button>
+            }
+            <br/>
+            {
+              !passwords_match &&
+              <Alert variant="danger">Your passwords must match</Alert>
+            }
+            {
+              reset_password &&
 
-        {
-          loading ?
-            <Button
-              block
-              bsSize="large"
-              disabled={
-                !(this.handleValidated())
-              }
-              onClick={this.handleChangePassword}
-            >
-              <LoaderSpinner />
-            </Button>
-          :
-            <Button
-              block
-              bsSize="large"
-              disabled={
-                !(this.handleValidated())
-              }
-              onClick={this.handleChangePassword}
-            >
-              Change Your Password
-            </Button>
-
-        }
-
-        <br/>
-        <br />
-        {
-          !passwords_match &&
-          <Alert variant="danger">Your passwords must match</Alert>
-        }
-
-        {
-          reset_password &&
-
-            <Alert variant="success">
-              {reset_password}
-            </Alert>
-        }
-        {
-          error &&
-            <Alert variant="danger">
-
-              {
-                //loops through all the returned errors and prints them with a bullet
-                Object.keys(error).map(e => {
-                  return <li>{error[e][0]}</li>
-                })
-              }
-            </Alert>
-        }
-
+                <Alert variant="success">
+                  {reset_password}
+                </Alert>
+            }
+            {
+              error &&
+                <Alert variant="danger">
+                  {
+                    //loops through all the returned errors and prints them with a bullet
+                    Object.keys(error).map(e => {
+                      return <li>{error[e][0]}</li>
+                    })
+                  }
+                </Alert>
+            }
+          </Card.Body>
+        </Card>
       </Container>
 
 

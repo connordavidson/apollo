@@ -14,14 +14,19 @@ from rest_framework.generics import (
     CreateAPIView,
     GenericAPIView ,
     DestroyAPIView ,
-
+    RetrieveUpdateAPIView ,
 )
 
 from rest_framework.permissions import (
     AllowAny ,
     IsAuthenticated ,
-    IsAdminUser
+    IsAdminUser ,
+    IsAuthenticatedOrReadOnly ,
 )
+
+
+
+
 from rest_auth.views import (
     LoginView ,
     PasswordResetView ,
@@ -51,6 +56,7 @@ from .models import (
     CommentDownvote ,
     ArticleUpvote ,
     ArticleDownvote ,
+    UserReadArticle ,
 
 )
 
@@ -74,6 +80,9 @@ from .serializers import (
 
     ArticleDownvoteSerializer ,
     CreateArticleDownvoteSerializer ,
+
+    UserSerializer ,
+    UserReadArticleSerializer ,
 
 )
 
@@ -191,8 +200,69 @@ class RemoveArticleDownvoteView(DestroyAPIView):
 
 
 
+###MAY HAVE TO  CONSOLIDATE THESE ENDPOINTS INTO 1 ENDPOINT ####
+#gets all of the articles that a user has upvoted
+class UserArticleUpvoteListView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = ArticleUpvoteSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = ArticleUpvote.objects.all()
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
+
+#gets all of the articles that a user has downvoted
+class UserArticleDownvoteListView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = ArticleDownvoteSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = ArticleDownvote.objects.all()
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
+
+#gets all of the comments that a user has upvoted
+class UserCommentUpvoteListView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CommentUpvoteSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = CommentUpvote.objects.all()
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
+
+#gets all of the comments that a user has downvoted
+class UserCommentDownvoteListView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CommentDownvoteSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = CommentDownvote.objects.all()
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
 
 
+
+#adds to the UserReadArticle table. this tracks whenever a user reads an article
+class CreateUserReadArticleView(CreateAPIView):
+    permission_classes = (AllowAny, )
+    serializer_class = UserReadArticleSerializer
+    queryset = UserReadArticle.objects.all()
+
+#gets all of the article that a user has read
+class UserReadArticleListView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = UserReadArticleSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = UserReadArticle.objects.distinct('article') #all()
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
 
 
 
@@ -331,7 +401,7 @@ class CustomPasswordResetView(PasswordResetView):
 
 #not using this
 class PasswordChangeView(GenericAPIView):
-    print("inside password change view")
+
     """
     Calls Django Auth SetPasswordForm save method.
     Accepts the following POST parameters: new_password1, new_password2
@@ -354,7 +424,28 @@ class PasswordChangeView(GenericAPIView):
 
 
 
+class UserDetailsView(RetrieveUpdateAPIView):
+    """
+    Reads and updates UserModel fields
+    Accepts GET, PUT, PATCH methods.
+    Default accepted fields: username, first_name, last_name
+    Default display fields: pk, username, email, first_name, last_name
+    Read-only fields: pk, email
+    Returns UserModel fields.
+    """
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
+    def get_object(self):
+        return self.request.user
+
+    def get_queryset(self):
+        """
+        Adding this method since it is sometimes called when using
+        django-rest-swagger
+        https://github.com/Tivix/django-rest-auth/issues/275
+        """
+        return get_user_model().objects.none()
 
 
 

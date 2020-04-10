@@ -106,24 +106,24 @@ DATABASES = {
     # }
 
     ##connect to gcloud from local machine
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    #     'NAME': 'apollo',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'PLvK5AGsOqgKtotN',
-    # }
-
-    ##connect to gcloud on app engine
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '/cloudsql/apollo-blog-269301:us-central1:apollo-psql',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
         'NAME': 'apollo',
         'USER': 'postgres',
         'PASSWORD': 'PLvK5AGsOqgKtotN',
     }
+
+    ##connect to gcloud on app engine
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'HOST': '/cloudsql/apollo-blog-269301:us-central1:apollo-psql',
+    #     'PORT': '5432',
+    #     'NAME': 'apollo',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'PLvK5AGsOqgKtotN',
+    # }
 
 }
 
@@ -183,7 +183,8 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH_SERIALIZERS = {
-    'PASSWORD_RESET_SERIALIZER':'api.serializers.PasswordResetSerializer'
+    'PASSWORD_RESET_SERIALIZER':'api.serializers.PasswordResetSerializer' ,
+    'USER_DETAILS_SERIALIZER': 'api.serializers.UserSerializer',
 }
 
 

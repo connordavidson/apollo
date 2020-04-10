@@ -133,7 +133,7 @@ class CommentSection extends React.Component {
 
 
 
-    console.log(comments);
+    // console.log(comments);
 
     return(
         <div >

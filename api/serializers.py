@@ -3,7 +3,7 @@ from rest_framework import serializers , fields
 from django.contrib.auth.forms import PasswordResetForm , SetPasswordForm
 from django.conf import settings
 
-# from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User #, Group
 from .models import (
     Comment ,
     Article ,
@@ -15,9 +15,18 @@ from .models import (
     ArticleUpvote ,
     ArticleDownvote ,
 
+    UserReadArticle ,
+
 )
 
 
+
+
+# found at https://krakensystems.co/blog/2020/custom-users-using-django-rest-framework
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ( 'email', 'username', 'first_name', 'last_name', 'date_joined', 'last_login')
 
 
 
@@ -50,6 +59,7 @@ class CommentDownvoteSerializer(serializers.ModelSerializer):
             'user' ,
             # 'comment'
         )
+
 class CreateCommentDownvoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommentDownvote
@@ -77,9 +87,6 @@ class CommentSerializer(serializers.ModelSerializer):
             "upvotes" ,
             "article"
         )
-
-
-
 
 
 
@@ -124,6 +131,21 @@ class CreateArticleDownvoteSerializer(serializers.ModelSerializer):
         )
     def create(self, validated_data):
         return ArticleDownvote.objects.create(**validated_data)
+
+
+
+
+
+class UserReadArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserReadArticle
+        fields = (
+            'article',
+            'user' ,
+        )
+    def create(self, validated_data):
+        return UserReadArticle.objects.create(**validated_data)
+
 
 
 
@@ -219,7 +241,6 @@ class PasswordResetSerializer(serializers.Serializer):
 #not used
 class PasswordChangeSerializer(serializers.Serializer):
 
-    print("inside password change serializer")
     old_password = serializers.CharField(max_length=128)
     new_password1 = serializers.CharField(max_length=128)
     new_password2 = serializers.CharField(max_length=128)

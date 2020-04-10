@@ -16,10 +16,17 @@ import {
 } from 'react-bootstrap';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
-import ChangePassword from './ChangePassword'
+import ChangePassword from './../Misc/ChangePassword' ;
+import LoaderSpinner from './../Misc/LoaderSpinner';
+import UserInformation from './../Misc/UserInformation';
+import UserArticleInteractions from './../Misc/UserArticleInteractions';
 
 
 
+import {
+  get_user_details_url ,
+
+} from "../../backend-urls.js" ;
 
 
 class Profile extends React.Component {
@@ -27,7 +34,7 @@ class Profile extends React.Component {
     error : null , //holds the error
     loading : true , //to determine if the page is loading
     account_info : [] , //holds the account info
-    selected_button : "change_password" , //changes whenever a user selected a button. is on the top button by default
+    // selected_button : "change_password" , //changes whenever a user selected a button. is on the top button by default
 
   }
 
@@ -35,53 +42,11 @@ class Profile extends React.Component {
     console.log('token CDM : ' + this.props.token)
     console.log('username CDM: ' + this.props.username)
     this.setState({
-      loading: true ,
-      // token : this.props.token ,
+      loading: false ,
     })
 
-    // this.handleGetAccount() ;
   }
 
-  handleGetAccount = () => {
-    this.setState({
-      loading: true ,
-
-    })
-    console.log('username: ' + this.props.username)
-    // creates a new FormData object and adds all the form data to it
-    var account_data = new FormData();
-    account_data.append('username' , "connordavidson") ;
-    account_data.append('first_name' , "Connor") ;
-    account_data.append('last_name' , "Davidson") ;
-
-    for (var value of account_data.values()) {
-       console.log("value: " + value);
-    }
-
-    var auth_token = 'Token ' + this.props.token ;
-
-    console.log('auth token account info: ' + auth_token)
-    axios
-      .post( 'http://127.0.0.1:8000/rest-auth/user/' , account_data ,
-        {
-          headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
-        }
-      )
-      .then(response => {
-        console.log("response: " + response )
-        this.setState({
-          loading: false ,
-          //account_info : response
-        })
-      })
-      .catch(error => {
-        console.log("error: " + error.data)
-        this.setState({
-          loading : false ,
-          erorr : error.data
-        })
-      })
-  }
 
 
   handleProfileInfo = () => {
@@ -141,18 +106,45 @@ class Profile extends React.Component {
 
     } = this.props
 
-    // console.log('username: ' + username)
-    // console.log('token: ' + token)
 
 
     console.log(selected_button)
+
     return(
       <React.Fragment>
         {
           authenticated  ?
             <Container>
-              <h4>Account Information for {username}</h4>
+              <h4>{username}</h4>
               <hr />
+              <Row>
+                <Col sm={{ span: 6 }}>
+                  <ListGroup variant="flush" className="bg-app">
+                  {
+                    !loading &&
+                      <React.Fragment>
+                        <ListGroup.Item className="bg-app">
+                          <UserInformation token={token} />
+                        </ListGroup.Item>
+                        <ListGroup.Item className="bg-app">
+                          <UserArticleInteractions token={token} />
+                        </ListGroup.Item>
+                      </React.Fragment>
+                  }
+                  </ListGroup>
+                </Col>
+                <Col sm={{ span: 6}} >
+                  <ListGroup variant="flush" className="bg-app">
+                    <ListGroup.Item className="bg-app">
+                      <ChangePassword />
+                    </ListGroup.Item>
+
+                  </ListGroup>
+                </Col>
+              </Row>
+
+
+              {/*
               <Row>
                 <Col sm={{ span: 3 }}>
                   <Card>
@@ -170,7 +162,7 @@ class Profile extends React.Component {
                       >
                         Account Info
                       </ListGroup.Item>
-                      */}
+
                       <ListGroup.Item
                         active={selected_button !== "change_password"}
 
@@ -178,7 +170,7 @@ class Profile extends React.Component {
                       >
                         Change Password
                       </ListGroup.Item>
-                      {/*
+
                       <ListGroup.Item
                         active={selected_button === "email_preferences"}
                         onClick={() => {
@@ -191,7 +183,7 @@ class Profile extends React.Component {
                       >
                         Email Preferences
                       </ListGroup.Item>
-                      */}
+
                     </ListGroup>
                   </Card>
                 </Col>
@@ -199,6 +191,8 @@ class Profile extends React.Component {
                   {this.handleProfileInfo()}
                 </Col>
               </Row>
+              */}
+
             </Container>
           :
             <h5>how'd you get here??</h5>
