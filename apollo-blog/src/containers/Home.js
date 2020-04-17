@@ -15,6 +15,7 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
+
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 import { StarFill  } from 'react-bootstrap-icons';
 
@@ -27,7 +28,6 @@ import {
 
 import "../content/css/App.css";
 import RegisterEmail from './Misc/RegisterEmail';
-
 
 
 class Home extends React.Component {
@@ -83,7 +83,6 @@ class Home extends React.Component {
   }
 
 
-
   render(){
 
     const {
@@ -137,13 +136,13 @@ class Home extends React.Component {
           </Row>
         </Container>
         <hr />
-        
+
         <ListGroup variant="flush" className="bg-app">
 
             {/* cannot put this inside the "loading === true" ternary below for some reason*/
             loading === false &&
               pinned_article !== null &&
-                <ListGroup.Item className="bg-app">
+                <ListGroup.Item className="bg-app" > 
                   <Link to={'blog/article/'+pinned_article.id} className="article-link">
                     <Card className="width-100-percent " id={pinned_article.id}>
                       <Card.Body>

@@ -23,7 +23,7 @@ class NavigationBar extends React.Component {
         <Navbar expand="lg" className="bg-navbar">
           <Container >
             <Navbar.Brand
-            
+
               onClick={() => this.props.history.push('/')}
               style={{cursor: 'pointer'}}
             >

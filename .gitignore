@@ -24,3 +24,7 @@ pem-files/
 
 
 cloud_sql_proxy
+
+
+
+node_modules
