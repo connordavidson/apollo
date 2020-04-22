@@ -13,6 +13,9 @@ import {
 } from 'react-bootstrap';
 import axios from "axios";
 import { connect } from "react-redux";
+// import { Event } from "./Misc/Tracking";
+import { Event, PageView} from './Misc/Tracking';
+
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 
 
@@ -50,7 +53,7 @@ class ArticlePage extends React.Component  {
     this.setState({
       loading: true ,
     })
-
+    PageView();
     this.handleGetArticle() ;
     this.handleCreateUserReadArticle() ;
 
@@ -78,10 +81,8 @@ class ArticlePage extends React.Component  {
   }
 
   handleCreateUserReadArticle = () => {
-
     // var user_id = null ;
     //gets the user_id from local storage. difficulty getting user_id from redux-store
-
 
     var user_read_article_data = new FormData() ;
     user_read_article_data.append('article' , this.props.match.params.article_id )
@@ -121,6 +122,13 @@ class ArticlePage extends React.Component  {
       article_downvoted : value ,
     })
   }
+
+
+  handleHomeButtonClickWithGA = () => {
+    this.props.history.push('/') ;
+    Event("Routing", "Opening Home Page", "From Article Page")
+  }
+
 
 
   render(){
@@ -171,8 +179,8 @@ class ArticlePage extends React.Component  {
 
     }
 
-var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20cryptocurrency%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
-var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20cryptocurrency%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
 
     return (
 
@@ -191,22 +199,21 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                   <ListGroup.Item className="bg-app">
                     <h4
                       className="verdana-font"
-                      onClick={() => this.props.history.push('/')}
+                      onClick={this.handleHomeButtonClickWithGA }
                       style={{cursor: 'pointer'}}
                     >
                         Apollo
                     </h4>
                   </ListGroup.Item>
-
                   {
                     !authenticated &&
                       <ListGroup.Item className="bg-app">
-                        <Link to="/signup" className="article-link">
+                        <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
                           <Badge >
                             Create an account
                           </Badge>
                         </Link>
-                        <RegisterEmail text="Get email updates" direction="right"/>
+                        <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/>
                       </ListGroup.Item>
                   }
 
@@ -221,11 +228,11 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
 
                   }
                     <ListGroup.Item className="bg-app">
-                      <a href={twitter_link} >
+                      <a href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
                         <TwitterLogo />
                       </a>
 
-                      <a href={facebook_link}>
+                      <a href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
                         <FacebookLogo />
                       </a>
                     </ListGroup.Item>
@@ -251,10 +258,10 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                           <h6 className="padding-left-10px">
                             By { article_data['author']}, <Badge>{ article_date }</Badge>
                             <div className="float-right">
-                              <a href={twitter_link} >
+                              <a href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
                                 <TwitterLogo />
                               </a>
-                              <a href={facebook_link}>
+                              <a href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
                                 <FacebookLogo />
                               </a>
                             </div>
@@ -274,7 +281,7 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                       /*only displays the "sign up for email updates" if they aren't signed in*/
                       !authenticated &&
                         <div style={{backgroundColor:"lightgrey" , paddingTop:"8px" , paddingBottom:"3px", paddingLeft:"8px" , borderRadius:"4px"}}>
-                          <text >Like what you see? Subscribe for updates on our website</text>
+                          <text >Like what you see? Subscribe for updates </text>
                           <Form >
                             <Form.Row>
                               <Col>
@@ -288,12 +295,12 @@ var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F
                             </Form.Row>
                             <small>We will never sell your information </small>
                           </Form>
-                          <br />
                         </div>
 
                     }
+                  <br/>
+                  <CommentSection  article_id={this.props.match.params.article_id}/>
 
-                  <CommentSection comments={article_data['comments']} article_id={this.props.match.params.article_id}/>
                 </React.Fragment>
               }
             </Col>

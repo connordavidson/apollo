@@ -10,6 +10,7 @@ from .views import (
     CreateCommentView ,
     CustomRegisterView ,
 
+    CommentListView ,
 
     CreateCommentUpvoteView ,
     RemoveCommentUpvoteView ,
@@ -57,6 +58,7 @@ urlpatterns = [
     path('create-comment-upvote/' , CreateCommentUpvoteView.as_view(), name='create-comment-upvote') ,
     path('remove-comment-upvote/<pk>' , RemoveCommentUpvoteView.as_view() , name='remove-comment-upvote') ,
 
+    path('comment/<article_id>' , CommentListView.as_view() , name='comment-list-view' ) ,
     path('comment-downvote/<comment_id>/' , CommentDownvoteListView.as_view() , name='comment-downvote-list-view') ,
     path('create-comment-downvote/' , CreateCommentDownvoteView.as_view(), name='create-comment-downvote') ,
     path('remove-comment-downvote/<pk>' , RemoveCommentDownvoteView.as_view() , name='remove-comment-downvote') ,

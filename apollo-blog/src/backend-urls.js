@@ -17,7 +17,7 @@ export const create_comment_url = endpoint+'create-comment/' ;
 export const login_url = endpoint+`login/`;
 export const signup_url = endpoint+`signup/` ;
 
-
+export const comments_url = (article_id) => endpoint+`comment/`+ article_id ; 
 export const create_comment_upvote_url = endpoint+`create-comment-upvote/` ;
 export const remove_comment_upvote_url = (upvote) => endpoint+`remove-comment-upvote/` + upvote ;
 export const get_comment_upvotes_url = (comment_id) => endpoint+'comment-upvote/' + comment_id + '/';

@@ -9,6 +9,7 @@ import {
 
 } from "react-bootstrap";
 import LoaderSpinner from '../Misc/LoaderSpinner'
+import { Event, PageView} from '../Misc/Tracking';
 
 import "../../content/css/App.css";
 import {
@@ -25,6 +26,10 @@ class SetNewPassword extends React.Component {
     confirm_password : "" , //holds the confirm_password value
     passwords_match : true , //if the passwords match
     success_message : "" , //holds the success message from the server
+  }
+
+  componentDidMount(){
+    PageView();
   }
 
   //sets the password into the state and determines if the two password fields match
@@ -66,6 +71,13 @@ class SetNewPassword extends React.Component {
     return password_valid && confirm_password_valid && passwords_match && this.state.passwords_match  ;
   }
 
+
+  handleSubmitWithGA = () => {
+    Event("Set New Password", "Set New Password Reset Attempt", "From Set New Password Page") ;
+    this.handleSubmit()
+  }
+
+
   handleSubmit = (event) => {
     this.setState({
       loading: true
@@ -86,6 +98,7 @@ class SetNewPassword extends React.Component {
       .post(set_new_password_url , password_data)
       .then(response => {
         console.log(response)
+        Event("Set New Password", "Set New Password Reset SUCCESS", "From Set New Password Page") ;
         this.setState({
           loading: true ,
           success_message : response.data.detail
@@ -93,6 +106,7 @@ class SetNewPassword extends React.Component {
       })
       .catch(error => {
         console.log(error)
+        Event("Set New Password", "Set New Password Reset FAIL", "From Set New Password Page") ;
         this.setState({
           loading: false ,
           error: error.response.data ,

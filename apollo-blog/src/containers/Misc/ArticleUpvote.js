@@ -6,6 +6,7 @@ import {
 
 } from 'react-bootstrap';
 import { ChevronUp } from 'react-bootstrap-icons';
+import { Event } from './Tracking';
 
 import { connect } from "react-redux";
 
@@ -29,9 +30,7 @@ class ArticleUpvote extends React.Component {
   }
 
   componentDidMount(){
-
     this.handleGetUpvotes()
-
 
   }
 
@@ -39,7 +38,6 @@ class ArticleUpvote extends React.Component {
     axios
       .get(get_article_upvotes_url(this.props.article_id))
       .then(response => {
-
 
         // console.log("user_id inside get upvotes: " + this.props.user_id)
         // console.log("response: " + response.data )
@@ -75,6 +73,7 @@ class ArticleUpvote extends React.Component {
         }
       )
       .then(response => {
+        Event("Upvote Article" , "Remove Upvote Article SUCCESS")
         this.handleGetUpvotes()
         console.log('removed upvote ')
         this.setState({
@@ -82,6 +81,7 @@ class ArticleUpvote extends React.Component {
         })
       })
       .catch(error => {
+        Event("Upvote Article" , "Remove Upvote Article FAIL")
         console.log('error removing upvote' + error )
       })
 
@@ -104,9 +104,11 @@ class ArticleUpvote extends React.Component {
         }
       )
       .then(response => {
+        Event("Upvote Article" , "Create Upvote Article SUCCESS")
         this.handleGetUpvotes()
       })
       .catch(error => {
+        Event("Upvote Article" , "Create Upvote Article FAIL")
         console.log('error creating upvote: ' + error.code)
       })
 
@@ -115,7 +117,10 @@ class ArticleUpvote extends React.Component {
   }
 
 
-
+  handleUpvoteClickWithGA = () => {
+    Event("Upvote Article" , "Upvote Comment Attempt")
+    this.handleUpvoteClick() ;
+  }
 
   handleUpvoteClick = ( text ) => {
     if(this.props.user_id === 0)
@@ -152,7 +157,7 @@ class ArticleUpvote extends React.Component {
     return(
 
       <Badge
-        onClick={this.handleUpvoteClick}
+        onClick={this.handleUpvoteClickWithGA}
         className={(this.state.upvoted ? "cursor-pointer color-green " : "cursor-pointer" )}
         >
         <ChevronUp size={25}/> {number_of_upvotes}

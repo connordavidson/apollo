@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router';
+import { Event, PageView} from '../Misc/Tracking';
 
 
 import "../../content/css/App.css";
@@ -24,6 +25,9 @@ class Login extends React.Component {
     username: "" , //stores the username that is getting entered
     password: "" , //stores the password that is getting entered
 
+  }
+  componentDidMount(){
+    PageView();
   }
 
   handleUsername = e => {
@@ -99,26 +103,27 @@ class Login extends React.Component {
             disabled={
               !(this.handleValidated())
             }
+            onClick={() => Event("Login" , "Login Attempt" , "Hit Login Button")}
             type="submit"
           >
             Login
           </Button>
-          <Badge> New to Apollo? <NavLink to="/signup">Sign Up</NavLink> </Badge>
+          <Badge> New to Apollo? <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Login Page") }>Sign Up</NavLink> </Badge>
           <br/>
-          <Badge> <NavLink to="/reset-password">Forgot your password? </NavLink> </Badge>
-            <br />
-            {
-              error &&
-                <Alert variant="danger">
-                  {
-                    //loops through all the returned errors and prints them with a bullet
-                    Object.keys(errors).map(e => {
-                      return <li>{errors[e][0]}</li>
-                    })
-                  }
-                </Alert>
+          <Badge> <NavLink to="/reset-password" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink> </Badge>
+          <br />
+          {
+            error &&
+              <Alert variant="danger">
+                {
+                  //loops through all the returned errors and prints them with a bullet
+                  Object.keys(errors).map(e => {
+                    return <li>{errors[e][0]}</li>
+                  })
+                }
+              </Alert>
 
-            }
+          }
         </form>
       </div>
     );

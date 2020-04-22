@@ -151,6 +151,16 @@ class CreateArticleView(CreateAPIView):
     queryset = Article.objects.all()
 
 
+class CommentListView(ListAPIView):
+    permission_classes = (AllowAny , )
+    serializer_class = CommentSerializer
+    def get_queryset(self):
+        article_id = self.kwargs['article_id']
+        qs = Comment.objects.all()
+        if article_id is None :
+            return Http404("article id not found")
+        return qs.filter(article=article_id)
+
 
 
 

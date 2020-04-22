@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import { CheckCircle } from 'react-bootstrap-icons';
 import LoaderSpinner from './LoaderSpinner'
+import { Event } from './Tracking';
 
 import "../../content/css/App.css";
 import {
@@ -32,7 +33,11 @@ class RegisterEmail extends React.Component {
 
   }
 
-   handlePostEmail = () => {
+  handlePostEmailWithGA = () => {
+    Event("Register Email" , "Register Email Atempt")
+    this.handlePostEmail()
+  }
+  handlePostEmail = () => {
     this.setState({
       loading: true ,
       error: null ,
@@ -45,12 +50,16 @@ class RegisterEmail extends React.Component {
     axios
       .post(create_email_url , data)
       .then(response => {
+
+        Event("Register Email" , "Register Email SUCCESS" )
         this.setState({
           email_submitted : true ,
           loading:false ,
         })
       })
       .catch(error => {
+
+        Event("Register Email" , "Register Email FAIL" )
         this.setState({
           error: error.response.data  ,
           loading: false ,
@@ -75,7 +84,6 @@ class RegisterEmail extends React.Component {
   }
 
   handleClosePopover = () => {
-    alert('blurred')
     document.getElementById("emailBadge").click()
   }
 
@@ -122,7 +130,7 @@ class RegisterEmail extends React.Component {
                             disabled={true}
                             variant="primary"
                             type="submit"
-                            onClick={this.handlePostEmail }
+                            onClick={this.handlePostEmailWithGA }
                             className="float-right"
                           >
                             <LoaderSpinner />
@@ -132,7 +140,7 @@ class RegisterEmail extends React.Component {
                           disabled={this.handleEmailValidated()}
                           variant="primary"
                           type="submit"
-                          onClick={this.handlePostEmail }
+                          onClick={this.handlePostEmailWithGA }
                           className="float-right"
                         >
                           Submit

@@ -5,6 +5,7 @@ import {
 
 } from 'react-bootstrap';
 import { ChevronDown } from 'react-bootstrap-icons';
+import { Event } from './Tracking';
 
 import { connect } from "react-redux";
 import {
@@ -25,7 +26,6 @@ class CommentDownvote extends React.Component {
 
 
   componentDidMount(){
-
     this.handleGetDownvotes()
 
   }
@@ -66,6 +66,7 @@ class CommentDownvote extends React.Component {
         }
       )
       .then(response => {
+        Event("Downvote Comment" , "Remove Downvote Comment SUCCESS")
         console.log('removed downvote ')
         this.setState({
           downvoted : false ,
@@ -74,6 +75,7 @@ class CommentDownvote extends React.Component {
         })
       })
       .catch(error => {
+        Event("Downvote Comment" , "Remove Downvote Comment FAIL")
         console.log('error removing downvote' + error )
       })
 
@@ -96,9 +98,11 @@ class CommentDownvote extends React.Component {
         }
       )
       .then(response => {
+        Event("Downvote Comment" , "Create Downvote Comment SUCCESS")
         this.handleGetDownvotes()
       })
       .catch(error => {
+        Event("Downvote Comment" , "Create Downvote Comment FAIL")
         console.log('error creating upvote: ' + error.code)
       })
 
@@ -107,7 +111,10 @@ class CommentDownvote extends React.Component {
   }
 
 
-
+  handleDownvoteClickWithGA = () => {
+    Event("Downvote Comment" , "Downvote Comment Attempt")
+    this.handleDownvoteClick()
+  }
 
   handleDownvoteClick = ( text ) => {
 
@@ -139,7 +146,7 @@ class CommentDownvote extends React.Component {
 
     return(
       <Badge
-        onClick={this.handleDownvoteClick}
+        onClick={this.handleDownvoteClickWithGA}
         className={(this.state.downvoted ? "cursor-pointer color-red " : "cursor-pointer" )}
         >
         <ChevronDown size={25}/> {number_of_downvotes}

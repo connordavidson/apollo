@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { Event, PageView} from '../Misc/Tracking';
 import "../../content/css/App.css";
 import { authSignup } from "../../store/actions/auth";
 
@@ -24,6 +25,9 @@ class  Signup extends React.Component  {
     confirm_password : "" , //holds the confirm_password value
     passwords_match : true ,
 
+  }
+  componentDidMount(){
+    PageView();
   }
 
   //sets the email in the state
@@ -79,6 +83,7 @@ class  Signup extends React.Component  {
     var passwords_match = this.state.password_valid === this.state.confirm_password_valid
     return email_valid && username_valid && password_valid && confirm_password_valid && passwords_match && this.state.passwords_match  ;
   }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -150,10 +155,16 @@ class  Signup extends React.Component  {
             />
           </FormGroup>
 
-          <Button block bsSize="large" disabled={!this.handleValidated()} type="submit" >
+          <Button
+          block
+          bsSize="large"
+          disabled={!this.handleValidated()}
+          onClick={() => Event("Signup" , "Signup Attempt" , "Hit Signup Button")}
+          type="submit"
+           >
             Signup
           </Button>
-          <Badge> Already have an account? <NavLink to="/login">Login </NavLink> </Badge>
+          <Badge> Already have an account? <NavLink to="/login" onClick={() => Event("Routing", "Opening Login Page", "From Signup Page") }>Login </NavLink> </Badge>
 
           {
             !passwords_match &&

@@ -6,6 +6,7 @@ import {
 
 } from 'react-bootstrap';
 import { ChevronUp } from 'react-bootstrap-icons';
+import { Event } from './Tracking';
 
 import { connect } from "react-redux";
 
@@ -29,7 +30,6 @@ class CommentUpvote extends React.Component {
   }
 
   componentDidMount(){
-
     this.handleGetUpvotes()
 
   }
@@ -71,13 +71,14 @@ class CommentUpvote extends React.Component {
       )
       .then(response => {
         console.log('removed upvote ')
+        Event("Upvote Comment" , "Remove Upvote Comment SUCCESS")
         this.setState({
           upvoted : false ,
           number_of_upvotes : this.state.number_of_upvotes - 1 ,
-
         })
       })
       .catch(error => {
+        Event("Upvote Comment" , "Remove Upvote Comment FAIL")
         console.log('error removing upvote' + error )
       })
 
@@ -89,7 +90,6 @@ class CommentUpvote extends React.Component {
 
   handleCreateUpvote = () => {
       var auth_token = 'Token ' + this.props.token ;
-
       var upvote_data = new FormData() ;
       upvote_data.append('comment' , this.props.comment_id )
       upvote_data.append('user' , this.props.user_id)
@@ -101,9 +101,11 @@ class CommentUpvote extends React.Component {
           }
         )
         .then(response => {
+          Event("Upvote Comment" , "Create Upvote Comment SUCCESS")
           this.handleGetUpvotes()
         })
         .catch(error => {
+          Event("Upvote Comment" , "Create Upvote Comment FAIL")
           console.log('error creating upvote: ' + error.code)
         })
         //sets the CommentSection state var "comment_upvoted" to true
@@ -112,7 +114,10 @@ class CommentUpvote extends React.Component {
 
 
 
-
+  handleUpvoteClickWithGA = () => {
+    Event("Upvote Comment" , "Upvote Comment Attempt")
+    this.handleUpvoteClick() ;
+  }
 
   handleUpvoteClick = ( text ) => {
     if(this.props.user_id === 0)
@@ -149,7 +154,7 @@ class CommentUpvote extends React.Component {
     return(
 
       <Badge
-        onClick={this.handleUpvoteClick}
+        onClick={this.handleUpvoteClickWithGA}
         className={(upvoted ? "cursor-pointer color-green " : "cursor-pointer" )}
         >
         <ChevronUp size={25}/> {number_of_upvotes}

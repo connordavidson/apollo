@@ -20,6 +20,7 @@ import ChangePassword from './../Misc/ChangePassword' ;
 import LoaderSpinner from './../Misc/LoaderSpinner';
 import UserInformation from './../Misc/UserInformation';
 import UserArticleInteractions from './../Misc/UserArticleInteractions';
+import { PageView } from '../Misc/Tracking';
 
 
 
@@ -44,6 +45,8 @@ class Profile extends React.Component {
     this.setState({
       loading: false ,
     })
+
+    PageView() ;
 
   }
 
@@ -138,7 +141,6 @@ class Profile extends React.Component {
                     <ListGroup.Item className="bg-app">
                       <ChangePassword />
                     </ListGroup.Item>
-
                   </ListGroup>
                 </Col>
               </Row>

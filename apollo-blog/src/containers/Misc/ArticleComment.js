@@ -6,7 +6,6 @@ import {
 
 } from 'react-bootstrap';
 
-
 import RichText from './RichText'
 import CommentUpvote from './CommentUpvote'
 import CommentDownvote from './CommentDownvote'
@@ -16,6 +15,7 @@ import "../../content/css/App.css";
 
 
 class ArticleComment extends React.Component {
+
   state = {
     comment_upvoted : false , //determines if the comment is upvoted or not.
     comment_downvoted : false , //determines if the comment is downvoted or not.
@@ -61,9 +61,9 @@ class ArticleComment extends React.Component {
               <RichText text={this.props.comment.body} />
             </Card.Text>
 
-            <CommentUpvote comment_id={this.props.comment.id} comment_downvoted={comment_downvoted} comment_upvoted={this.handleCommentUpvoteClick}/>
+            <CommentUpvote comment_id={this.props.comment.id} comment_downvoted={comment_downvoted} comment_upvoted={this.handleCommentUpvoteClick} />
             {' '}
-            <CommentDownvote comment_id={this.props.comment.id} comment_upvoted={comment_upvoted} comment_downvoted={this.handleCommentDownvoteClick}/>
+            <CommentDownvote comment_id={this.props.comment.id} comment_upvoted={comment_upvoted} comment_downvoted={this.handleCommentDownvoteClick} />
 
           </Card.Body>
         </Card>

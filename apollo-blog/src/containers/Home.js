@@ -15,6 +15,9 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
+import { Event, PageView, initGA } from "./Misc/Tracking";
+
+// import ReactGA from "react-ga";
 
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 import { StarFill  } from 'react-bootstrap-icons';
@@ -44,6 +47,9 @@ class Home extends React.Component {
     this.setState({
       loading: true ,
     })
+    // ReactGA.initialize('UA-163650811-1');
+    // PageView();
+
     this.handleGetArticles();
   }
 
@@ -129,7 +135,7 @@ class Home extends React.Component {
                     </div>
                 :
                   <div className="float-right">
-                    <RegisterEmail text="Sign up for email updates" direction="left"/>
+                    <RegisterEmail text="Sign up for email updates" direction="left" onClick={()=> Event("Register", "Register Email Button", "HOME_PAGE")}/>
                   </div>
               }
             </Col>
@@ -142,8 +148,8 @@ class Home extends React.Component {
             {/* cannot put this inside the "loading === true" ternary below for some reason*/
             loading === false &&
               pinned_article !== null &&
-                <ListGroup.Item className="bg-app" > 
-                  <Link to={'blog/article/'+pinned_article.id} className="article-link">
+                <ListGroup.Item className="bg-app" >
+                  <Link to={'blog/article/'+pinned_article.id} className="article-link" onClick={() => Event("Routing", "Opening Pinned Article; id = " + pinned_article.id, "From Home Page")}>
                     <Card className="width-100-percent " id={pinned_article.id}>
                       <Card.Body>
                         <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
@@ -165,7 +171,7 @@ class Home extends React.Component {
                 articles.length > 0 ?
                   articles.map(article =>  (
                       <ListGroup.Item className="bg-app">
-                        <Link to={'blog/article/'+article.id} className="article-link">
+                        <Link to={'blog/article/'+article.id} className="article-link" onClick={()=> Event("Routing", "Opening Pinned Article;; id = " + article.id, "From Home Page")}>
                           <Card className="width-100-percent" id={article.id}>
                             <Card.Body>
                               <Card.Title>{article.title}</Card.Title>

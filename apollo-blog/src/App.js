@@ -6,6 +6,7 @@ import {
   Container ,
 
 } from 'react-bootstrap';
+import {PageView, initGA} from './containers/Misc/Tracking';
 
 import * as actions from "./store/actions/auth";
 import NavigationBar from "./containers/Layout/NavigationBar";
@@ -15,25 +16,13 @@ import BaseRouter from "./routes";
 // import {PageView, initGA} from './containers/Misc/Tracking';
 
 
-
-// initGA('UA-163650811-1') ;
-
-// ReactGA.initialize('UA-163650811-1');
-//
-// function initializeReactGA() {
-//     ReactGA.initialize('UA-163650811-1');
-//     ReactGA.pageview('/homepage');
-// }
-
-
-
 class App extends React.Component {
 
   componentDidMount() {
     //keeps the token in redux state from getting erased on page reload
     this.props.checkState();
-    // PageView() ;
-    // ReactGA.pageview(window.location.pathname + window.location.search);
+    initGA('UA-163650811-1');
+    PageView();
   }
 
   render() {

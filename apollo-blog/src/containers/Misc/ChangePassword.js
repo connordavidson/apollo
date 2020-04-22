@@ -13,7 +13,7 @@ import {
   change_password_url ,
 
 } from "../../backend-urls.js" ;
-
+import { Event } from '../Misc/Tracking';
 import LoaderSpinner from '../Misc/LoaderSpinner'
 
 
@@ -68,12 +68,14 @@ class ChangePassword extends React.Component {
         new_password2 : text.target.value
       });
     }
-    // console.log("new password 2 :" + text.target.value)
-    // this.setState({
-    //   new_password2: text.target.value
-    // });
   }
 
+
+
+  handleChangePasswordWithGA = () => {
+    Event("Change Password", "Change Password Attempt", "Change Password Attempt" )
+    this.handleChangePassword() ;
+  }
 
   handleChangePassword = () => {
     this.setState({
@@ -90,13 +92,14 @@ class ChangePassword extends React.Component {
     }
     var auth_token = 'Token ' + this.props.token ;
     axios
-      .post( "http://127.0.0.1:8000/rest-auth/password/change/"  , password_data ,
+      .post( "/rest-auth/password/change/"  , password_data ,
         {
           headers: { Authorization: auth_token } //DRF requires the token in the header to retrieve user's info
         }
       )
       .then(response => {
         console.log("response: " + response.data )
+        Event("Change Password", "Change Password SUCCESS", "Change Password SUCCESS" )
         this.setState({
           loading : false ,
           error : null ,
@@ -106,6 +109,7 @@ class ChangePassword extends React.Component {
       })
       .catch(error => {
         console.log("error: " + error.response.data )
+        Event("Change Password", "Change Password FAIL", "Change Password FAIL" )
         this.setState({
           loading: false ,
           error : error.response.data ,
@@ -179,7 +183,6 @@ class ChangePassword extends React.Component {
                   disabled={
                     !(this.handleValidated())
                   }
-                  onClick={this.handleChangePassword}
                 >
                   <LoaderSpinner />
                 </Button>
@@ -190,7 +193,7 @@ class ChangePassword extends React.Component {
                   disabled={
                     !(this.handleValidated())
                   }
-                  onClick={this.handleChangePassword}
+                  onClick={this.handleChangePasswordWithGA}
                 >
                   Change Your Password
                 </Button>

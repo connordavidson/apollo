@@ -5,6 +5,8 @@ import {
     login_url ,
 
 } from '../../backend-urls' ;
+import { Event, PageView, initGA} from '../../containers/Misc/Tracking';
+
 // import {
 //   mergeCartOnLogin,
 //   removeCartOnLogout,
@@ -65,6 +67,8 @@ export const authLogin = (username, password) => {
         localStorage.setItem("username", username);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
+        Event("Login" , "Login SUCCESS" , "Login SUCCESS") ;
+
         dispatch(authSuccess(token , username , user_id));
         dispatch(checkAuthTimeout(10000));
 
@@ -74,6 +78,7 @@ export const authLogin = (username, password) => {
       })
       .catch(err => {
         // console.log(err.response.data.non_field_errors)
+        Event("Login" , "Login FAIL" , "Login FAIL") ;
         dispatch(authFail(err));
       });
   };
@@ -95,10 +100,15 @@ export const authSignup = (username, email, password1, password2) => {
         const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
+        Event("Signup" , "Signup SUCCESS" , "Signup SUCCESS") ;
         dispatch(authSuccess(token , username , false));
         dispatch(checkAuthTimeout(3600));
       })
       .catch(err => {
+        console.log("err: " + err)
+        console.log("err.data: " + err.data) ;
+
+        Event("Signup" , "Signup FAIL" , "Signup FAIL: " + err) ;
         dispatch(authFail(err));
       });
   };
@@ -139,6 +149,8 @@ export const logoutUser = () => {
       localStorage.removeItem("username");
       localStorage.removeItem("staff");
       localStorage.removeItem("user_id");
+      Event("Logout" , "Logout SUCESS" , "Logout SUCESS") ;
+
       dispatch( logout() )
     }
 }

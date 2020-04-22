@@ -2,29 +2,23 @@ apollo-blog/node_modules/
 
 .gcloudignore
 
-
 *.sqlite3
-
 
 migrations/
 
 __pycache__/
 
-
 /setup.cfg
 
 apollo-blog/build/
-
-
 
 app.yaml
 
 pem-files/
 *.pem
 
-
 cloud_sql_proxy
 
-
-
 node_modules
+
+static

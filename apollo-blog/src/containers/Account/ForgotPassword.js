@@ -9,6 +9,7 @@ import {
 
 } from "react-bootstrap";
 import LoaderSpinner from '../Misc/LoaderSpinner'
+import { Event, PageView} from '../Misc/Tracking';
 
 
 import "../../content/css/App.css";
@@ -29,6 +30,10 @@ class ForgotPassword extends React.Component {
 
   }
 
+  componentDidMount(){
+    PageView();
+  }
+
   handleEmail = (e) => {
     console.log(e.target.value) ;
     this.setState({email : e.target.value}) ;
@@ -36,6 +41,11 @@ class ForgotPassword extends React.Component {
 
   handleValidated = () => {
     return !(this.state.email.length > 1  )
+  }
+
+  handleSubmitWithGA = () => {
+    Event("Forgot Password", "Forgot Password Reset Attempt", "From Forgot Password Page") ;
+    this.handleSubmit()
   }
 
   handleSubmit = () => {
@@ -50,6 +60,7 @@ class ForgotPassword extends React.Component {
       .post(reset_password_url , data)
       .then(response => {
         console.log(response)
+        Event("Forgot Password", "Forgot Password Reset SUCCESS", "From Forgot Password Page") ;
         this.setState({
           email_submitted : true ,
           loading : false ,
@@ -58,6 +69,7 @@ class ForgotPassword extends React.Component {
       })
       .catch(error => {
         console.log(error)
+        Event("Forgot Password", "Forgot Password Reset FAIL", "From Forgot Password Page") ;
         this.setState({
           error : error.response.data ,
           loading : false ,
@@ -109,7 +121,7 @@ class ForgotPassword extends React.Component {
                 disabled={
                   (this.handleValidated())
                 }
-                onClick={this.handleSubmit}
+                onClick={this.handleSubmitWithGA}
               >
                 Submit
               </Button>
