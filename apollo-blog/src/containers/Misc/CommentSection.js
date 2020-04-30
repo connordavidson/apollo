@@ -38,7 +38,7 @@ class CommentSection extends React.Component {
 
   state = {
     error : null , //stores any error that comes back from the database
-    loading : null , //set to determine if the page is loading
+    loading : true , //set to determine if the page is loading
     commenter_name : "" , //stores the anme of the person that is writing the comment
     comment_body : "" , //stores the body of the comment
     comment_submitted : false , //determines if the comment has been submitted.
@@ -174,21 +174,28 @@ class CommentSection extends React.Component {
 
 
 
-    // console.log(comments);
+    console.log("loading : " + loading );
 
     return(
         <div >
-          <h2 className="tahoma-font">Article Comments</h2>
+          <h2 className="tahoma-font">Comments</h2>
           <hr />
           <Container>
             {
-              comments  ?
-                comments.map(comment => (
-                    <ArticleComment comment={comment} />
-                  )
-                )
-              :
-                <Alert variant="dark">There are no comments yet! Leave one below</Alert>
+              loading &&
+                <LoaderSpinner />
+            }
+            {
+              !loading ?
+                  comments  ?
+                    comments.map(comment => (
+                        <ArticleComment comment={comment} />
+                      )
+                    )
+                  :
+                    <Alert variant="dark">There are no comments yet! Leave one below</Alert>
+                :
+                  <br />
             }
             {
               authenticated ?
@@ -241,7 +248,9 @@ class CommentSection extends React.Component {
                     </Card.Body>
                   </Card>
                 :
-                  <Alert variant="dark">You need to <a href="/login" onClick={() => Event("Routing", "Opening Login Page", "From Article Comment Section")}>login</a> or <a href="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Article Comment Section") }>signup</a> to leave a comment.  </Alert>
+                  <Alert variant="dark">
+                    You need to <a href="/login" onClick={() => Event("Routing", "Opening Login Page", "From Article Comment Section")}>Login</a> or <a href="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Article Comment Section") }>Signup</a> to leave a comment.
+                  </Alert>
             }
             {
               comment_submitted &&

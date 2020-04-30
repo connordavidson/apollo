@@ -108,9 +108,13 @@ class Login extends React.Component {
           >
             Login
           </Button>
-          <Badge> New to Apollo? <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Login Page") }>Sign Up</NavLink> </Badge>
+          <Badge>
+            New to Apollo? <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Login Page") }>Signup</NavLink>
+          </Badge>
           <br/>
-          <Badge> <NavLink to="/reset-password" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink> </Badge>
+          <Badge>
+            <NavLink to="/reset-password" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink>
+          </Badge>
           <br />
           {
             error &&

@@ -180,7 +180,8 @@ class ArticlePage extends React.Component  {
     }
 
     var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20cryptocurrency%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
-    var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse "
+    //" https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
 
     return (
 
@@ -204,37 +205,53 @@ class ArticlePage extends React.Component  {
                     >
                         Apollo
                     </h4>
+
                   </ListGroup.Item>
-                  {
-                    !authenticated &&
-                      <ListGroup.Item className="bg-app">
-                        <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
-                          <Badge >
-                            Create an account
-                          </Badge>
-                        </Link>
-                        <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/>
-                      </ListGroup.Item>
-                  }
 
-                  { /*checks that loading is false because if loading is false, then we know that article_data has actual information in it (as opposed to being empty. if it's empty, it can't get the upvote data)*/
-                    !loading &&
-                      <ListGroup.Item className="bg-app">
-                        <div id="sm_links_left_sidebar">
-                          <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                          <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                        </div>
-                      </ListGroup.Item>
 
-                  }
+
                     <ListGroup.Item className="bg-app">
-                      <a href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
+
+                      {
+                        !loading &&
+
+                            <React.Fragment>
+                              <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                              <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                            </React.Fragment>
+                      }
+
+                      {
+                        !authenticated &&
+                          <React.Fragment>
+                            <br />
+                            <br />
+                            <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                              <Button
+                                variant="outline-secondary"
+                                size="sm"
+                              >
+                                Signup
+                              </Button>
+                            </Link>
+                            {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
+
+                          </React.Fragment>
+
+                      }
+                      <br />
+                      <br />
+
+
+                      <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
                         <TwitterLogo />
                       </a>
 
-                      <a href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
+                      {/*
+                      <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
                         <FacebookLogo />
                       </a>
+                      */}
                     </ListGroup.Item>
                 </div>
 
@@ -258,19 +275,21 @@ class ArticlePage extends React.Component  {
                           <h6 className="padding-left-10px">
                             By { article_data['author']}, <Badge>{ article_date }</Badge>
                             <div className="float-right">
-                              <a href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
+                              <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
                                 <TwitterLogo />
                               </a>
-                              <a href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
+                              {/*
+                              <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
                                 <FacebookLogo />
                               </a>
+                              */}
                             </div>
                           </h6>
 
                           <hr />
 
                           {/*Displays the body of the article in Rich Text*/}
-                          <RichText  text={article_data['body']} classes="times-new-roman-font"/>
+                          <RichText text={article_data['body']} classes="times-new-roman-font font-size-19px"/>
                         </React.Fragment>
                       :
                         <Alert variant="dark">There was an issue loading this article</Alert>
@@ -279,6 +298,7 @@ class ArticlePage extends React.Component  {
                     <br />
                     {
                       /*only displays the "sign up for email updates" if they aren't signed in*/
+                      /*
                       !authenticated &&
                         <div style={{backgroundColor:"lightgrey" , paddingTop:"8px" , paddingBottom:"3px", paddingLeft:"8px" , borderRadius:"4px"}}>
                           <text >Like what you see? Subscribe for updates </text>
@@ -296,9 +316,10 @@ class ArticlePage extends React.Component  {
                             <small>We will never sell your information </small>
                           </Form>
                         </div>
-
+                        <br/>
+                        
+                      */
                     }
-                  <br/>
                   <CommentSection  article_id={this.props.match.params.article_id}/>
 
                 </React.Fragment>

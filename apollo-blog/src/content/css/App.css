@@ -78,6 +78,12 @@ a.article-link:active
   font-size: "10pt";
 }
 
+
+.font-size-19px{
+  font-size: 19px ;
+}
+
+
 .float-right{
   float: right ;
 }

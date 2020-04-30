@@ -135,7 +135,7 @@ class Home extends React.Component {
                     </div>
                 :
                   <div className="float-right">
-                    <RegisterEmail text="Sign up for email updates" direction="left" onClick={()=> Event("Register", "Register Email Button", "HOME_PAGE")}/>
+                    {/*<RegisterEmail text="Sign up for email updates" direction="left" onClick={()=> Event("Register", "Register Email Button", "HOME_PAGE")}/> */}
                   </div>
               }
             </Col>
@@ -147,6 +147,7 @@ class Home extends React.Component {
 
             {/* cannot put this inside the "loading === true" ternary below for some reason*/
             loading === false &&
+              /*This prevents the pinned_article from displaying if loading is false... it runs parallel to the logic of LoaderSpinner in the following ternary -> If loading, display the LoaderSpinner and don't display pinned article   */
               pinned_article !== null &&
                 <ListGroup.Item className="bg-app" >
                   <Link to={'blog/article/'+pinned_article.id} className="article-link" onClick={() => Event("Routing", "Opening Pinned Article; id = " + pinned_article.id, "From Home Page")}>

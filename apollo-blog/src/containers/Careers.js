@@ -28,7 +28,7 @@ class Careers extends React.Component  {
 
         <hr />
 
-        <p>If you are interested in what we're doing here, send us an email with your resume and interests at <a href="mailto:apollo-team@apollo.com" onClick={() => Event("Careers Email Link" , "Click Careers Email Link" , "From Careers Page")}>apollo-team@apollo.com</a>
+        <p>If you are interested in what we're doing here, send us an email with your resume and interests at <a href="mailto:apollo-team@apollo.com" onClick={() => Event("Careers Email Link" , "Click Careers Email Link" , "From Careers Page")}>careers@apollo.com</a>
         </p>
 
       </Container>

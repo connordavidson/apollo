@@ -12,7 +12,7 @@ import {
 
 } from 'react-bootstrap';
 import { CheckCircle } from 'react-bootstrap-icons';
-import LoaderSpinner from './LoaderSpinner'
+import ButtonLoaderSpinner from './ButtonLoaderSpinner'
 import { Event } from './Tracking';
 
 import "../../content/css/App.css";
@@ -133,7 +133,7 @@ class RegisterEmail extends React.Component {
                             onClick={this.handlePostEmailWithGA }
                             className="float-right"
                           >
-                            <LoaderSpinner />
+                            <ButtonLoaderSpinner />
                           </Button>
                       :
                         <Button

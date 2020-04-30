@@ -156,11 +156,11 @@ class  Signup extends React.Component  {
           </FormGroup>
 
           <Button
-          block
-          bsSize="large"
-          disabled={!this.handleValidated()}
-          onClick={() => Event("Signup" , "Signup Attempt" , "Hit Signup Button")}
-          type="submit"
+            block
+            bsSize="large"
+            disabled={!this.handleValidated()}
+            onClick={() => Event("Signup" , "Signup Attempt" , "Hit Signup Button")}
+            type="submit"
            >
             Signup
           </Button>
@@ -168,7 +168,7 @@ class  Signup extends React.Component  {
 
           {
             !passwords_match &&
-            <Alert variant="danger">Your passwords must match</Alert>
+              <Alert variant="danger">Your passwords must match</Alert>
           }
 
           {

@@ -154,7 +154,7 @@ class UserReadArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True , read_only=True)
+    # comments = CommentSerializer(many=True , read_only=True)
     class Meta:
         model = Article
         fields = (
@@ -163,7 +163,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'body' ,
             'created_date' ,
             'author' ,
-            'comments' ,
+            # 'comments' ,
             'pinned' ,
         )
 
