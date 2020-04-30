@@ -46,10 +46,14 @@ class ArticlePage extends React.Component  {
     article_data: [] , //stores the article information
     article_upvoted : false , //determines if the article is upvoted or not.
     article_downvoted : false , //determines if the article is downvoted or not.
-
+    window_width : null , // stores the width of the window. used to determine if the left sidebar should be hidden
   }
 
   componentDidMount(){
+    //resize event listener so the app knows when to remove the left sidebar. found at => https://gist.github.com/nma/33f8057e4899bdb55440a693a02c431b
+    window.addEventListener("resize", this.updateWindowDimensions.bind(this));
+    this.updateWindowDimensions();
+
     this.setState({
       loading: true ,
     })
@@ -57,6 +61,12 @@ class ArticlePage extends React.Component  {
     this.handleGetArticle() ;
     this.handleCreateUserReadArticle() ;
 
+
+  }
+
+
+  updateWindowDimensions() {
+      this.setState({ window_width: window.innerWidth >= 992, height: window.innerHeight });
   }
 
 
@@ -98,7 +108,6 @@ class ArticlePage extends React.Component  {
       .post(create_user_read_article_url , user_read_article_data)
       .then( response => {
         console.log("Create userreadarticle: " + response.data)
-
       })
       .catch(error => {
         console.log("error userreadarticle: " + error.data )
@@ -138,6 +147,7 @@ class ArticlePage extends React.Component  {
       loading ,
       article_upvoted ,
       article_downvoted ,
+      window_width ,
 
     } = this.state
 
@@ -146,7 +156,7 @@ class ArticlePage extends React.Component  {
 
     } = this.props
 
-    // console.log(comment_body)
+    // console.log("window_width : " + window_width)
     // console.log(commenter_name)
 
     // console.log(  article_data['comments'] )
@@ -190,75 +200,78 @@ class ArticlePage extends React.Component  {
         <Container >
 
           <Row>
-            <Col xs={2}>
 
-              <ListGroup
-                variant="flush"
-                className="sticky-top BeforeScroll "
-              >
-                <div id="apollo_widget_left_sidebar">
-                  <ListGroup.Item className="bg-app">
-                    <h4
-                      className="verdana-font"
-                      onClick={this.handleHomeButtonClickWithGA }
-                      style={{cursor: 'pointer'}}
-                    >
-                        Apollo
-                    </h4>
+            {
+              window_width  &&
+                <Col lg={2} >
 
-                  </ListGroup.Item>
+                  <ListGroup
+                    variant="flush"
+                    className="sticky-top BeforeScroll "
+                  >
+                    <div id="apollo_widget_left_sidebar">
+                      <ListGroup.Item className="bg-app">
+                        <h4
+                          className="verdana-font"
+                          onClick={this.handleHomeButtonClickWithGA }
+                          style={{cursor: 'pointer'}}
+                        >
+                            Apollo
+                        </h4>
 
-
-
-                    <ListGroup.Item className="bg-app">
-
-                      {
-                        !loading &&
-
-                            <React.Fragment>
-                              <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                              <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                            </React.Fragment>
-                      }
-
-                      {
-                        !authenticated &&
-                          <React.Fragment>
-                            <br />
-                            <br />
-                            <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
-                              <Button
-                                variant="outline-secondary"
-                                size="sm"
-                              >
-                                Signup
-                              </Button>
-                            </Link>
-                            {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
-
-                          </React.Fragment>
-
-                      }
-                      <br />
-                      <br />
+                      </ListGroup.Item>
 
 
-                      <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
-                        <TwitterLogo />
-                      </a>
 
-                      {/*
-                      <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
-                        <FacebookLogo />
-                      </a>
-                      */}
-                    </ListGroup.Item>
-                </div>
+                        <ListGroup.Item className="bg-app">
 
-              </ListGroup>
-            </Col>
+                          {
+                            !loading &&
 
-            <Col xs={8} >
+                                <React.Fragment>
+                                  <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                                  <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                                </React.Fragment>
+                          }
+
+                          {
+                            !authenticated &&
+                              <React.Fragment>
+                                <br />
+                                <br />
+                                <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                                  <Button
+                                    variant="outline-secondary"
+                                    size="sm"
+                                  >
+                                    Signup
+                                  </Button>
+                                </Link>
+                                {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
+
+                              </React.Fragment>
+
+                          }
+                          <br />
+                          <br />
+
+
+                          <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
+                            <TwitterLogo />
+                          </a>
+
+                          {/*
+                          <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
+                            <FacebookLogo />
+                          </a>
+                          */}
+                        </ListGroup.Item>
+                    </div>
+
+                  </ListGroup>
+                </Col>
+            }
+            <Col lg={8} md={12}  >
 
               {
                 loading ?
@@ -317,7 +330,7 @@ class ArticlePage extends React.Component  {
                           </Form>
                         </div>
                         <br/>
-                        
+
                       */
                     }
                   <CommentSection  article_id={this.props.match.params.article_id}/>
