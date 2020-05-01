@@ -23,12 +23,13 @@ class Careers extends React.Component  {
       <Container >
 
         <h1 className="verdana-font">
-          Careers with Apollo
+          Careers With Apollo
         </h1>
 
         <hr />
 
-        <p>If you are interested in what we're doing here, send us an email with your resume and interests at <a href="mailto:apollo-team@apollo.com" onClick={() => Event("Careers Email Link" , "Click Careers Email Link" , "From Careers Page")}>careers@apollo.com</a>
+        <p>
+          If you are interested in what we're doing here, send us an email with your resume and skills at <a href="mailto:careers@apollo.com" onClick={() => Event("Careers Email Link" , "Click Careers Email Link" , "From Careers Page")}>careers@apollo.com</a>
         </p>
 
       </Container>

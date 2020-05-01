@@ -174,7 +174,7 @@ class CreateArticle extends React.Component  {
                 <React.Fragment>
                    {/*<meta http-equiv="refresh" content="3;url=/" />*/}
                   <Alert variant="danger">
-                    How did you get here? oops. <a href="/">go home</a>
+                    How did you get here? Oops. Click here to <a href="/blog">go to Home.</a>
                   </Alert>
                 </React.Fragment>
               )

@@ -20,6 +20,10 @@ import { Event, PageView} from './Misc/Tracking';
 
 
 import TwitterLogo from './Misc/TwitterLogo';
+import RedditLogo from './Misc/RedditLogo';
+import LinkedInLogo from './Misc/LinkedInLogo';
+import EmailLogo from './Misc/EmailLogo';
+
 import FacebookLogo from './Misc/FacebookLogo';
 import RegisterEmail from './Misc/RegisterEmail';
 import RichText from './Misc/RichText';
@@ -179,167 +183,184 @@ class ArticlePage extends React.Component  {
         apollo_div.classList.remove("AfterScroll") ;
       }
 
-      // if(document.documentElement.scrollTop >= 225)
-      // {
-      //   sm_div.classList.add("AfterScroll");
-      // }else{
-      //   sm_div.classList.remove("AfterScroll");
-      // }
-
-
     }
 
-    var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20cryptocurrency%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20ecommerce%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
     var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse "
     //" https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    var reddit_link = "https://www.reddit.com/submit?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']+"&title=Check%20Out%20This%20New%20Ecommerce%20Startup "
+    var email_link = "mailto:?subject=Check Out This New Ecommerce Startup&body=Check Out This New Ecommerce Startup!%0A%0A They are the first ecommerce site that is accepting Bitcoin and they've got big plans!%0A%0A You can read more about them out at https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
+    var linkedin_link = "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
+
 
     return (
 
       <React.Fragment>
+        <Row>
 
-        <Container >
+          {
+            window_width  &&
+              <Col lg={2} >
 
-          <Row>
+                <ListGroup
+                  variant="flush"
+                  className="sticky-top BeforeScroll "
+                >
+                  <div id="apollo_widget_left_sidebar">
+                    <ListGroup.Item className="bg-app">
+                      <h4
+                        className="verdana-font"
+                        onClick={this.handleHomeButtonClickWithGA }
+                        style={{cursor: 'pointer'}}
+                      >
+                          Apollo
+                      </h4>
+
+                    </ListGroup.Item>
+
+                    <ListGroup.Item className="bg-app">
+
+                      {
+                        !loading &&
+                          <React.Fragment>
+                            <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                            <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                          </React.Fragment>
+                      }
+
+
+                      {/*<br />*/}
+                      <br />
+
+                      <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
+                        <TwitterLogo />
+                      </a>
+                      <br />
+                      <a target="_blank" href={reddit_link} onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }>
+                        <RedditLogo />
+                      </a>
+                      <br />
+                      <a target="_blank" href={linkedin_link} onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }>
+                        <LinkedInLogo />
+                      </a>
+                      <br />
+                      <a target="_blank" href={email_link} onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }>
+                        <EmailLogo />
+                      </a>
+                      {/*
+                      <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
+                        <FacebookLogo />
+                      </a>
+                      */}
+                      {
+                        !authenticated &&
+                          <React.Fragment>
+                            <br />
+                            <br />
+                            <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                              <Button
+                                variant="outline-secondary"
+                                size="sm"
+                              >
+                                Signup
+                              </Button>
+                            </Link>
+                            {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
+
+                          </React.Fragment>
+
+                      }
+
+
+                    </ListGroup.Item>
+                  </div>
+                </ListGroup>
+              </Col>
+          }
+          <Col lg={8} md={12}  >
 
             {
-              window_width  &&
-                <Col lg={2} >
+              loading ?
+                <LoaderSpinner />
+              :
+                <React.Fragment>
+                  {
+                    article_data  ?
+                      <React.Fragment>
+                        <h1 className="times-new-roman-font">
+                          {  article_data['title'] }
+                        </h1>
 
-                  <ListGroup
-                    variant="flush"
-                    className="sticky-top BeforeScroll "
-                  >
-                    <div id="apollo_widget_left_sidebar">
-                      <ListGroup.Item className="bg-app">
-                        <h4
-                          className="verdana-font"
-                          onClick={this.handleHomeButtonClickWithGA }
-                          style={{cursor: 'pointer'}}
-                        >
-                            Apollo
-                        </h4>
+                        <h6 className="padding-left-10px">
+                          By { article_data['author']}, <Badge>{ article_date }</Badge>
+                          <div className="float-right">
+                            <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
+                              <TwitterLogo />
+                            </a>
+                            <a target="_blank" href={reddit_link} onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }>
+                              <Badge>
+                                <RedditLogo />
+                              </Badge>
+                            </a>
+                            <a target="_blank" href={linkedin_link} onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }>
+                              <Badge>
+                                <LinkedInLogo />
+                              </Badge>
+                            </a>
+                            <a target="_blank" href={email_link} onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }>
+                              <Badge>
+                                <EmailLogo />
+                              </Badge>
+                            </a>
+                            {/*
+                            <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
+                              <FacebookLogo />
+                            </a>
+                            */}
+                          </div>
+                        </h6>
 
-                      </ListGroup.Item>
+                        <hr />
 
+                        {/*Displays the body of the article in Rich Text*/}
+                        <RichText text={article_data['body']} classes="times-new-roman-font font-size-19px"/>
+                      </React.Fragment>
+                    :
+                      <Alert variant="dark">There was an issue loading this article</Alert>
+                  }
 
+                  <br />
+                  {
+                    /*only displays the "sign up for email updates" if user isn't signed in*/
+                    /*
+                    !authenticated &&
+                      <div style={{backgroundColor:"lightgrey" , paddingTop:"8px" , paddingBottom:"3px", paddingLeft:"8px" , borderRadius:"4px"}}>
+                        <text >Like what you see? Subscribe for updates </text>
+                        <Form >
+                          <Form.Row>
+                            <Col>
+                              <Form.Control type="email" placeholder="Enter email" />
+                            </Col>
+                            <Col>
+                              <Button variant="primary" type="submit">
+                                Submit
+                              </Button>
+                            </Col>
+                          </Form.Row>
+                          <small>We will never sell your information </small>
+                        </Form>
+                      </div>
+                      <br/>
 
-                        <ListGroup.Item className="bg-app">
+                    */
+                  }
+                <CommentSection  article_id={this.props.match.params.article_id}/>
 
-                          {
-                            !loading &&
-
-                                <React.Fragment>
-                                  <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                                  <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                                </React.Fragment>
-                          }
-
-                          {
-                            !authenticated &&
-                              <React.Fragment>
-                                <br />
-                                <br />
-                                <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
-                                  <Button
-                                    variant="outline-secondary"
-                                    size="sm"
-                                  >
-                                    Signup
-                                  </Button>
-                                </Link>
-                                {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
-
-                              </React.Fragment>
-
-                          }
-                          <br />
-                          <br />
-
-
-                          <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
-                            <TwitterLogo />
-                          </a>
-
-                          {/*
-                          <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
-                            <FacebookLogo />
-                          </a>
-                          */}
-                        </ListGroup.Item>
-                    </div>
-
-                  </ListGroup>
-                </Col>
+              </React.Fragment>
             }
-            <Col lg={8} md={12}  >
+          </Col>
+        </Row>
 
-              {
-                loading ?
-                  <LoaderSpinner />
-                :
-                  <React.Fragment>
-                    {
-                      article_data  ?
-                        <React.Fragment>
-                          <h1 className="times-new-roman-font">
-                            {  article_data['title'] }
-                          </h1>
-
-                          <h6 className="padding-left-10px">
-                            By { article_data['author']}, <Badge>{ article_date }</Badge>
-                            <div className="float-right">
-                              <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
-                                <TwitterLogo />
-                              </a>
-                              {/*
-                              <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
-                                <FacebookLogo />
-                              </a>
-                              */}
-                            </div>
-                          </h6>
-
-                          <hr />
-
-                          {/*Displays the body of the article in Rich Text*/}
-                          <RichText text={article_data['body']} classes="times-new-roman-font font-size-19px"/>
-                        </React.Fragment>
-                      :
-                        <Alert variant="dark">There was an issue loading this article</Alert>
-                    }
-
-                    <br />
-                    {
-                      /*only displays the "sign up for email updates" if they aren't signed in*/
-                      /*
-                      !authenticated &&
-                        <div style={{backgroundColor:"lightgrey" , paddingTop:"8px" , paddingBottom:"3px", paddingLeft:"8px" , borderRadius:"4px"}}>
-                          <text >Like what you see? Subscribe for updates </text>
-                          <Form >
-                            <Form.Row>
-                              <Col>
-                                <Form.Control type="email" placeholder="Enter email" />
-                              </Col>
-                              <Col>
-                                <Button variant="primary" type="submit">
-                                  Submit
-                                </Button>
-                              </Col>
-                            </Form.Row>
-                            <small>We will never sell your information </small>
-                          </Form>
-                        </div>
-                        <br/>
-
-                      */
-                    }
-                  <CommentSection  article_id={this.props.match.params.article_id}/>
-
-                </React.Fragment>
-              }
-            </Col>
-          </Row>
-        </Container>
       </React.Fragment>
     );
   }

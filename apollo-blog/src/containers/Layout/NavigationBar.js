@@ -36,13 +36,6 @@ class NavigationBar extends React.Component {
       <React.Fragment >
         <Navbar expand="lg" className="bg-navbar">
           <Container >
-            {/*
-            <Navbar.Brand
-
-              onClick={() => this.props.history.push('/') }
-              style={{cursor: 'pointer'}}
-            >
-            */}
             <Navbar.Brand
               onClick={this.handleHomeButtonClickWithGA   }
               style={{cursor: 'pointer'}}

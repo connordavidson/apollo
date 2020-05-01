@@ -52,10 +52,6 @@ class Login extends React.Component {
     this.props.login(username, password)
   }
 
-  handleValidated = () => {
-    return (this.state.username.length > 1 && this.state.password.length > 1 )
-  }
-
   render(){
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
@@ -100,9 +96,6 @@ class Login extends React.Component {
           <Button
             block
             bsSize="large"
-            disabled={
-              !(this.handleValidated())
-            }
             onClick={() => Event("Login" , "Login Attempt" , "Hit Login Button")}
             type="submit"
           >

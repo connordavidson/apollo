@@ -16,8 +16,8 @@ function Footer() {
       <Container>
         <Navbar.Text >&copy; {new Date().getFullYear()} - Apollo</Navbar.Text>
         <Nav>
-          <Navbar.Text ><Nav.Link href="#">Legal</Nav.Link></Navbar.Text>
-          <Navbar.Text ><Nav.Link href="#">Privacy</Nav.Link></Navbar.Text>
+          {/* "Privacy" , "Store" , "Technology" , etc. */}
+          <Navbar.Text ><Nav.Link href="/blog">Blog</Nav.Link></Navbar.Text>
           <Navbar.Text ><Nav.Link href="/careers">Careers</Nav.Link></Navbar.Text>
         </Nav>
       </Container>
