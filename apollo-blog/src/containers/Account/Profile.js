@@ -197,7 +197,19 @@ class Profile extends React.Component {
 
             </Container>
           :
-            <h5>how'd you get here??</h5>
+            <React.Fragment>
+              <meta http-equiv="refresh" content="10;url=/" />
+
+              <Alert variant="secondary" >
+                <Alert.Heading>Oops! How'd you get here? </Alert.Heading>
+                <hr/>
+                <p className="mb-0">
+                  Are you lost? You can <Alert.Link href="/login">login</Alert.Link> or <Alert.Link href="/signup">signup</Alert.Link>. Redirecting you in 10 seconds...
+                </p>
+              </Alert>
+
+            </React.Fragment>
+
         }
       </React.Fragment>
     )

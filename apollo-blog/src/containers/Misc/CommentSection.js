@@ -20,6 +20,8 @@ import { Event } from './Tracking';
 
 import ArticleComment from './ArticleComment'
 import LoaderSpinner from './LoaderSpinner'
+import ButtonLoaderSpinner from './ButtonLoaderSpinner'
+
 import CommentUpvote from './CommentUpvote'
 import CommentDownvote from './CommentDownvote'
 import RichText from './RichText'
@@ -39,6 +41,7 @@ class CommentSection extends React.Component {
   state = {
     error : null , //stores any error that comes back from the database
     loading : true , //set to determine if the page is loading
+    submit_button_loading : false , //set to determine if the page is loading
     commenter_name : "" , //stores the anme of the person that is writing the comment
     comment_body : "" , //stores the body of the comment
     comment_submitted : false , //determines if the comment has been submitted.
@@ -98,7 +101,7 @@ class CommentSection extends React.Component {
 
   handlePostComment = () => {
     this.setState({
-      loading: true
+      submit_button_loading: true
     })
     var comment_data = new FormData() ;
     comment_data.append('body' , this.state.comment_body )
@@ -111,7 +114,7 @@ class CommentSection extends React.Component {
         console.log('comment submitted')
         Event("Create Article Comment", "Create Comment SUCCESS", "From Article Comment Section")
         this.setState({
-          loading: false ,
+          submit_button_loading: false ,
           commenter_name : "" ,
           comment_body : "" ,
           comment_submitted : true ,
@@ -122,13 +125,15 @@ class CommentSection extends React.Component {
         Event("Create Article Comment", "Create Comment FAIL", "From Article Comment Section" )
         this.setState({
           error: error.response.data ,
-          loading: false ,
+          submit_button_loading: false ,
+          comment_body : "" ,
         })
       })
   }
 
   handleValidateComment = () => {
-    return !(this.state.comment_body.length > 1 && this.props.username.length > 1)
+    console.log( "comment body : " + (this.state.comment_body ) )
+    return (this.state.comment_body.length > 11)
   }
 
 
@@ -156,6 +161,7 @@ class CommentSection extends React.Component {
 
     const {
       loading ,
+      submit_button_loading ,
       error ,
       comment_body ,
       comment_submitted ,
@@ -228,17 +234,17 @@ class CommentSection extends React.Component {
                           </Form.Row>
                         </Form>
                       </Card.Text>
-                      {loading ?
+                      {submit_button_loading ?
                           <Button
                             disabled={true}
                             variant="primary"
                           >
-                            <LoaderSpinner />
+                            <ButtonLoaderSpinner />
                           </Button>
                         :
                           <Button
                             onClick={this.handlePostCommentWithGA}
-                            disabled={this.handleValidateComment()}
+                            disabled={!this.handleValidateComment()}
                             variant="primary"
                           >
                             Add Comment
@@ -256,7 +262,7 @@ class CommentSection extends React.Component {
               comment_submitted &&
                 <React.Fragment>
                   <br />
-                  <Alert variant="success">You successfully added a comment!</Alert>
+                  <Alert variant="success">Your comment has been added!</Alert>
                 </React.Fragment>
             }
           </Container>

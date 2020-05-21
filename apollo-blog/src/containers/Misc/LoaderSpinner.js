@@ -9,7 +9,9 @@ function LoaderSpinner() {
       animation="border"
       role="status"
       style={{
-        position: 'relative', left: '50%', top: '50%',
+        position: 'relative',
+        left: '50%',
+        top: '50%',
       }}
     >
       <span className="sr-only">Loading...</span>

@@ -106,7 +106,7 @@ class Login extends React.Component {
           </Badge>
           <br/>
           <Badge>
-            <NavLink to="/reset-password" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink>
+            <NavLink to="/reset" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink>
           </Badge>
           <br />
           {

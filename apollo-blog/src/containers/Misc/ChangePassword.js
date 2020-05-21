@@ -14,7 +14,7 @@ import {
 
 } from "../../backend-urls.js" ;
 import { Event } from '../Misc/Tracking';
-import LoaderSpinner from '../Misc/LoaderSpinner'
+import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
 
 
 class ChangePassword extends React.Component {
@@ -184,7 +184,7 @@ class ChangePassword extends React.Component {
                     !(this.handleValidated())
                   }
                 >
-                  <LoaderSpinner />
+                  <ButtonLoaderSpinner />
                 </Button>
               :
                 <Button

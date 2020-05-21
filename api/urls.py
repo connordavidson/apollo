@@ -43,6 +43,8 @@ from .views import (
     CreateUserReadArticleView ,
     UserReadArticleListView ,
 
+    CustomPasswordResetConfirmView ,
+
 )
 
 urlpatterns = [
@@ -88,8 +90,13 @@ urlpatterns = [
 
 
 
-    path('password-reset/' , CustomPasswordResetView.as_view() , name='password-reset') ,
+    path('password-reset/' , CustomPasswordResetView.as_view() , name='email-password-reset') ,
     # path('password-reset-confirm/' , CustomPasswordResetConfirmView.as_view() , name='password-reset-confirm')
     path('password-change/' , PasswordChangeView.as_view() , name='password-change') ,
     # path( '', FrontendAppView.as_view() )
+
+
+
+
+
 ]

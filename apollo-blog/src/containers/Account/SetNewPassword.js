@@ -158,7 +158,7 @@ class SetNewPassword extends React.Component {
             </FormGroup>
 
             <Button block bsSize="large" disabled={!this.handleValidated()} onClick={this.handleSubmit}>
-              Change Password
+              Set New Password
             </Button>
 
             <br/>

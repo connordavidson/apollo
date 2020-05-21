@@ -30,8 +30,8 @@ const BaseRouter = () => (
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/create-article" component={CreateArticle} />
-    <Route exact path="/reset-password" component={ForgotPassword} />
-    <Route exact path="/reset-password/:uid/:token" component={SetNewPassword}/>
+    <Route exact path="/reset" component={ForgotPassword} />
+    <Route exact path="/reset/:uid/:token" component={SetNewPassword}/>
     <Route exact path="/careers" component={Careers} />
 
   </Hoc>

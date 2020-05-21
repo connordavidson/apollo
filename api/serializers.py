@@ -214,7 +214,6 @@ class PasswordResetSerializer(serializers.Serializer):
         self.reset_form = self.password_reset_form_class(data=self.initial_data)
         if not self.reset_form.is_valid():
             raise serializers.ValidationError(self.reset_form.errors)
-
         return value
 
     def save(self):
@@ -224,6 +223,7 @@ class PasswordResetSerializer(serializers.Serializer):
         opts = {
             'use_https': request.is_secure(),
             'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
+            'subject_template_name':'reset_password_subject.txt',
             'email_template_name': 'reset_password_email.txt',
             'request': request,
         }
@@ -234,7 +234,47 @@ class PasswordResetSerializer(serializers.Serializer):
 
 
 
+class CustomPasswordResetConfirmSerializer(serializers.Serializer):
+    """
+    Serializer for requesting a password reset e-mail.
+    """
 
+    new_password1 = serializers.CharField(max_length=128)
+    new_password2 = serializers.CharField(max_length=128)
+
+    uid = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
+
+    set_password_form_class = SetPasswordForm
+
+    def custom_validation(self, attrs):
+        pass
+
+    def validate(self, attrs):
+        self._errors = {}
+
+        # Decode the uidb64 to uid to get User object
+        try:
+            uid = force_text(uid_decoder(attrs['uid']))
+            self.user = UserModel._default_manager.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
+            raise ValidationError({'uid': ['Invalid value']})
+
+        self.custom_validation(attrs)
+        # Construct SetPasswordForm instance
+        self.set_password_form = self.set_password_form_class(
+            user=self.user, data=attrs
+        )
+        if not self.set_password_form.is_valid():
+            raise serializers.ValidationError(self.set_password_form.errors)
+        if not default_token_generator.check_token(self.user, attrs['token']):
+            raise ValidationError({'token': ['Invalid value']})
+
+        return attrs
+
+    def save(self):
+        print("inside save in CustomPasswordResetConfirmSerializer")
+        self.set_password_form.save()
 
 
 

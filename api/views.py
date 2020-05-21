@@ -84,6 +84,8 @@ from .serializers import (
     UserSerializer ,
     UserReadArticleSerializer ,
 
+    CustomPasswordResetConfirmSerializer ,
+
 )
 
 
@@ -363,12 +365,12 @@ class RemoveCommentDownvoteView(DestroyAPIView):
 
 class CustomRegisterView(RegisterView):
     def create(self, request, *args, **kwargs):
-        # subject = 'Thank you for creating an account with Apollo!'
-        # message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
-        # Sincerely, The Team at Apollo'''
-        # email_from = settings.EMAIL_HOST_USER
-        # recipient_list = [email_address,]
-        # send_mail(subject, message, email_from, recipient_list)
+        subject = 'Thank you for creating an account with Apollo!'
+        message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
+        Sincerely, The Team at Apollo'''
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email_address,]
+        send_mail(subject, message, email_from, recipient_list)
 
         response = super().create(request, *args, **kwargs)
         return response
@@ -404,6 +406,26 @@ class CustomPasswordResetView(PasswordResetView):
             {"message": ("Check your inbox for a link to reset your password.")},
             status=HTTP_200_OK
         )
+
+class CustomPasswordResetConfirmView(GenericAPIView):
+
+    """
+    Password reset e-mail link is confirmed, therefore this resets the user's password.
+    Accepts the following POST parameters: new_password1, new_password2
+    Accepts the following Django URL arguments: token, uid
+    Returns the success/fail message.
+    """
+
+    serializer_class = CustomPasswordResetConfirmSerializer
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        print("inside CustomPasswordResetConfirmView ") 
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"success": "Password has been reset with the new password."})
+
 
 
 

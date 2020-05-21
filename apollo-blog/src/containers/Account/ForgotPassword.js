@@ -9,6 +9,8 @@ import {
 
 } from "react-bootstrap";
 import LoaderSpinner from '../Misc/LoaderSpinner'
+import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
+
 import { Event, PageView} from '../Misc/Tracking';
 
 
@@ -112,7 +114,7 @@ class ForgotPassword extends React.Component {
                   bsSize="large"
                   disabled={true}
                 >
-                  <LoaderSpinner />
+                  <ButtonLoaderSpinner />
                 </Button>
             :
               <Button
@@ -134,7 +136,13 @@ class ForgotPassword extends React.Component {
                 {message}
               </Alert>
           }
-
+          {
+            error &&
+              <Alert variant="danger">
+                There was an error with your submitted email :
+                {error}
+              </Alert>
+          }
 
       </div>
 

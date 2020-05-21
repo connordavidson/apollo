@@ -17,8 +17,9 @@ function Footer() {
         <Navbar.Text >&copy; {new Date().getFullYear()} - Apollo</Navbar.Text>
         <Nav>
           {/* "Privacy" , "Store" , "Technology" , etc. */}
+          {/*<Navbar.Text ><Nav.Link href="/">Store</Nav.Link></Navbar.Text>*/}
           <Navbar.Text ><Nav.Link href="/blog">Blog</Nav.Link></Navbar.Text>
-          <Navbar.Text ><Nav.Link href="/careers">Careers</Nav.Link></Navbar.Text>
+          {/*<Navbar.Text ><Nav.Link href="/careers">Careers</Nav.Link></Navbar.Text>*/}
         </Nav>
       </Container>
     </Navbar>
