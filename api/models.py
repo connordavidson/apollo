@@ -27,14 +27,14 @@ from django.dispatch import receiver
 
 
 class CommentUpvote(models.Model):
-    comment = models.ForeignKey('Comment' , related_name='upvotes' , on_delete=models.CASCADE , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='comment_upvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    comment = models.ForeignKey('Comment' , related_name='comment_upvote_comment' , on_delete=models.SET_NULL , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='comment_upvote_user' , on_delete=models.SET_NULL , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 
 class CommentDownvote(models.Model):
-    comment = models.ForeignKey('Comment' , related_name='downvotes' , on_delete=models.CASCADE , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='comment_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    comment = models.ForeignKey('Comment' , related_name='comment_downvote_comment' , on_delete=models.SET_NULL , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='comment_downvote_user' , on_delete=models.SET_NULL , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 class Comment(models.Model):
@@ -42,32 +42,32 @@ class Comment(models.Model):
     #automatically fills the value when it gets inserted
     created_date = models.DateTimeField(auto_now_add=True , null=True)
     updated_date = models.DateTimeField(auto_now=True, null=True)
-    author = models.CharField(max_length=20 , default=None)
-
-    article = models.ForeignKey('Article' , related_name='comments' , on_delete=models.CASCADE , null=True , blank=True)
+    deleted = models.BooleanField(default=False)
+    user = models.ForeignKey(User , related_name='comment_author' , on_delete=models.SET_NULL , null =True , blank=True)
+    article = models.ForeignKey('Article' , related_name='comment_article' , on_delete=models.SET_NULL , null=True , blank=True)
 
     def __str__(self):
-        return self.author
+        return self.user
 
 
 
 
 
 class ArticleUpvote(models.Model):
-    article = models.ForeignKey('Article' , related_name='upvotes' , on_delete=models.CASCADE , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='article_upvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    article = models.ForeignKey('Article' , related_name='article_upvote_comment' , on_delete=models.SET_NULL , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='article_upvote_user' , on_delete=models.SET_NULL , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 class ArticleDownvote(models.Model):
-    article = models.ForeignKey('Article' , related_name='downvotes' , on_delete=models.CASCADE , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='article_downvotes' , on_delete=models.CASCADE , null =True , blank=True)
+    article = models.ForeignKey('Article' , related_name='article_downvote_comment' , on_delete=models.SET_NULL , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='article_downvote_user' , on_delete=models.SET_NULL , null =True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 
 #used to track when a user reads an article.
 class UserReadArticle(models.Model):
-    article = models.ForeignKey('Article' , related_name='user_articles' ,  on_delete=models.CASCADE , default=None , null=True , blank=True)
-    user = models.ForeignKey(User , related_name='user_articles' , on_delete=models.CASCADE , null=True , blank=True)
+    article = models.ForeignKey('Article' , related_name='user_read_article_article' ,  on_delete=models.SET_NULL , default=None , null=True , blank=True)
+    user = models.ForeignKey(User , related_name='user_read_article_user' , on_delete=models.SET_NULL , null=True , blank=True)
     created_date = models.DateTimeField(auto_now_add=True , null=True)
 
 
@@ -79,15 +79,16 @@ class Article(models.Model):
     #automatically fills the value when it gets inserted
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     updated_date = models.DateTimeField(auto_now=True, null=True)
-    author = models.CharField(max_length=20 , default=None)
+    user = models.ForeignKey(User , related_name='article_author' , on_delete=models.SET_NULL , null =True , blank=True)
     pinned = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)
     def __str__(self):
         return self.title
 
 
 
 
-#stores the emails that the users enter to recieve updates
+#stores the emails that the users enter to recieve updates (for the "sign up for email updates" feature)
 class Email(models.Model):
     email = models.EmailField(null=True)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
@@ -98,8 +99,13 @@ class Email(models.Model):
 
 
 #stores a user's email preferences
-class EmailPreferences(models.Model):
-    user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.CASCADE ,  null =True , blank=True)
+class UserEmailPreferences(models.Model):
+    user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.SET_NULL ,  null =True , blank=True)
+    news_and_updates = models.BooleanField(default=True)
+    new_blog_posts = models.BooleanField(default=True)
+
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
+    updated_date = models.DateTimeField(auto_now=True, null=True)
 
     def _str_(self):
         return self.user

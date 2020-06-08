@@ -1,0 +1,9 @@
+
+
+Hello from Apollo!
+
+You're receiving this e-mail because this email was used to register an account at apollostore.co/signup
+
+
+To confirm this is was you, go to {{ activate_url }}
+  Thank you from Apollo!

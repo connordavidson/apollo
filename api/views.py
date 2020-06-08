@@ -15,6 +15,8 @@ from rest_framework.generics import (
     GenericAPIView ,
     DestroyAPIView ,
     RetrieveUpdateAPIView ,
+    UpdateAPIView ,
+
 )
 
 from rest_framework.permissions import (
@@ -57,6 +59,7 @@ from .models import (
     ArticleUpvote ,
     ArticleDownvote ,
     UserReadArticle ,
+    UserEmailPreferences ,
 
 )
 
@@ -85,6 +88,9 @@ from .serializers import (
     UserReadArticleSerializer ,
 
     CustomPasswordResetConfirmSerializer ,
+
+    UserEmailPreferencesSerializer ,
+    UpdateUserEmailPreferencesSerializer ,
 
 )
 
@@ -127,7 +133,9 @@ class ArticleListView(ListAPIView):
 
     #[::-1] reverses the list. the email popover kept glitching out the order of the articles so i just reversed the list on the backend
     #.order_by('-created_date') reverses the order by the date that they were created
-    queryset = Article.objects.all().order_by('-created_date')
+    # queryset = Article.objects.all().order_by('-created_date')
+    queryset = Article.objects.filter(deleted=False).order_by('-created_date')
+
 
 
 class ArticlePageView(RetrieveAPIView):
@@ -139,6 +147,50 @@ class ArticlePageView(RetrieveAPIView):
         if id is None :
             return Http404("Article not found")
         return qs.filter(id=id)
+
+
+
+class UserEmailPreferencesListView(ListAPIView):
+
+    authentication_classes = (TokenAuthentication, )
+    serializer_class = UserEmailPreferencesSerializer
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        qs = UserEmailPreferences.objects
+        if user_id is None :
+            return Http404("user id not found")
+        return qs.filter(user=user_id)
+
+
+
+#probably need to filter by user_id in the QS
+class UserEmailPreferencesUpdateView(UpdateAPIView):
+    authentication_classes = (TokenAuthentication, )
+
+    # queryset = UserEmailPreferences.objects.all()
+    # serializer_class = UpdateUserEmailPreferencesSerializer
+    queryset = UserEmailPreferences.objects.all()
+    serializer_class = UpdateUserEmailPreferencesSerializer
+    permission_classes = (AllowAny, )
+    #this is how it knows which one to update (user_id comes from the url urls.py)
+    lookup_field = "user_id"
+
+    #got from -> https://stackoverflow.com/a/31175629/12921499
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.news_and_updates = request.data.get("news_and_updates")
+        instance.new_blog_posts = request.data.get("new_blog_posts")
+        instance.save()
+
+        # serializer = self.get_serializer(instance)
+        # serializer.is_valid(raise_exception=True )
+        # self.perform_update(serializer)
+
+        return Response(
+            {"message": ("Email preferences updated.")},
+            status=HTTP_200_OK
+        )
+
 
 
 
@@ -161,7 +213,7 @@ class CommentListView(ListAPIView):
         qs = Comment.objects.all()
         if article_id is None :
             return Http404("article id not found")
-        return qs.filter(article=article_id)
+        return qs.filter(article=article_id , deleted=False)
 
 
 
@@ -305,6 +357,7 @@ class CreateEmailView(CreateAPIView):
         else :
             return Response("This email is already registered" , status=HTTP_400_BAD_REQUEST)
 
+
 class CreateCommentView(CreateAPIView):
     permission_classes = (AllowAny, )
     serializer_class = CreateCommentSerializer
@@ -363,17 +416,36 @@ class RemoveCommentDownvoteView(DestroyAPIView):
 
 
 
+
+
+### USE THIS LINK FOR HELP ON SENDING CUSTOM COnfirm Accoun Emails => https://stackoverflow.com/questions/27984901/how-to-customize-activate-url-on-django-allauth
 class CustomRegisterView(RegisterView):
     def create(self, request, *args, **kwargs):
-        subject = 'Thank you for creating an account with Apollo!'
-        message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
-        Sincerely, The Team at Apollo'''
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email_address,]
-        send_mail(subject, message, email_from, recipient_list)
+        email_address = request.data.get('email' , None )
 
-        response = super().create(request, *args, **kwargs)
-        return response
+        if email_address != None :
+            response = super().create(request, *args, **kwargs)
+            # print(response.data)
+            # print(response.data["user"])
+
+            # subject = 'Thank you for creating an account with Apollo!'
+            # message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
+            # Sincerely, The Team at Apollo'''
+            # email_from = settings.EMAIL_HOST_USER
+            # recipient_list = [email_address,]
+            #
+            # send_mail(subject, message, email_from, recipient_list)
+            # user = response.data["user"]
+            # #create row in emailpreferences with response.data["user"]
+            # UserEmailPreferences.objects.create(
+            #                 user=user,
+            #             )
+
+            return response
+
+
+
+
 
 
 class CustomLoginView(LoginView):
@@ -420,7 +492,7 @@ class CustomPasswordResetConfirmView(GenericAPIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        print("inside CustomPasswordResetConfirmView ") 
+        print("inside CustomPasswordResetConfirmView ")
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -451,7 +523,7 @@ class PasswordChangeView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response({"detail": _("New password has been saved.")})
+        return Response({"detail": _("New password has been saved.")}, status=HTTP_200_OK)
 
 
 
