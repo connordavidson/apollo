@@ -165,13 +165,14 @@ EMAIL_HOST_PASSWORD = '1011Castalia!'
 #lets the user confirm their email on a get request to the confirm account (if they just click the link in the email) pagehttps://django-allauth.readthedocs.io/en/latest/configuration.html
 # ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 #for django allauth
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-#bo
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
-ACCOUNT_ADAPTER = 'api.adapter.DefaultAccountAdapterCustom'
-URL_FRONT = 'http://apollostore.co/'
+#bo
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 # 1 day in seconds
+
+
 
 
 # Internationalization
@@ -203,6 +204,9 @@ REST_AUTH_SERIALIZERS = {
     'REGISTER_SERIALIZER' : 'api.serializers.CustomRegisterSerializer',
 
 }
+
+ACCOUNT_ADAPTER = 'api.adapter.DefaultAccountAdapterCustom'
+URL_FRONT = 'http://apollostore.co/'
 
 
 OLD_PASSWORD_FIELD_ENABLED = True

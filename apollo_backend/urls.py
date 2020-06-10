@@ -24,8 +24,10 @@ urlpatterns = [
     path('api/', include('api.urls')) ,
     path('rest-auth/', include('rest_auth.urls')) ,
     path('rest-auth/registration/', include('rest_auth.registration.urls')) ,
+
     url(r'^', FrontendAppView.as_view()) ,
     #had to include this because rest-auth/reset-password was breaking -> https://stackoverflow.com/questions/28418233/noreversematch-at-rest-auth-password-reset/29505964#29505964
     path('', include('django.contrib.auth.urls')),
 
+    url(r'^accounts/', include('allauth.urls')),
 ]

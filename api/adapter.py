@@ -12,8 +12,9 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
     def format_email_subject(self, subject):
         # prefix = app_settings.EMAIL_SUBJECT_PREFIX
         # if prefix is None:
-            # site = get_current_site(self.request)
-        prefix = ""#"[{name}] ".format(name=site.name)
+        #     site = get_current_site(self.request)
+        prefix = ""#[{name}] ".format(name=site.name)
+        # print(subject)
         return prefix + force_str(subject)
 
 
@@ -22,6 +23,9 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
             'verify-email/' + context['key']
         print(template_prefix)
         msg = self.render_mail("email_confirmation", email, context)
+        print(msg)
+        print(email)
+        # print(context)
         msg.send()
 
     def render_mail(self, template_prefix, email, context):

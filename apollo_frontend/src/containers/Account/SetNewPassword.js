@@ -19,6 +19,7 @@ import {
 
 
 class SetNewPassword extends React.Component {
+
   state = {
     loading : false , //determines if the page is laoding
     error : null , //holds the error that gets returned from the database
@@ -137,7 +138,7 @@ class SetNewPassword extends React.Component {
       <div className="account-form bg-app">
         <form>
           <h5>Enter New Password </h5>
-
+            <hr />
             <FormGroup controlId="password" bsSize="large">
               Password
               <FormControl

@@ -112,13 +112,13 @@ class Login extends React.Component {
           {
             error &&
               <Alert variant="danger">
-                {/*
+                {
                   //loops through all the returned errors and prints them with a bullet
-                  Object.keys(errors).map(e => {
-                    return <li>{errors[e][0]}</li>
+                  Object.keys(error).map(e => {
+                    return <li>{error[e][0]}</li>
                   })
-                */}
-                {error}
+                }
+                {/*error*/}
               </Alert>
 
           }

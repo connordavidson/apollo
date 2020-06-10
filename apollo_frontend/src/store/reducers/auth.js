@@ -29,6 +29,7 @@ const authSuccess = (state, action) => {
     token: action.token ,
     username: action.username ,
     user_id: action.user_id ,
+    success_message : action.success_message ,
     error: null ,
     loading: false ,
 
@@ -37,6 +38,7 @@ const authSuccess = (state, action) => {
 
 const authFail = (state, action) => {
   return updateObject(state, {
+    success_message : null ,
     error: action.error,
     loading: false
   });

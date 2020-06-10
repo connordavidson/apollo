@@ -107,8 +107,13 @@ class  Signup extends React.Component  {
     const {
       error ,
       token ,
-      loading
+      loading ,
+      success_message ,
+
     } = this.props ;
+
+
+
 
     if(error){
       var errors = error.response.data
@@ -191,7 +196,17 @@ class  Signup extends React.Component  {
             !passwords_match &&
               <Alert variant="danger">Your passwords must match</Alert>
           }
-
+          {
+            success_message &&
+              <Alert variant="success">
+                {
+                  //loops through all the returned errors and prints them with a bullet
+                  Object.keys(success_message).map(e => {
+                    return <li>{success_message[e] }</li>
+                  })
+                }
+              </Alert>
+          }
           {
             error &&
               <Alert variant="danger">
@@ -217,6 +232,8 @@ const mapStateToProps = state => {
     loading: state.auth.loading,
     error: state.auth.error,
     token: state.auth.token,
+    success_message : state.auth.success_message ,
+
   };
 };
 

@@ -19,17 +19,19 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token , username , user_id) => {
+export const authSuccess = (token , username , user_id, success_message) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
     username : username,
-    user_id : user_id
+    user_id : user_id ,
+    success_message : success_message ,
   };
 };
 
 export const authFail = error => {
   return {
+    success_message : null ,
     type: actionTypes.AUTH_FAIL,
     error: error
   };
@@ -79,7 +81,7 @@ export const authLogin = (username, password) => {
       })
       .catch(err => {
         console.log("error logging in: " )
-        console.log(err)
+        console.log(err.response.data)
         // console.log(err.response.data.non_field_errors)
         Event("Login" , "Login FAIL" , "Login FAIL") ;
         dispatch(authFail(err.response.data));
@@ -100,16 +102,17 @@ export const authSignup = (username, email, password1, password2) => {
         password2: password2
       })
       .then(res => {
-        const token = res.data.key;
-        const user_id = res.data.user;
-        console.log("res.data.user; user_id -> " + res.data.user + " ; " + user_id )
-        const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
-        localStorage.setItem("user_id", user_id);
-        localStorage.setItem("username", username);
-        localStorage.setItem("token", token);
-        localStorage.setItem("expirationDate", expirationDate);
+        console.log(res.data)
+        // const token = res.data.key;
+        // const user_id = res.data.user;
+        // console.log("res.data.user; user_id -> " + res.data.user + " ; " + user_id )
+        // const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
+        // localStorage.setItem("user_id", user_id);
+        // localStorage.setItem("username", username);
+        // localStorage.setItem("token", token);
+        // localStorage.setItem("expirationDate", expirationDate);
         Event("Signup" , "Signup SUCCESS" , "Signup SUCCESS") ;
-        dispatch(authSuccess(token , username , user_id));
+        dispatch(authSuccess(null , null , null , res.data));
         dispatch(checkAuthTimeout(3600));
 
       })

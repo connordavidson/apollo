@@ -1,5 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
+from django.urls import path, include
+
 from django.views.decorators.csrf import csrf_exempt
 from .views import (
     ArticleListView ,
@@ -95,14 +97,13 @@ urlpatterns = [
     path('update-user-email-preferences/<user_id>/' , UserEmailPreferencesUpdateView.as_view() , name='user-email-preferences-list-view') ,
 
 
-
     path('password-reset/' , CustomPasswordResetView.as_view() , name='email-password-reset') ,
     # path('password-reset-confirm/' , CustomPasswordResetConfirmView.as_view() , name='password-reset-confirm')
     path('password-change/' , PasswordChangeView.as_view() , name='password-change') ,
     # path( '', FrontendAppView.as_view() )
 
 
-
+    url(r'^accounts/', include('allauth.urls')),
 
 
 ]

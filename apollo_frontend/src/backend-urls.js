@@ -57,6 +57,12 @@ export const get_user_info_url =  `http://127.0.0.1:8000/rest-auth/user/` ;
 
 export const change_password_url =  `http://127.0.0.1:8000/password-change/` ;
 
+export const verify_email_url =  `http://127.0.0.1:8000/rest-auth/registration/verify-email/` ;
+
+
+
+
+
 
 export const get_user_email_preferences_url = (user_id) => endpoint + 'user-email-preferences/' + user_id + '/' ;
 
