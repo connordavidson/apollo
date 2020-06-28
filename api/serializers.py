@@ -31,25 +31,104 @@ from .models import (
 
 
 
+
+
+
+#sends the "important" columns to the front end. These are the ones that get displayed in the email preferences section of the profile page
+class UserEmailPreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserEmailPreferences
+        fields = (
+            "news_and_updates" ,
+            "new_blog_posts" ,
+        )
+
+
+
+class UpdateUserEmailPreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserEmailPreferences
+        fields = (
+            "id" ,
+            "news_and_updates" ,
+            "new_blog_posts" ,
+            "user"
+        )
+    def create(self, validated_data):
+        return UserEmailPreferences.objects.create(**validated_data)
+
+# class CreateUserEmailPreferencesSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserEmailPreferences
+#         fields = (
+#             "id" ,
+#             "news_and_updates" ,
+#             "new_blog_posts" ,
+#             "user"
+#         )
+#     def create(self, validated_data):
+#         return UserEmailPreferences.objects.create(**validated_data)
+
+
+
+
+
+
+#FOR GETTING USER DATA FOR /profile/ PAGE
 # found at https://krakensystems.co/blog/2020/custom-users-using-django-rest-framework
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ( 'email', 'username', 'first_name', 'last_name', 'date_joined', 'last_login')
+
+
+
+
 class UserSerializer(serializers.ModelSerializer):
+    # password = serializers.CharField(write_only=True)
+    # userprofile = UpdateUserEmailPreferencesSerializer(required=True)
+    # UserEmailPreferences = UpdateUserEmailPreferencesSerializer(many=True)
+
     class Meta:
         model = User
         fields = ( 'email', 'username', 'first_name', 'last_name', 'date_joined', 'last_login')
 
 
+    def create(self, request, validated_data):
+        print(request.data)
+        # profile_data = validated_data.pop('userprofile')
+        # UserEmailPreferences = validated_data.pop('UserEmailPreferences')
+
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+
+        data = validated_data.pop('data')
+        print(data)
+        print(**data[0])
+        print(user)
+        UserEmailPreferences.objects.create(user=user, **data[0])
+
+        # print(user)
+        # for pref in UserEmailPreferences:
+        #     UserEmailPreferences.objects.update_or_create(user=user , **pref ) # **profile_data)
+        return user
+
+
+
 class CustomTokenSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Token
         fields = (
             'key',
             'user'
         )
+
+
     #trying to create a UserEmailPreferences object when the user creates an account.. no luck yet. this is inspired by -> https://stackoverflow.com/questions/41735113/how-to-call-serializers-create-method-from-one-serializer
     def create(self, validated_data):
-        print("validated data user : " + validated_data.get('user'))
-        email_preferences_serializer = UpdateUserEmailPreferencesSerializer(validated_data.get('user'))
-        email_preferences_serializer.save()
+
         return Token.objects.create(**validated_data)
 
 
@@ -231,28 +310,6 @@ class CreateCommentSerializer(serializers.ModelSerializer):
 
 
 
-#sends the "important" columns to the front end. These are the ones that get displayed in the email preferences section of the profile page
-class UserEmailPreferencesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserEmailPreferences
-        fields = (
-            "news_and_updates" ,
-            "new_blog_posts" ,
-        )
-
-
-
-class UpdateUserEmailPreferencesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserEmailPreferences
-        fields = (
-            "id" ,
-            "news_and_updates" ,
-            "new_blog_posts" ,
-            "user"
-        )
-    def create(self, validated_data):
-        return UserEmailPreferences.objects.create(**validated_data)
 
 
 
@@ -341,6 +398,23 @@ class CustomRegisterSerializer(serializers.Serializer):
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         setup_user_email(request, user, [])
+
+
+        # print("validated data vv")
+        # print(validated_data)
+        #
+        # request_data = dict(self.get_serializer_context())
+        # print( request_data['user_id'][0] )
+        #
+        # req_data = {'first_name':request_data['user_id'][0],
+        #                  'last_name':request_data['last_name'][0],
+        #                  'email':request_data['email'][0]
+        #                 }
+        # email_pref_serializer = UserEmailPreferences(data=req_data)
+        # if email_pref_serializer.is_valid():
+        #     email_pref_serializer.save()
+
+        print(user)
         return user
 
 

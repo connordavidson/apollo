@@ -91,6 +91,7 @@ from .serializers import (
 
     UserEmailPreferencesSerializer ,
     UpdateUserEmailPreferencesSerializer ,
+    # CreateUserEmailPreferencesSerializer ,
 
 )
 
@@ -191,6 +192,28 @@ class UserEmailPreferencesUpdateView(UpdateAPIView):
             status=HTTP_200_OK
         )
 
+
+# class UserEmailPreferencesCreateView(CreateAPIView):
+#     # authentication_classes = (TokenAuthentication, )
+#
+#     # queryset = UserEmailPreferences.objects.all()
+#     # serializer_class = UpdateUserEmailPreferencesSerializer
+#     queryset = UserEmailPreferences.objects.all()
+#     serializer_class = CreateUserEmailPreferencesSerializer
+#     permission_classes = (AllowAny, )
+#     #this is how it knows which one to update (user_id comes from the url urls.py)
+#     # lookup_field = "user_id"
+#
+#     #got from -> https://stackoverflow.com/a/31175629/12921499
+#     def create(self, validated_data):
+#         data = validated_data.pop('data')
+#         coin = models.Coin.objects.create(**validated_data)
+#         models.Data.objects.create(coin=coin, **data[0])
+#
+#         return Response(
+#             {"message": ("Email preferences created.")},
+#             status=HTTP_200_OK
+#         )
 
 
 

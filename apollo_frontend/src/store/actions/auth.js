@@ -3,6 +3,7 @@ import * as actionTypes from "./actionTypes";
 import {
     signup_url ,
     login_url ,
+    update_user_email_preferences_url ,
 
 } from '../../backend-urls' ;
 import { Event, PageView, initGA} from '../../containers/Misc/Tracking';
@@ -102,9 +103,50 @@ export const authSignup = (username, email, password1, password2) => {
         password2: password2
       })
       .then(res => {
-        console.log(res.data)
-        // const token = res.data.key;
+
+        /***
+        *
+        *COMMENTED THIS OUT BECAUSE THE BACKEND DOESN'T WANT YOU TO SIGN IN AUTOMATICALLY AFTER ACCOUNT CREATION.
+        * ie. user has to confirm their email address before they're able to sign in
+        *
+        */
+        // console.log("response data from creating user object object vv")
+        // console.log(res.data)
+        // const auth_token = 'Token ' + res.data.key;
+        // console.log("auth_token : " + auth_token )
         // const user_id = res.data.user;
+        // console.log("user_id : " + user_id )
+        // var changed_prefs_data = { "user_id" : user_id}
+        // axios
+        //   .put( update_user_email_preferences_url( user_id ) , changed_prefs_data ,
+        //       {
+        //         headers: { Authorization: auth_token} //DRF requires the token in the header to retrieve user's info
+        //       }
+        //     )
+        //   .then(response => {
+        //     console.log("response data from creating email_preferenes object vv")
+        //     console.log(response)
+        //     console.log(response.data)
+        //     // this.setState({
+        //     //   loading : false ,
+        //     //   updated : true ,
+        //     //   update_loading : false
+        //     // })
+        //     // Event("Change Email Preferences", "Submit New Email Preferences SUCCESS", "From Profile Page") ;
+        //   })
+        //   .catch(error => {
+        //     console.log("error vv ")
+        //     console.log(error)
+        //     // this.setState({
+        //     //   loading : false ,
+        //     //   error : error.data ,
+        //     //   update_loading : false
+        //     // })
+        //     // Event("Change Email Preferences", "Submit New Email Preferences FAIL", "From Profile Page") ;
+        //   })
+
+
+
         // console.log("res.data.user; user_id -> " + res.data.user + " ; " + user_id )
         // const expirationDate = new Date(new Date().getTime() + 86400 * 1000);
         // localStorage.setItem("user_id", user_id);

@@ -21,10 +21,10 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
     def send_mail(self, template_prefix, email, context):
         context['activate_url'] = settings.URL_FRONT + \
             'verify-email/' + context['key']
-        print(template_prefix)
+        # print(template_prefix)
         msg = self.render_mail("email_confirmation", email, context)
-        print(msg)
-        print(email)
+        # print(msg)
+        # print(email)
         # print(context)
         msg.send()
 
