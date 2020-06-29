@@ -8,10 +8,12 @@ import {
   Alert ,
 
 } from "react-bootstrap";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect }  from    "react-router-dom";
 
-import LoaderSpinner from '../Misc/LoaderSpinner'
-import { Event, PageView} from '../Misc/Tracking';
+import { Event, PageView}     from    '../GlobalMisc/Tracking';
+
+import LoaderSpinner          from    '../GlobalMisc/LoaderSpinner'
+
 
 import "../../content/css/App.css";
 import {

@@ -5,7 +5,10 @@ import {
 
 } from 'react-bootstrap';
 import { ChevronDown } from 'react-bootstrap-icons';
-import { Event } from './Tracking';
+
+
+import { Event } from '../../GlobalMisc/Tracking';
+
 
 import { connect } from "react-redux";
 import {
@@ -13,7 +16,7 @@ import {
   remove_comment_downvote_url ,
   get_comment_downvotes_url ,
 
-} from "../../backend-urls.js" ;
+} from "../../../backend-urls.js" ;
 
 class CommentDownvote extends React.Component {
 

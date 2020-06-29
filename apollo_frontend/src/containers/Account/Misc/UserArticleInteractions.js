@@ -9,8 +9,9 @@ import {
   Card ,
 
 } from 'react-bootstrap';
-import LoaderSpinner from './LoaderSpinner';
 
+
+import LoaderSpinner    from    '../../GlobalMisc/LoaderSpinner';
 
 import {
   get_user_article_upvotes_url ,
@@ -19,7 +20,7 @@ import {
   get_user_comment_downvotes_url ,
   get_user_read_article_url ,
 
-} from "../../backend-urls.js" ;
+} from "../../../backend-urls.js" ;
 
 
 

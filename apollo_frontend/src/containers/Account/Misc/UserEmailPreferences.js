@@ -13,10 +13,12 @@ import {
   get_user_email_preferences_url ,
   update_user_email_preferences_url ,
 
-} from "../../backend-urls.js" ;
-import { Event } from '../Misc/Tracking';
-import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
-import LoaderSpinner from '../Misc/LoaderSpinner'
+} from "../../../backend-urls.js" ;
+
+
+import { Event }              from    '../../GlobalMisc/Tracking';
+import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner';
+import LoaderSpinner          from    '../../GlobalMisc/LoaderSpinner';
 
 //stores the values of the
 var changed_prefs_data = {}

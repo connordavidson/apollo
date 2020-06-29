@@ -8,13 +8,15 @@ import {
   Card ,
 
 } from 'react-bootstrap';
-import LoaderSpinner from './LoaderSpinner';
+
+
+import LoaderSpinner    from    '../../GlobalMisc/LoaderSpinner';
 
 
 import {
   get_user_details_url ,
 
-} from "../../backend-urls.js" ;
+} from "../../../backend-urls.js" ;
 
 
 

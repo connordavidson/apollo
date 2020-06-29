@@ -11,10 +11,10 @@ import {
 import { NavLink, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { Event, PageView} from '../Misc/Tracking';
+import { Event, PageView} from '../GlobalMisc/Tracking';
 import "../../content/css/App.css";
 import { authSignup } from "../../store/actions/auth";
-import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
+import ButtonLoaderSpinner from '../GlobalMisc/ButtonLoaderSpinner'
 
 class  Signup extends React.Component  {
   state = {

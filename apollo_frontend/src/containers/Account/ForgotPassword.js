@@ -8,10 +8,12 @@ import {
   Alert ,
 
 } from "react-bootstrap";
-import LoaderSpinner from '../Misc/LoaderSpinner'
-import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
 
-import { Event, PageView} from '../Misc/Tracking';
+import { Event, PageView}   from    '../GlobalMisc/Tracking';
+import LoaderSpinner        from    '../GlobalMisc/LoaderSpinner'
+import ButtonLoaderSpinner  from    '../GlobalMisc/ButtonLoaderSpinner'
+
+
 
 
 import "../../content/css/App.css";

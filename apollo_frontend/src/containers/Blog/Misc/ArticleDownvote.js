@@ -5,15 +5,19 @@ import {
 
 } from 'react-bootstrap';
 import { ChevronDown } from 'react-bootstrap-icons';
-import { Event } from './Tracking';
+
+
+import { Event } from '../../GlobalMisc/Tracking';
 
 import { connect } from "react-redux";
+
+
 import {
   create_article_downvote_url ,
   remove_article_downvote_url ,
   get_article_downvotes_url ,
 
-} from "../../backend-urls.js" ;
+} from "../../../backend-urls.js" ;
 
 
 

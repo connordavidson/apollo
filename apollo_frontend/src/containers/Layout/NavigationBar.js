@@ -6,7 +6,7 @@ import {
   Container ,
 
 } from 'react-bootstrap';
-import { Event } from "../Misc/Tracking";
+import { Event } from "../GlobalMisc/Tracking";
 
 import { connect } from "react-redux";
 import {

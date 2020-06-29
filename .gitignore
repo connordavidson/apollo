@@ -1,6 +1,6 @@
 apollo-blog/node_modules/
 
-.gcloudignore
+#.gcloudignore
 
 *.sqlite3
 

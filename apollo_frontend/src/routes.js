@@ -2,9 +2,9 @@ import React from "react";
 import {Route, Redirect} from "react-router-dom";
 import Hoc from "./hoc/hoc";
 
-import ArticlePage from "./containers/ArticlePage";
-import Home from './containers/Home' ;
-import CreateArticle from './containers/CreateArticle';
+import ArticlePage from "./containers/Blog/ArticlePage";
+import Home from './containers/Blog/Home' ;
+import CreateArticle from './containers/Blog/CreateArticle';
 
 
 import Login from './containers/Account/Login';

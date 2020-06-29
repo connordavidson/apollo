@@ -7,7 +7,7 @@ import {
 
 } from 'react-bootstrap';
 
-import { Event, PageView} from './Misc/Tracking';
+import { Event, PageView} from './GlobalMisc/Tracking';
 
 
 

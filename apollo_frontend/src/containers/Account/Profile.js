@@ -16,13 +16,16 @@ import {
 } from 'react-bootstrap';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
-import ChangePassword from './../Misc/ChangePassword' ;
-import LoaderSpinner from './../Misc/LoaderSpinner';
-import UserInformation from './../Misc/UserInformation';
-import UserEmailPreferences from './../Misc/UserEmailPreferences';
-import UserArticleInteractions from './../Misc/UserArticleInteractions';
-import { PageView , Event } from '../Misc/Tracking';
 
+import ChangePassword           from    './Misc/ChangePassword' ;
+import UserInformation          from    './Misc/UserInformation';
+import UserEmailPreferences     from    './Misc/UserEmailPreferences';
+import UserArticleInteractions  from    './Misc/UserArticleInteractions';
+
+
+
+import { PageView , Event }     from    '../GlobalMisc/Tracking';
+import LoaderSpinner            from    '../GlobalMisc/LoaderSpinner';
 
 
 import {

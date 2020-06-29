@@ -6,7 +6,7 @@ import {
   Container ,
 
 } from 'react-bootstrap';
-import {PageView, initGA} from './containers/Misc/Tracking';
+import {PageView, initGA} from './containers/GlobalMisc/Tracking';
 
 import * as actions from "./store/actions/auth";
 import NavigationBar from "./containers/Layout/NavigationBar";

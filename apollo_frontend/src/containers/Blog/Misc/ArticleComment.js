@@ -1,16 +1,17 @@
 import React from 'react';
-
-
 import {
   Card ,
 
 } from 'react-bootstrap';
 
-import RichText from './RichText'
-import CommentUpvote from './CommentUpvote'
-import CommentDownvote from './CommentDownvote'
 
-import "../../content/css/App.css";
+import CommentUpvote      from    './CommentUpvote'
+import CommentDownvote    from    './CommentDownvote'
+
+import RichText           from    '../../GlobalMisc/RichText'
+
+
+import "../../../content/css/App.css";
 
 
 
@@ -47,7 +48,7 @@ class ArticleComment extends React.Component {
       comment_upvoted ,
       comment_downvoted ,
     } = this.state
-    
+
     console.log("this.props.comment.author: " + this.props.comment.author )
 
     return(

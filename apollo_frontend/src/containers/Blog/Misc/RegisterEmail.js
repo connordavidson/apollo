@@ -11,15 +11,17 @@ import {
   Form,
 
 } from 'react-bootstrap';
-import { CheckCircle } from 'react-bootstrap-icons';
-import ButtonLoaderSpinner from './ButtonLoaderSpinner'
-import { Event } from './Tracking';
+import { CheckCircle }        from    'react-bootstrap-icons';
 
-import "../../content/css/App.css";
+import { Event }              from    '../../GlobalMisc/Tracking';
+import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner'
+
+
+import "../../../content/css/App.css";
 import {
   create_email_url ,
 
-} from "../../backend-urls.js" ;
+} from "../../../backend-urls.js" ;
 
 
 //text is what gets passed in. should be used like : <RichText text={example_rich_text} />

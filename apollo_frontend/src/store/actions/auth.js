@@ -6,7 +6,7 @@ import {
     update_user_email_preferences_url ,
 
 } from '../../backend-urls' ;
-import { Event, PageView, initGA} from '../../containers/Misc/Tracking';
+import { Event, PageView, initGA} from '../../containers/GlobalMisc/Tracking';
 
 // import {
 //   mergeCartOnLogin,

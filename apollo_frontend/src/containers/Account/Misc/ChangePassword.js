@@ -12,9 +12,10 @@ import {
 import {
   change_password_url ,
 
-} from "../../backend-urls.js" ;
-import { Event } from '../Misc/Tracking';
-import ButtonLoaderSpinner from '../Misc/ButtonLoaderSpinner'
+} from "../../../backend-urls.js" ;
+
+import { Event }              from    '../../GlobalMisc/Tracking';
+import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner';
 
 
 class ChangePassword extends React.Component {

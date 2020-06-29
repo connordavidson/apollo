@@ -14,30 +14,31 @@ import {
 import axios from "axios";
 import { connect } from "react-redux";
 // import { Event } from "./Misc/Tracking";
-import { Event, PageView} from './Misc/Tracking';
+import { Event, PageView} from '../GlobalMisc/Tracking';
 
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 
+import TwitterLogo      from    '../GlobalMisc/TwitterLogo';
+import RedditLogo       from    '../GlobalMisc/RedditLogo';
+import LinkedInLogo     from    '../GlobalMisc/LinkedInLogo';
+import EmailLogo        from    '../GlobalMisc/EmailLogo';
+import FacebookLogo     from    '../GlobalMisc/FacebookLogo';
 
-import TwitterLogo from './Misc/TwitterLogo';
-import RedditLogo from './Misc/RedditLogo';
-import LinkedInLogo from './Misc/LinkedInLogo';
-import EmailLogo from './Misc/EmailLogo';
+import RichText         from    '../GlobalMisc/RichText';
+import LoaderSpinner    from    '../GlobalMisc/LoaderSpinner';
 
-import FacebookLogo from './Misc/FacebookLogo';
-import RegisterEmail from './Misc/RegisterEmail';
-import RichText from './Misc/RichText';
-import LoaderSpinner from './Misc/LoaderSpinner';
-import CommentSection from './Misc/CommentSection' ;
-import ArticleUpvote from './Misc/ArticleUpvote' ;
-import ArticleDownvote from './Misc/ArticleDownvote' ;
+import RegisterEmail    from    './Misc/RegisterEmail';
+import CommentSection   from    './Misc/CommentSection' ;
+import ArticleUpvote    from    './Misc/ArticleUpvote' ;
+import ArticleDownvote  from    './Misc/ArticleDownvote' ;
 
-import "../content/css/App.css";
+
+import "../../content/css/App.css";
 import {
   article_url,
   create_user_read_article_url ,
 
-} from "../backend-urls.js" ;
+} from "../../backend-urls.js" ;
 
 
 

@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router';
-import { Event, PageView} from '../Misc/Tracking';
+import { Event, PageView} from '../GlobalMisc/Tracking';
 
 
 import "../../content/css/App.css";
