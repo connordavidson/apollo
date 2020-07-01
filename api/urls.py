@@ -49,6 +49,7 @@ from .views import (
 
     UserEmailPreferencesListView ,
     UserEmailPreferencesUpdateView ,
+    UserEmailPreferencesCreateView
 
 )
 
@@ -94,7 +95,8 @@ urlpatterns = [
     path('user-details/' , UserDetailsView.as_view() , name='user-details') ,
 
     path('user-email-preferences/<user_id>/' , UserEmailPreferencesListView.as_view() , name='user-email-preferences-list-view') ,
-    path('update-user-email-preferences/<user_id>/' , UserEmailPreferencesUpdateView.as_view() , name='user-email-preferences-list-view') ,
+    path('update-user-email-preferences/<user_id>/' , UserEmailPreferencesUpdateView.as_view() , name='user-email-preferences-update-view') ,
+
 
 
     path('password-reset/' , CustomPasswordResetView.as_view() , name='email-password-reset') ,

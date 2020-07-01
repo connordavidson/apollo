@@ -91,7 +91,7 @@ from .serializers import (
 
     UserEmailPreferencesSerializer ,
     UpdateUserEmailPreferencesSerializer ,
-    # CreateUserEmailPreferencesSerializer ,
+    CreateUserEmailPreferencesSerializer ,
 
 )
 
@@ -193,27 +193,27 @@ class UserEmailPreferencesUpdateView(UpdateAPIView):
         )
 
 
-# class UserEmailPreferencesCreateView(CreateAPIView):
-#     # authentication_classes = (TokenAuthentication, )
-#
-#     # queryset = UserEmailPreferences.objects.all()
-#     # serializer_class = UpdateUserEmailPreferencesSerializer
-#     queryset = UserEmailPreferences.objects.all()
-#     serializer_class = CreateUserEmailPreferencesSerializer
-#     permission_classes = (AllowAny, )
-#     #this is how it knows which one to update (user_id comes from the url urls.py)
-#     # lookup_field = "user_id"
-#
-#     #got from -> https://stackoverflow.com/a/31175629/12921499
-#     def create(self, validated_data):
-#         data = validated_data.pop('data')
-#         coin = models.Coin.objects.create(**validated_data)
-#         models.Data.objects.create(coin=coin, **data[0])
-#
-#         return Response(
-#             {"message": ("Email preferences created.")},
-#             status=HTTP_200_OK
-#         )
+class UserEmailPreferencesCreateView(CreateAPIView):
+    # authentication_classes = (TokenAuthentication, )
+
+    # queryset = UserEmailPreferences.objects.all()
+    # serializer_class = UpdateUserEmailPreferencesSerializer
+    queryset = UserEmailPreferences.objects.all()
+    serializer_class = CreateUserEmailPreferencesSerializer
+    permission_classes = (AllowAny, )
+    #this is how it knows which one to update (user_id comes from the url urls.py)
+    # lookup_field = "user_id"
+
+    #got from -> https://stackoverflow.com/a/31175629/12921499
+    # def create(self, validated_data):
+    #     data = validated_data.pop('data')
+    #     coin = models.Coin.objects.create(**validated_data)
+    #     models.Data.objects.create(coin=coin, **data[0])
+    #
+    #     return Response(
+    #         {"message": ("Email preferences created.")},
+    #         status=HTTP_200_OK
+    #     )
 
 
 
@@ -387,10 +387,6 @@ class CreateCommentView(CreateAPIView):
     queryset = Comment.objects.all()
 
 
-
-
-
-
 class CommentUpvoteListView(ListAPIView):
     permission_classes = (AllowAny , )
     serializer_class = CommentUpvoteSerializer
@@ -435,39 +431,17 @@ class RemoveCommentDownvoteView(DestroyAPIView):
 
 
 
-
-
-
-
-
-
-### USE THIS LINK FOR HELP ON SENDING CUSTOM COnfirm Accoun Emails => https://stackoverflow.com/questions/27984901/how-to-customize-activate-url-on-django-allauth
 class CustomRegisterView(RegisterView):
+
     def create(self, request, *args, **kwargs):
-        email_address = request.data.get('email' , None )
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
 
-        if email_address != None :
-            response = super().create(request, *args, **kwargs)
-            # print(response.data)
-            # print(response.data["user"])
-
-            # subject = 'Thank you for creating an account with Apollo!'
-            # message = '''We appreciate it and will keep you updated with the progress of our site! blah blah blah
-            # Sincerely, The Team at Apollo'''
-            # email_from = settings.EMAIL_HOST_USER
-            # recipient_list = [email_address,]
-            #
-            # send_mail(subject, message, email_from, recipient_list)
-            # user = response.data["user"]
-            # #create row in emailpreferences with response.data["user"]
-            # UserEmailPreferences.objects.create(
-            #                 user=user,
-            #             )
-
-            return response
-
-
-
+        return Response(self.get_response_data(user),
+                        status=HTTP_201_CREATED,
+                        headers=headers)
 
 
 
@@ -477,10 +451,12 @@ class CustomLoginView(LoginView):
         key = original_response.data['key']
         user = Token.objects.filter(key=key).values('user_id').distinct()
         user_id = user[0]['user_id']
-        # user_is_staff = User.objects.filter(pk=user_id).values('is_staff')
+        # last_login = User.objects.filter(pk=user_id).values('last_login').distinct()
+        # user_last_login = last_login[0]['last_login']
         # user_is_staff = user_is_staff[0]['is_staff']
 
-        mydata = {"user_id": user_id}
+        mydata = { "user_id": user_id }
+
         original_response.data.update(mydata)
         return original_response
 

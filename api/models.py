@@ -97,10 +97,23 @@ class Email(models.Model):
         return self.email
 
 
+# #commented to preserve history
+# #stores a user's email preferences
+# class UserEmailPreferences(models.Model):
+#     user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.SET_NULL ,  null =True , blank=True)
+#     news_and_updates = models.BooleanField(default=True)
+#     new_blog_posts = models.BooleanField(default=True)
+#
+#     created_date = models.DateTimeField(auto_now_add=True, null=True)
+#     updated_date = models.DateTimeField(auto_now=True, null=True)
+#
+#     def _str_(self):
+#         return self.user
+
 
 #stores a user's email preferences
 class UserEmailPreferences(models.Model):
-    user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.SET_NULL ,  null =True , blank=True)
+    user = models.OneToOneField(User , on_delete=models.SET_NULL ,  null =True , blank=True)
     news_and_updates = models.BooleanField(default=True)
     new_blog_posts = models.BooleanField(default=True)
 

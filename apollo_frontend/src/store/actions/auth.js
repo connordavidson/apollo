@@ -4,6 +4,7 @@ import {
     signup_url ,
     login_url ,
     update_user_email_preferences_url ,
+    create_user_email_preferences_url ,
 
 } from '../../backend-urls' ;
 import { Event, PageView, initGA} from '../../containers/GlobalMisc/Tracking';
@@ -65,7 +66,9 @@ export const authLogin = (username, password) => {
       .then(res => {
         const token = res.data.key;
         const user_id = res.data.user_id;
+
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+
         localStorage.setItem("user_id", user_id);
         localStorage.setItem("username", username);
         localStorage.setItem("token", token);
@@ -74,7 +77,6 @@ export const authLogin = (username, password) => {
 
         dispatch(authSuccess(token , username , user_id));
         dispatch(checkAuthTimeout(10000));
-
 
         //merges the cart when the user logs in. mergeCartOnLogin is located in actions/cart.js
         // dispatch( mergeCartOnLogin(token) )
