@@ -53,7 +53,8 @@ from django.utils.decorators import method_decorator
 from .models import (
     Comment ,
     Article ,
-    Email ,
+    PromotionalEmail ,
+    EmailAddress ,
     CommentUpvote ,
     CommentDownvote ,
     ArticleUpvote ,
@@ -65,7 +66,8 @@ from .models import (
 
 from .serializers import (
     ArticleSerializer ,
-    EmailSerializer ,
+    EmailAddressSerializer ,
+    PromotionalEmailSerializer ,
 
     CommentSerializer ,
     CreateCommentSerializer ,
@@ -161,6 +163,11 @@ class UserEmailPreferencesListView(ListAPIView):
         if user_id is None :
             return Http404("user id not found")
         return qs.filter(user=user_id)
+
+
+
+
+
 
 
 
@@ -353,20 +360,18 @@ class UserReadArticleListView(ListAPIView):
 
 
 
-
-
-class CreateEmailView(CreateAPIView):
+class CreateEmailAddressView(CreateAPIView):
     #with no post def, this works
-    serializer_class = EmailSerializer
-    queryset = Email.objects.all()
+    serializer_class = EmailAddressSerializer
+    queryset = EmailAddress.objects.all()
 
     def post(self, request):
         email_address = request.data.get('email' , None )
-        email_exists = Email.objects.all().filter(email = email_address).count()
+        email_exists = EmailAddress.objects.all().filter(email = email_address).count()
 
         if email_exists < 1:
             # found this at https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#pulling-it-all-together
-            serializer = EmailSerializer(data=request.data)
+            serializer = EmailAddressSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 subject = 'Thank you for registering with Apollo!'
@@ -379,6 +384,52 @@ class CreateEmailView(CreateAPIView):
                 return Response(serializer.data, status=HTTP_201_CREATED)
         else :
             return Response("This email is already registered" , status=HTTP_400_BAD_REQUEST)
+
+
+
+
+
+class CreatePromotionalEmailView(CreateAPIView):
+    #with no post def, this works
+    serializer_class = PromotionalEmailSerializer
+    queryset = PromotionalEmail.objects.all()
+
+    def post(self, request):
+        subject     =       request.data.get('subject' , None )
+        body        =       request.data.get('body' , None )
+        recipient   =       request.data.get('recipients' , None )
+        user        =       request.data.get('user' , None )
+
+        # got the data for filtering based on a variable from here -> https://stackoverflow.com/a/4720109/12921499
+        recipient_user_ids = UserEmailPreferences.objects.filter( **{ recipient: True }  ).values('user').distinct()
+        #get the recipient user emails based on the id's from the UserEmailPreferences table
+        recipient_user_emails = User.objects.filter( pk__in=recipient_user_ids ).values('email').distinct()
+
+        # #loops through the list of qs results and appends the values to the email_recipient_list list
+        email_recipient_list = []
+        for qs in recipient_user_emails :
+            email_recipient_list.append(qs["email"])
+
+
+        print( request.data )
+            # found this at https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#pulling-it-all-together
+        serializer = PromotionalEmailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            #loop through all the recipients and send an email to every email in the list.
+            #This is necessary because using email_recipient_list will show every other recipient in the "To: " field
+            for email in email_recipient_list :
+                email_from = settings.EMAIL_HOST_USER
+                # #sends email with html email (passed in from frontend.) and passes the html message as the "default" message 
+                send_mail(subject, body, email_from, [email,] , html_message=body)
+
+            return Response(serializer.data, status=HTTP_201_CREATED)
+        else :
+            return Response("Error with serializer " , status=HTTP_400_BAD_REQUEST)
+
+
+
+
 
 
 class CreateCommentView(CreateAPIView):

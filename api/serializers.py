@@ -14,7 +14,8 @@ from django.contrib.auth.models import User #, Group
 from .models import (
     Comment ,
     Article ,
-    Email ,
+    EmailAddress ,
+    PromotionalEmail ,
 
     CommentUpvote ,
     CommentDownvote ,
@@ -245,12 +246,24 @@ class ArticleSerializer(serializers.ModelSerializer):
         )
 
 
-class EmailSerializer(serializers.ModelSerializer):
+class EmailAddressSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Email
+        model = EmailAddress
         fields = (
             "email" ,
+        )
+
+class PromotionalEmailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PromotionalEmail
+        fields = (
+            "subject" ,
+            "recipients" ,
+            "body" ,
+            "user" ,
+
         )
 
 

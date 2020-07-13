@@ -19,7 +19,7 @@ import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner'
 
 import "../../../content/css/App.css";
 import {
-  create_email_url ,
+  create_email_address_url ,
 
 } from "../../../backend-urls.js" ;
 
@@ -50,7 +50,7 @@ class RegisterEmail extends React.Component {
     data.append('email' , this.state.email) ;
 
     axios
-      .post(create_email_url , data)
+      .post(create_email_address_url , data)
       .then(response => {
 
         Event("Register Email" , "Register Email SUCCESS" )

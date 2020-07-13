@@ -8,7 +8,9 @@ from .views import (
     ArticlePageView ,
     CreateArticleView ,
     CustomLoginView ,
-    CreateEmailView ,
+    CreateEmailAddressView ,
+    CreatePromotionalEmailView ,
+
     CreateCommentView ,
     CustomRegisterView ,
 
@@ -58,7 +60,10 @@ urlpatterns = [
     path('article/<pk>/', ArticlePageView.as_view() , name="article") ,
     path('create-article/' , CreateArticleView.as_view() , name="create-article") ,
     path('login/' , CustomLoginView.as_view() , name="login") ,
-    path('create-email/' , CreateEmailView.as_view() , name="create-email") ,
+    path('create-email-address/' , CreateEmailAddressView.as_view() , name="create-email-address") ,
+
+    path('create-promotional-email/', CreatePromotionalEmailView.as_view(), name="create-promotional-email" ) , 
+
     path('create-comment/' , CreateCommentView.as_view() , name="create-comment") ,
     path('signup/' , CustomRegisterView.as_view() , name='register') ,
 

@@ -22,7 +22,7 @@ import UserInformation          from    './Misc/UserInformation';
 import UserEmailPreferences     from    './Misc/UserEmailPreferences';
 import UserArticleInteractions  from    './Misc/UserArticleInteractions';
 
-
+import AdminCard                from    '../Admin/AdminCard.js' ;
 
 import { PageView , Event }     from    '../GlobalMisc/Tracking';
 import LoaderSpinner            from    '../GlobalMisc/LoaderSpinner';
@@ -135,6 +135,12 @@ class Profile extends React.Component {
                         <ListGroup.Item className="bg-app">
                           <UserArticleInteractions token={token} />
                         </ListGroup.Item>
+                        {/*only display the admin card if the user is me (that is my token)*/
+                          token === "8eb05e1e2a096148f4686c071328cd1fbdec1904" &&
+                            <ListGroup.Item className="bg-app">
+                              <AdminCard />
+                            </ListGroup.Item>
+                        }
                       </React.Fragment>
                   }
                   </ListGroup>
@@ -150,56 +156,6 @@ class Profile extends React.Component {
                   </ListGroup>
                 </Col>
               </Row>
-
-
-              {/*
-              <Row>
-                <Col sm={{ span: 3 }}>
-                  <Card>
-                    <ListGroup variant="flush">
-                      {/*
-                      <ListGroup.Item
-                        active={selected_button === "info"}
-                        onClick={() => {
-                            this.setState({
-                              selected_button : "info"
-                            })
-                          }
-                        }
-                        style={{cursor:"pointer"}}
-                      >
-                        Account Info
-                      </ListGroup.Item>
-
-                      <ListGroup.Item
-                        active={selected_button !== "change_password"}
-
-                        style={{cursor:"pointer"}}
-                      >
-                        Change Password
-                      </ListGroup.Item>
-
-                      <ListGroup.Item
-                        active={selected_button === "email_preferences"}
-                        onClick={() => {
-                            this.setState({
-                              selected_button : "email_preferences"
-                            })
-                          }
-                        }
-                        style={{cursor:"pointer"}}
-                      >
-                        Email Preferences
-                      </ListGroup.Item>
-
-                    </ListGroup>
-                  </Card>
-                </Col>
-                <Col sm={{ span: 6}} >
-                  {this.handleProfileInfo()}
-                </Col>
-              </Row>
-              */}
 
             </Container>
           :

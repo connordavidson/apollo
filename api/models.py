@@ -80,16 +80,18 @@ class Article(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     updated_date = models.DateTimeField(auto_now=True, null=True)
     user = models.ForeignKey(User , related_name='article_author' , on_delete=models.SET_NULL , null =True , blank=True)
+    body = models.TextField()
     pinned = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title
 
 
 
 
-#stores the emails that the users enter to recieve updates (for the "sign up for email updates" feature)
-class Email(models.Model):
+# #stores the emails that the users enter to recieve updates (for the "sign up for email updates" feature)
+class EmailAddress(models.Model):
     email = models.EmailField(null=True)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -97,21 +99,21 @@ class Email(models.Model):
         return self.email
 
 
-# #commented to preserve history
-# #stores a user's email preferences
-# class UserEmailPreferences(models.Model):
-#     user = models.ForeignKey(User , related_name='email_preferences' , on_delete=models.SET_NULL ,  null =True , blank=True)
-#     news_and_updates = models.BooleanField(default=True)
-#     new_blog_posts = models.BooleanField(default=True)
-#
-#     created_date = models.DateTimeField(auto_now_add=True, null=True)
-#     updated_date = models.DateTimeField(auto_now=True, null=True)
-#
-#     def _str_(self):
-#         return self.user
+# #holds an email object that is sent from /send-email. serves the purpose of promotional emails
+class PromotionalEmail(models.Model):
+    subject = models.CharField(max_length=140)
+    recipients = models.CharField(max_length=140)
+    body = models.TextField()
+
+    user = models.ForeignKey(User , related_name='email_sender' , on_delete=models.SET_NULL , null =True , blank=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.email
 
 
-#stores a user's email preferences
+
+#stores a user's email preferences. WHen adding a new field , have to add it to UserEmailPreferencesSerializer so that it will show up in the frontend. Frontend (in UserEmailPreferences and SendEmail components) removes _ and capitalizes first character so naming is important.
 class UserEmailPreferences(models.Model):
     user = models.OneToOneField(User , on_delete=models.SET_NULL ,  null =True , blank=True)
     news_and_updates = models.BooleanField(default=True)

@@ -50,12 +50,6 @@ class CreateArticle extends React.Component  {
     })
   }
 
-  handleAuthor = (text) => {
-    this.setState({
-      author: text.target.value
-    });
-  }
-
   handleTitle = (text) => {
     this.setState({
       title: text.target.value

@@ -125,19 +125,7 @@ class Home extends React.Component {
           </Row>
           <Row>
             <Col >
-              {
-                authenticated ?
-                  token === "8eb05e1e2a096148f4686c071328cd1fbdec1904" &&
-                    <div className="float-right">
-                      <Link to="/create-article" >
-                        <Button variant="outline-secondary">Write an Article </Button>
-                      </Link>
-                    </div>
-                :
-                  <div className="float-right">
-                    {/*<RegisterEmail text="Sign up for email updates" direction="left" onClick={()=> Event("Register", "Register Email Button", "HOME_PAGE")}/> */}
-                  </div>
-              }
+
             </Col>
           </Row>
         </Container>

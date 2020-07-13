@@ -6,6 +6,7 @@ import ArticlePage from "./containers/Blog/ArticlePage";
 import Home from './containers/Blog/Home' ;
 import CreateArticle from './containers/Blog/CreateArticle';
 
+import SendEmail from './containers/Admin/Misc/SendEmail';
 
 import Login from './containers/Account/Login';
 import Signup from './containers/Account/Signup';
@@ -15,6 +16,7 @@ import SetNewPassword from './containers/Account/SetNewPassword';
 import Careers from './containers/Careers';
 import VerifyEmail from './containers/Account/VerifyEmail';
 
+import UserEmailPreferences from './containers/Account/Misc/UserEmailPreferences';
 
 
 const BaseRouter = () => (
@@ -29,10 +31,14 @@ const BaseRouter = () => (
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/create-article" component={CreateArticle} />
+    <Route exact path="/send-email" component={SendEmail} />
     <Route exact path="/reset" component={ForgotPassword} />
     <Route exact path="/reset/:uid/:token" component={SetNewPassword}/>
     <Route exact path="/careers" component={Careers} />
     <Route exact path="/verify-email/:key" component={VerifyEmail}/>
+
+    <Route exact path="/email-prefs" component={UserEmailPreferences}/>
+
   </Hoc>
 );
 

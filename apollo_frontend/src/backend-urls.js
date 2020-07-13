@@ -10,7 +10,9 @@ export const all_articles_url =     endpoint+`all-articles/` ;
 export const article_url = (id) =>  endpoint+`article/`+id+`/` ;
 
 export const create_article_url = endpoint+ `create-article/` ;
-export const create_email_url = endpoint+ `create-email/` ;
+export const create_email_address_url = endpoint+ `create-email-address/` ;
+
+export const create_promotional_email_url = endpoint+'create-promotional-email/'
 
 export const create_comment_url = endpoint+'create-comment/' ;
 
