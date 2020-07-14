@@ -10,7 +10,7 @@ __pycache__/
 
 /setup.cfg
 
-apollo-blog/build/
+#apollo_frontend/build/
 
 app.yaml
 
