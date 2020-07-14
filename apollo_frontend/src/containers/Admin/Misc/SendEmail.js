@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 import axios from 'axios';
 import {
@@ -14,8 +11,8 @@ import {
 
 } from 'react-bootstrap';
 
-import { connect } from "react-redux";
-import {withRouter} from 'react-router';
+import { connect }            from "react-redux";
+import {withRouter}           from 'react-router';
 
 import {
   get_user_email_preferences_url ,
@@ -23,13 +20,13 @@ import {
 
 } from "../../../backend-urls.js" ;
 
-import LoaderSpinner from "../../GlobalMisc/LoaderSpinner"
+import { PageView , Event }   from    '../../GlobalMisc/Tracking';
+import LoaderSpinner          from    "../../GlobalMisc/LoaderSpinner"
 
 //for ReactQuill. found at https://github.com/zenoamaro/react-quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-// import "../../../content/css/App.css";
 
 
 
@@ -53,6 +50,8 @@ class SendEmail extends React.Component  {
     this.setState({
       loading : true
     })
+
+    PageView() ;
 
   }
 
@@ -125,6 +124,9 @@ class SendEmail extends React.Component  {
 
   submitForm = () => {
 
+
+    Event("Send Promotional Email", "Send Promotional Email Attempt", "From Send Email Page") ;
+
     console.log("subject : " + this.state.subject)
     console.log("body : " + this.state.body)
     console.log("recipient : " +  this.state.recipient)
@@ -146,12 +148,19 @@ class SendEmail extends React.Component  {
         }
       )
       .then(response => {
+
+        Event("Send Promotional Email", "Send Promotional Email SUCCESS", "From Send Email Page") ;
+
+        console.log(response.data);
         this.setState({
           article_submitted : true
         })
-        console.log(response.data);
+
       })
       .catch(error => {
+
+        Event("Send Promotional Email", "Send Promotional Email FAIL", "From Send Email Page") ;
+
         console.log(error)
         this.setState({
           error: error ,

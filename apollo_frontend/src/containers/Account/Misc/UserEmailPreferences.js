@@ -224,7 +224,7 @@ class UserEmailPreferences extends React.Component {
                       block
                       bsSize="large"
                       disabled={!prefs_edited}
-                      onClick={this.handleUpdatePreferences}
+                      onClick={this.handleUpdatePreferencesWithGA}
                     >
                       Save
                     </Button>

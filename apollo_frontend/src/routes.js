@@ -2,19 +2,19 @@ import React from "react";
 import {Route, Redirect} from "react-router-dom";
 import Hoc from "./hoc/hoc";
 
-import ArticlePage from "./containers/Blog/ArticlePage";
-import Home from './containers/Blog/Home' ;
-import CreateArticle from './containers/Blog/CreateArticle';
+import ArticlePage          from "./containers/Blog/ArticlePage";
+import Home                 from './containers/Blog/Home' ;
 
-import SendEmail from './containers/Admin/Misc/SendEmail';
+import CreateArticle        from './containers/Admin/CreateArticle';
+import SendEmail            from './containers/Admin/Misc/SendEmail';
 
-import Login from './containers/Account/Login';
-import Signup from './containers/Account/Signup';
-import Profile from './containers/Account/Profile';
-import ForgotPassword from './containers/Account/ForgotPassword';
-import SetNewPassword from './containers/Account/SetNewPassword';
-import Careers from './containers/Careers';
-import VerifyEmail from './containers/Account/VerifyEmail';
+import Login                from './containers/Account/Login';
+import Signup               from './containers/Account/Signup';
+import Profile              from './containers/Account/Profile';
+import ForgotPassword       from './containers/Account/ForgotPassword';
+import SetNewPassword       from './containers/Account/SetNewPassword';
+import Careers              from './containers/Careers';
+import VerifyEmail          from './containers/Account/VerifyEmail';
 
 import UserEmailPreferences from './containers/Account/Misc/UserEmailPreferences';
 

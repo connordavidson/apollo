@@ -16,7 +16,7 @@ import {Link} from "react-router-dom";
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
 
-
+import { Event }        from    '../GlobalMisc/Tracking';
 import LoaderSpinner    from    '../GlobalMisc/LoaderSpinner';
 
 
@@ -35,6 +35,7 @@ class AdminCard extends React.Component {
     })
 
   }
+
 
 
   render(){
@@ -67,6 +68,7 @@ class AdminCard extends React.Component {
                           block
                           variant="outline-secondary"
                           href="/create-article"
+                          onclick={ Event("Routing", "Opening Write Article Page", "From Profile Page")}
                         >
                           Write an Article
                         </Button>
@@ -77,6 +79,7 @@ class AdminCard extends React.Component {
                           block
                           variant="outline-secondary"
                           href="/send-email"
+                          onclick={ Event("Routing", "Opening Send Email Page", "From Profile Page") }
                         >
                           Send an Email
                         </Button>
