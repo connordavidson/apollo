@@ -4,6 +4,7 @@ import Hoc from "./hoc/hoc";
 
 import ArticlePage          from "./containers/Blog/ArticlePage";
 import Home                 from './containers/Blog/Home' ;
+import StoreLandingPage     from './containers/Blog/StoreLandingPage' ;
 
 import CreateArticle        from './containers/Admin/CreateArticle';
 import SendEmail            from './containers/Admin/Misc/SendEmail';
@@ -21,9 +22,11 @@ import UserEmailPreferences from './containers/Account/Misc/UserEmailPreferences
 
 const BaseRouter = () => (
   <Hoc>
+    <Route exact path="/store" component={StoreLandingPage}/>
     <Route exact path="/" >
-      <Redirect to="/blog" />
+        <Redirect to="/blog" />
     </Route >
+
     <Route exact path="/blog" component={Home} />
 
     <Route exact path="/profile" component={Profile} />

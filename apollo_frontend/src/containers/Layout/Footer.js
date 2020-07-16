@@ -18,7 +18,7 @@ function Footer() {
 
         <Nav>
           {/* "Privacy" , "Store" , "Technology" , etc. */}
-          {/*  <Nav.Item ><Nav.Link href="/">Store</Nav.Link></Nav.Item>*/}
+          <Nav.Item ><Nav.Link href="/store">Store</Nav.Link></Nav.Item>
           <Nav.Item > <Nav.Link href="/blog">Blog</Nav.Link>  </Nav.Item>
           <Nav.Item ><Nav.Link href="/careers">Careers</Nav.Link></Nav.Item>
         </Nav>

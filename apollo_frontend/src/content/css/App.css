@@ -74,6 +74,11 @@ a.article-link:active
   font-size: 1.25em ;
 }
 
+.font-size-5em{
+  font-size: 10em ;
+}
+
+
 .font-size-10px{
   font-size: "10pt";
 }

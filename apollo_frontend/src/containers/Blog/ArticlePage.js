@@ -186,12 +186,12 @@ class ArticlePage extends React.Component  {
 
     }
 
-    var twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20ecommerce%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
-    var facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse "
+    const twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20ecommerce%20startup!%20https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
+    const facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse "
     //" https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
-    var reddit_link = "https://www.reddit.com/submit?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']+"&title=Check%20Out%20This%20New%20Ecommerce%20Startup "
-    var email_link = "mailto:?subject=Check Out This New Ecommerce Startup&body=Check Out This New Ecommerce Startup!%0A%0A They are the first ecommerce site that is accepting Bitcoin and they've got big plans!%0A%0A You can read more about them out at https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
-    var linkedin_link = "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
+    const reddit_link = "https://www.reddit.com/submit?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']+"&title=Check%20Out%20This%20New%20Ecommerce%20Startup "
+    const email_link = "mailto:?subject=Check Out This New Ecommerce Startup&body=Check Out This New Ecommerce Startup!%0A%0A They are the first ecommerce site that is accepting Bitcoin and they've got big plans!%0A%0A You can read more about them out at https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
+    const linkedin_link = "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.apollo-blog-269301.appspot.com%2Fblog%2Farticle%2F"+article_data['id']
 
 
     return (

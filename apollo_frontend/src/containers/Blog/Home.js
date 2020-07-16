@@ -15,22 +15,23 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { Event, PageView, initGA } from "../GlobalMisc/Tracking";
+import { Event, PageView } from "../GlobalMisc/Tracking";
 
-// import ReactGA from "react-ga";
 
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 import { StarFill  } from 'react-bootstrap-icons';
 
 import RichText from '../GlobalMisc/RichText';
 import LoaderSpinner from '../GlobalMisc/LoaderSpinner'
+import RegisterEmail from './Misc/RegisterEmail';
+
 import {
   all_articles_url ,
 
 } from "../../backend-urls.js" ;
 
 import "../../content/css/App.css";
-import RegisterEmail from './Misc/RegisterEmail';
+
 
 
 class Home extends React.Component {
