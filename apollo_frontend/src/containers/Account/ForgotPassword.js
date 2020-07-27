@@ -97,15 +97,20 @@ class ForgotPassword extends React.Component {
 
       <div className="account-form bg-app">
 
-          <h3>Reset Password </h3>
+          <h3
+            className="ubuntu-bold-font"
+          >
+            Reset Password
+          </h3>
           <hr />
           <FormGroup controlId="email" bsSize="large">
-            Email
             <FormControl
               required
               autoFocus
               value={email}
               onChange= {this.handleEmail}
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
+              placeholder="Email"
             />
           </FormGroup>
 
@@ -115,6 +120,7 @@ class ForgotPassword extends React.Component {
                   block
                   bsSize="large"
                   disabled={true}
+                  className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                 >
                   <ButtonLoaderSpinner />
                 </Button>
@@ -126,6 +132,7 @@ class ForgotPassword extends React.Component {
                   (this.handleValidated())
                 }
                 onClick={this.handleSubmitWithGA}
+                className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
               >
                 Submit
               </Button>

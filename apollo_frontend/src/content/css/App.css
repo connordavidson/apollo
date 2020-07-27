@@ -1,5 +1,205 @@
 
 
+
+/*got from https://colorlib.com/etc/cs/comingsoon_05/index.html */
+/*
+  --------------------------------------------------------------------------------
+*/
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+/*got from https://colorlib.com/etc/cs/comingsoon_05/index.html */
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url('../fonts/Open_Sans/OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: OpenSans-Bold;
+  src: url('../fonts/Open_Sans/OpenSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: OpenSans-Italic;
+  src: url('../fonts/Open_Sans/OpenSans-Italic.ttf');
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  src: url('../fonts/Roboto/Roboto-Bold.ttf');
+}
+@font-face {
+  font-family: Roboto-Regular;
+  src: url('../fonts/Roboto/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: Roboto-Italic;
+  src: url('../fonts/Roboto/Roboto-Italic.ttf');
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ L-Text >= 26 ]*/
+.l1-txt1 {
+  font-family: Ubuntu-Bold;
+  font-size: 60px;
+  /*color: #fff;*/
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.l1-txt2 {
+  font-family: Ubuntu-Regular;
+  font-size: 24px;
+  /*color: #fff;*/
+  line-height: 1.5;
+}
+
+
+
+/* ------------------------------------ */
+.txt-center {text-align: center;}
+
+.p-b-10 {padding-bottom: 10px;}
+
+.p-b-43 {padding-bottom: 43px;}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+
+  max-width: calc(100% - 20px);
+  height: 50px;
+  background: #fff;
+  border-radius: 25px;
+}
+
+.wrap-input100-border-radius-20px {
+
+  max-width: calc(100% - 20px);
+  height: 50px;
+
+  border-radius: 20px;
+}
+
+.wrap-input100-border-radius-15px {
+
+  max-width: calc(100% - 20px);
+  height: 50px;
+
+  border-radius: 15px;
+}
+
+.wrap-input100-border-radius-10px {
+
+  max-width: calc(100% - 20px);
+  height: 50px;
+
+  border-radius: 10px;
+}
+
+
+.s1-txt3 {
+  font-family: Ubuntu-Bold;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.4;
+}
+
+.s1-txt4 {
+  font-family: Ubuntu-Bold;
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.s1-txt4-without-white {
+  font-family: Ubuntu-Bold;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+
+.placeholder0::-webkit-input-placeholder { color: #999999;}
+.placeholder0:-moz-placeholder { color: #999999;}
+.placeholder0::-moz-placeholder { color: #999999;}
+.placeholder0:-ms-input-placeholder { color: #999999;}
+
+.wsize2 {
+  max-width: 526px;
+}
+
+.size3 {
+  width: 280px;
+  max-width: calc(100% - 20px);
+  height: 50px;
+}
+
+.size3-without-width {
+
+  max-width: calc(100% - 20px);
+  height: 50px;
+}
+
+
+.where1 {
+  margin: 0 10px 20px 10px;
+}
+
+.flex-c-m {
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+
+
+
+.how-btn {
+  padding: 0px 20px;
+  /*background-color: #222222; */
+  border-radius: 25px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+.how-btn-without-white {
+  padding: 0px 20px;
+  /*background-color: #222222; */
+  border-radius: 25px;
+
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+/*
+  --------------------------------------------------------------------------------
+*/
+
+
+
+
 @media all and (min-width: 480px) {
   .account-form {
     background-color: white ;
@@ -10,6 +210,38 @@
     margin: 0 auto;
     max-width: 450px;
   }
+}
+
+
+/*
+ .l1-txt2 {
+  font-family: Ubuntu-Regular;
+  font-size: 24px;
+
+  line-height: 1.5;
+}
+*/
+/*
+* These "children of paragraph tags" (and children of div) are all for the ArticlePage article_body section
+*/
+div > p {
+  font-family : Roboto-Regular;
+}
+p > em {
+  font-family : Roboto-Italic;
+}
+p > strong {
+  font-family : Roboto-Bold;
+}
+
+
+
+.border-radius-25px {
+  border-radius: 25px;
+}
+
+.border-width-0px {
+  border-width: 0px;
 }
 
 
@@ -48,7 +280,9 @@ a.article-link:active
   width: 250px ;
 }
 
-
+.width-300px{
+  width: 300px ;
+}
 
 .editor_form_control {
   height: 200px;
@@ -61,9 +295,35 @@ a.article-link:active
 }
 
 
+.centered {
+  position: fixed; /* or absolute */
+  left: 25%;
+}
+
+
+
+
+
+.margin-left-5-percent{
+  margin-left: 5% ;
+}
+
+.margin-right-5-percent{
+  margin-right: 5% ;
+}
+
+.margin-top-5-percent{
+  margin-top: 5% ;
+}
+
+
+
+
 .margin-bottom-75px{
   margin-bottom: 75px;
 }
+
+
 
 .font-size-2-5em{
   font-size: 2.5em ;
@@ -72,6 +332,10 @@ a.article-link:active
 
 .font-size-1-25em{
   font-size: 1.25em ;
+}
+
+.font-size-4em{
+  font-size: 4em ;
 }
 
 .font-size-5em{
@@ -88,9 +352,16 @@ a.article-link:active
   font-size: 19px ;
 }
 
+.font-size-24px {
+    font-size: 24px;
+}
 
 .float-right{
   float: right ;
+}
+
+.float-left{
+  float: left ;
 }
 
 .times-new-roman-font{
@@ -104,6 +375,37 @@ a.article-link:active
 .tahoma-font{
   font-family: "Tahoma", "Geneva", "sans-serif" ;
 }
+
+
+.ubuntu-regular-font {
+  font-family: Ubuntu-Regular;
+}
+.ubuntu-bold-font {
+  font-family: Ubuntu-Bold;
+}
+
+.open-sans-regular-font{
+   font-family : OpenSans-Regular;
+ }
+.open-sans-bold-font{
+ font-family : OpenSans-Bold;
+}
+.open-sans-italic-font{
+ font-family : OpenSans-Italic;
+}
+
+.roboto-regular-font{
+   font-family : Roboto-Regular;
+ }
+.roboto-bold-font{
+  font-family : Roboto-Bold;
+}
+
+
+
+
+
+
 
 .red-text{
   color: "red";
@@ -119,7 +421,7 @@ a.article-link:active
 }
 
 .footer {
-  padding-top: 10%;
+  padding-top: 15%;
   /* position:absolute;
   left:0;
   bottom:0;

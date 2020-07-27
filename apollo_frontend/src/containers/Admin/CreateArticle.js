@@ -175,9 +175,12 @@ class CreateArticle extends React.Component  {
               :
               (
                 <React.Fragment>
-                <Card >
-                  <Card.Header as="h3">Add an Article</Card.Header>
+                <Card className="border-radius-25px " >
                   <Card.Body>
+                    <Card.Title as="h3" className="roboto-bold-font" >
+                      Add an Article
+                    </Card.Title>
+                    <hr />
                     <Card.Text>
                       <Form>
                         <Form.Row>
@@ -212,6 +215,7 @@ class CreateArticle extends React.Component  {
                       variant="primary"
                       onClick={this.submitForm}
                       disabled={this.handleValidated()}
+                      className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                     >
                       Add Article
                     </Button>

@@ -24,6 +24,7 @@ import LoaderSpinner          from    '../../GlobalMisc/LoaderSpinner';
 var changed_prefs_data = {}
 
 class UserEmailPreferences extends React.Component {
+
   state = {
     error : null , //holds error
     loading : false , //loading
@@ -174,11 +175,16 @@ class UserEmailPreferences extends React.Component {
 
     return(
       <Container>
-
-        <Card>
-
+      
+        <Card className="border-radius-25px  " >
           <Card.Body>
-            <Card.Title><h5>Email Preferences</h5></Card.Title>
+            <Card.Title>
+              <h5
+                className="ubuntu-bold-font"
+              >
+                Email Preferences
+              </h5>
+            </Card.Title>
             <hr />
             {
               loading ?
@@ -198,6 +204,7 @@ class UserEmailPreferences extends React.Component {
                               type={"checkbox"}
                               label={key_with_spaces_and_capitalized}
                               onChange={this.handleInputChange}
+                              bsPrefix="form-check open-sans-regular-font"
                             />
                           </Form.Group >
                         )
@@ -214,6 +221,7 @@ class UserEmailPreferences extends React.Component {
                       block
                       bsSize="large"
                       disabled={true}
+                      className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                     >
                       <ButtonLoaderSpinner />
                     </Button>
@@ -225,6 +233,7 @@ class UserEmailPreferences extends React.Component {
                       bsSize="large"
                       disabled={!prefs_edited}
                       onClick={this.handleUpdatePreferencesWithGA}
+                      className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                     >
                       Save
                     </Button>

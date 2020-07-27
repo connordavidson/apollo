@@ -6,6 +6,7 @@ import {
   FormControl ,
   Badge ,
   Alert ,
+  Form ,
 
 } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -69,44 +70,60 @@ class Login extends React.Component {
 
     return (
 
-
       <div className="account-form bg-app">
 
         <form onSubmit={this.handleSubmit}>
-          <h3>Login </h3>
+          <h3
+            className="ubuntu-bold-font"
+          >
+            Login
+          </h3>
           <hr />
           <FormGroup controlId="email" bsSize="large">
-            Username
+            <Form.Label htmlFor="inlineFormInput" srOnly>
+              Username
+            </Form.Label>
             <FormControl
+              placeholder="Username"
               required
               autoFocus
               value={username}
               onChange= {this.handleUsername}
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            Password
+            <Form.Label htmlFor="inlineFormInput" srOnly>
+              Password
+            </Form.Label>
             <FormControl
+              placeholder="Password"
               required
               value={password}
               onChange= {this.handlePassword}
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
               type="password"
             />
           </FormGroup>
           <Button
             block
-            bsSize="large"
             onClick={() => Event("Login" , "Login Attempt" , "Hit Login Button")}
             type="submit"
+            className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
           >
             Login
           </Button>
           <Badge>
-            New to Apollo? <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Login Page") }>Signup</NavLink>
+            New to Apollo? <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Login Page") } >Signup </NavLink>
           </Badge>
           <br/>
           <Badge>
-            <NavLink to="/reset" onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}>Forgot your password?</NavLink>
+            <NavLink
+              to="/reset"
+              onClick={() => Event("Routing", "Opening reset-password Page", "From Login Page")}
+            >
+              Forgot your password?
+            </NavLink>
           </Badge>
           <br />
           {

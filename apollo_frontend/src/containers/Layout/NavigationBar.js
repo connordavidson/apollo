@@ -41,7 +41,7 @@ class NavigationBar extends React.Component {
               onClick={this.handleHomeButtonClickWithGA   }
               style={{cursor: 'pointer'}}
             >
-              <h4 className="verdana-font ">
+              <h4 className="ubuntu-regular-font">
                 Apollo
               </h4>
             </Navbar.Brand>
@@ -51,19 +51,42 @@ class NavigationBar extends React.Component {
                 authenticated ?
                   <React.Fragment>
                     <Navbar.Text>
-                      <Nav.Link href="/profile" onClick={() => Event("Routing", "Opening Profile Page",  "From Navbar")}>Hello, {username}!</Nav.Link>
+                      <Nav.Link
+                        href="/profile"
+                        onClick={() => Event("Routing", "Opening Profile Page",  "From Navbar")}
+                        className="ubuntu-regular-font"
+                      >
+                        Hello, {username}!
+                      </Nav.Link>
                     </Navbar.Text>
                     <Navbar.Text>
-                      <Nav.Link  onClick={ this.handleLogoutClickWithGA }>Logout</Nav.Link>
+                      <Nav.Link
+                        onClick={ this.handleLogoutClickWithGA }
+                        className="ubuntu-regular-font"
+                      >
+                        Logout
+                      </Nav.Link>
                     </Navbar.Text>
                   </React.Fragment>
                 :
                   <React.Fragment>
                     <Navbar.Text>
-                      <Nav.Link href="/login" onClick={() => Event("Routing", "Opening Login Page", "From Navbar")}>Login</Nav.Link>
+                      <Nav.Link
+                        href="/login"
+                        onClick={() => Event("Routing", "Opening Login Page", "From Navbar")}
+                        className="ubuntu-regular-font"
+                      >
+                        Login
+                      </Nav.Link>
                     </Navbar.Text>
                     <Navbar.Text>
-                      <Nav.Link href="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Navbar")}>Signup</Nav.Link>
+                      <Nav.Link
+                        href="/signup"
+                        onClick={() => Event("Routing", "Opening Signup Page", "From Navbar")}
+                        className="ubuntu-regular-font"
+                      >
+                        Signup
+                      </Nav.Link>
                     </Navbar.Text>
                   </React.Fragment>
               }

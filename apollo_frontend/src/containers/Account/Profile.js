@@ -121,7 +121,11 @@ class Profile extends React.Component {
         {
           authenticated  ?
             <Container>
-              <h4>{username}</h4>
+              <h4
+                className="ubuntu-bold-font"
+              >
+                {username}
+              </h4>
               <hr />
               <Row>
                 <Col sm={{ span: 6 }}>

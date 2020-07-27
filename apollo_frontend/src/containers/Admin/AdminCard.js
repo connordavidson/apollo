@@ -53,9 +53,15 @@ class AdminCard extends React.Component {
 
     return(
       <Container>
-        <Card>
+        <Card className="border-radius-25px " >
           <Card.Body>
-            <Card.Title><h5>Admin</h5></Card.Title>
+            <Card.Title>
+              <h5
+                className="ubuntu-bold-font"
+              >
+                Admin
+              </h5>
+              </Card.Title>
             <hr />
             {
               loading ?
@@ -66,9 +72,10 @@ class AdminCard extends React.Component {
                       <Row>
                         <Button
                           block
-                          variant="outline-secondary"
+
                           href="/create-article"
                           onclick={ Event("Routing", "Opening Write Article Page", "From Profile Page")}
+                          className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                         >
                           Write an Article
                         </Button>
@@ -77,9 +84,10 @@ class AdminCard extends React.Component {
                       <Row>
                         <Button
                           block
-                          variant="outline-secondary"
+
                           href="/send-email"
                           onclick={ Event("Routing", "Opening Send Email Page", "From Profile Page") }
+                          className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                         >
                           Send an Email
                         </Button>

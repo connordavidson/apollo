@@ -208,9 +208,9 @@ class ArticlePage extends React.Component  {
                   className="sticky-top BeforeScroll "
                 >
                   <div id="apollo_widget_left_sidebar">
-                    <ListGroup.Item className="bg-app">
+                    <ListGroup.Item className="bg-app border-width-0px ">
                       <h4
-                        className="verdana-font"
+                        className="roboto-regular-font"
                         onClick={this.handleHomeButtonClickWithGA }
                         style={{cursor: 'pointer'}}
                       >
@@ -219,7 +219,7 @@ class ArticlePage extends React.Component  {
 
                     </ListGroup.Item>
 
-                    <ListGroup.Item className="bg-app">
+                    <ListGroup.Item className="bg-app border-width-0px ">
 
                       {
                         !loading &&
@@ -229,30 +229,47 @@ class ArticlePage extends React.Component  {
                           </React.Fragment>
                       }
 
-
-                      {/*<br />*/}
                       <br />
 
-                      <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }>
+                      <a
+                        class="margin-top-5-percent"
+                        target="_blank"
+                        href={twitter_link}
+                        onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
+                      >
                         <TwitterLogo />
                       </a>
                       <br />
-                      <a target="_blank" href={reddit_link} onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }>
+                      <br />
+                      <a
+                        class="margin-top-5-percent"
+                        target="_blank"
+                        href={reddit_link}
+                        onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
+                      >
                         <RedditLogo />
                       </a>
                       <br />
-                      <a target="_blank" href={linkedin_link} onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }>
+                      <br />
+                      <a
+                        class="margin-top-5-percent"
+                        target="_blank"
+                        href={linkedin_link}
+                        onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
+                      >
                         <LinkedInLogo />
                       </a>
                       <br />
-                      <a target="_blank" href={email_link} onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }>
+                      <br />
+                      <a
+                        class="margin-top-5-percent"
+                        target="_blank"
+                        href={email_link}
+                        onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
+                      >
                         <EmailLogo />
                       </a>
-                      {/*
-                      <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Left Sidebar", "From Article Page") }>
-                        <FacebookLogo />
-                      </a>
-                      */}
+
                       {
                         !authenticated &&
                           <React.Fragment>
@@ -262,20 +279,18 @@ class ArticlePage extends React.Component  {
                               <Button
                                 variant="outline-secondary"
                                 size="sm"
+                                className="roboto-bold-font"
                               >
                                 Signup
                               </Button>
                             </Link>
-                            {/* <RegisterEmail text="Get email updates" direction="right" onClick={() => Event("Register", "Register Email Button", "From Article Page")}/> */}
 
                           </React.Fragment>
-
                       }
-
-
                     </ListGroup.Item>
                   </div>
                 </ListGroup>
+
               </Col>
           }
           <Col lg={8} md={12}  >
@@ -288,73 +303,70 @@ class ArticlePage extends React.Component  {
                   {
                     article_data  ?
                       <React.Fragment>
-                        <h1 className="times-new-roman-font">
+                        <h1 className="roboto-bold-font">
                           {  article_data['title'] }
                         </h1>
 
-                        <h6 className="padding-left-10px">
+                        <h6 className="padding-left-10px roboto-regular-font">
                           By { article_data['author']}, <Badge>{ article_date }</Badge>
-                          <div className="float-right">
-                            <a target="_blank" href={twitter_link} onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") } >
+                          <div class="float-right width-300px" >
+
+                            <a
+                              class=" float-right margin-right-5-percent "
+                              target="_blank"
+                              href={reddit_link}
+                              onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
+                            >
+                              <RedditLogo />
+                            </a>
+
+                            <a
+                              class=" float-right margin-right-5-percent "
+                              target="_blank"
+                              href={linkedin_link}
+                              onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
+                            >
+                              <LinkedInLogo />
+                            </a>
+
+                            <a
+                              class=" float-right margin-right-5-percent "
+                              target="_blank"
+                              href={email_link}
+                              onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
+                            >
+                              <EmailLogo />
+                            </a>
+
+                            <a
+                              class=" float-right margin-right-5-percent "
+                              target="_blank"
+                              href={twitter_link}
+                              onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") }
+                            >
                               <TwitterLogo />
                             </a>
-                            <a target="_blank" href={reddit_link} onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }>
-                              <Badge>
-                                <RedditLogo />
-                              </Badge>
-                            </a>
-                            <a target="_blank" href={linkedin_link} onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }>
-                              <Badge>
-                                <LinkedInLogo />
-                              </Badge>
-                            </a>
-                            <a target="_blank" href={email_link} onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }>
-                              <Badge>
-                                <EmailLogo />
-                              </Badge>
-                            </a>
-                            {/*
-                            <a target="_blank" href={facebook_link} onClick={ () => Event("Article Sharing", "Sharing Article via Facebook Link in Title", "From Article Page") } >
-                              <FacebookLogo />
-                            </a>
-                            */}
+
+
+
+
                           </div>
                         </h6>
 
                         <hr />
 
                         {/*Displays the body of the article in Rich Text*/}
-                        <RichText text={article_data['body']} classes="times-new-roman-font font-size-19px"/>
+                        <div id="article_body">
+                          <RichText text={article_data['body']} classes=" font-size-19px "/>
+                        </div>
+
                       </React.Fragment>
                     :
                       <Alert variant="dark">There was an issue loading this article</Alert>
                   }
 
                   <br />
-                  {
-                    /*only displays the "sign up for email updates" if user isn't signed in*/
-                    /*
-                    !authenticated &&
-                      <div style={{backgroundColor:"lightgrey" , paddingTop:"8px" , paddingBottom:"3px", paddingLeft:"8px" , borderRadius:"4px"}}>
-                        <text >Like what you see? Subscribe for updates </text>
-                        <Form >
-                          <Form.Row>
-                            <Col>
-                              <Form.Control type="email" placeholder="Enter email" />
-                            </Col>
-                            <Col>
-                              <Button variant="primary" type="submit">
-                                Submit
-                              </Button>
-                            </Col>
-                          </Form.Row>
-                          <small>We will never sell your information </small>
-                        </Form>
-                      </div>
-                      <br/>
 
-                    */
-                  }
                 <CommentSection  article_id={this.props.match.params.article_id}/>
 
               </React.Fragment>

@@ -128,42 +128,50 @@ class  Signup extends React.Component  {
       <div className="account-form bg-app">
 
         <form onSubmit={this.handleSubmit}>
-          <h3>Signup </h3>
+          <h3
+            className="ubuntu-bold-font"
+          >
+            Signup
+          </h3>
           <hr />
           <FormGroup controlId="email" bsSize="large">
-            Email
             <FormControl
+              placeholder="Email"
               required
               autoFocus
               type="email"
               value={email}
               onChange={this.handleEmail}
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
             />
           </FormGroup>
           <FormGroup controlId="username" bsSize="large">
-            Username
             <FormControl
+              placeholder="Username"
               required
               value={username}
               onChange={this.handleUsername}
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            Password
             <FormControl
+              placeholder="Password"
               required
               value={password}
               onChange={this.handlePassword}
               type="password"
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
             />
           </FormGroup>
           <FormGroup controlId="confirm_password" bsSize="large">
-            Confirm Password
             <FormControl
+              placeholder="Confirm Password"
               required
               value={confirm_password}
               onChange={this.handleConfirmPassword}
               type="password"
+              className="mb-2 s1-txt3 placeholder0 wrap-input100 "
             />
           </FormGroup>
 
@@ -174,6 +182,7 @@ class  Signup extends React.Component  {
                 bsSize="large"
                 disabled={true}
                 type="submit"
+                className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                >
                 <ButtonLoaderSpinner />
               </Button>
@@ -184,13 +193,22 @@ class  Signup extends React.Component  {
                 disabled={!this.handleValidated()}
                 onClick={() => Event("Signup" , "Signup Attempt" , "Hit Signup Button")}
                 type="submit"
+                className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                >
                 Signup
               </Button>
 
           }
 
-          <Badge> Already have an account? <NavLink to="/login" onClick={() => Event("Routing", "Opening Login Page", "From Signup Page") }>Login </NavLink> </Badge>
+          <Badge>
+            Already have an account?
+            <NavLink
+              to="/login"
+              onClick={() => Event("Routing", "Opening Login Page", "From Signup Page") }
+            >
+              Login
+            </NavLink>
+          </Badge>
 
           {
             !passwords_match &&

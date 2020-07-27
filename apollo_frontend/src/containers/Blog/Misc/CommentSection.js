@@ -189,7 +189,7 @@ class CommentSection extends React.Component {
 
     return(
         <div >
-          <h2 className="tahoma-font">Comments</h2>
+          <h2 className="roboto-bold-font">Comments</h2>
           <hr />
           <Container>
             {
@@ -210,27 +210,19 @@ class CommentSection extends React.Component {
             }
             {
               authenticated ?
-                <Card >
-                  <Card.Header as="h4">Add a Comment</Card.Header>
+                  <Card className="border-radius-25px ">
                     <Card.Body>
+                      <Card.Title className="roboto-bold-font" >
+                        Add a Comment
+                      </Card.Title>
+                      <hr />
                       <Card.Text>
                         <Form>
-                          {/*
-                            <Form.Row>
-                              <Form.Label>Name:</Form.Label>
-                              <Form.Control
-                                type="text"
-                                placeholder="Enter Name"
-                                value={commenter_name}
-                                onChange={this.handleCommenterName}
-                              />
-                            </Form.Row>
-                            <br/>
-                          */}
                           <Form.Row>
                             <Col>
                               {/*<Form.Label>Comment:</Form.Label>*/}
                               <ReactQuill
+
                                 placeholder="Start Writing..."
                                 onChange={this.handleCommentBody}
                                 value={comment_body}
@@ -239,10 +231,12 @@ class CommentSection extends React.Component {
                           </Form.Row>
                         </Form>
                       </Card.Text>
-                      {submit_button_loading ?
+                      {
+                        submit_button_loading ?
                           <Button
                             disabled={true}
                             variant="primary"
+                            className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                           >
                             <ButtonLoaderSpinner />
                           </Button>
@@ -251,15 +245,16 @@ class CommentSection extends React.Component {
                             onClick={this.handlePostCommentWithGA}
                             disabled={!this.handleValidateComment()}
                             variant="primary"
+                            className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                           >
                             Add Comment
                           </Button>
 
-                      }
+                        }
                     </Card.Body>
                   </Card>
                 :
-                  <Alert variant="dark">
+                  <Alert variant="dark" className="roboto-regular-font">
                     You need to <a href="/login" onClick={() => Event("Routing", "Opening Login Page", "From Article Comment Section")}>Login</a> or <a href="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Article Comment Section") }>Signup</a> to leave a comment.
                   </Alert>
             }
@@ -267,7 +262,12 @@ class CommentSection extends React.Component {
               comment_submitted &&
                 <React.Fragment>
                   <br />
-                  <Alert variant="success">Your comment has been added!</Alert>
+                  <Alert
+                    variant="success"
+                    className="roboto-bold-font"
+                  >
+                    Your comment has been added!
+                  </Alert>
                 </React.Fragment>
             }
           </Container>

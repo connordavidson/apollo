@@ -53,20 +53,23 @@ class ArticleComment extends React.Component {
 
     return(
       <React.Fragment>
-        <Card >
+        <Card className="border-radius-25px ">
           <Card.Body>
-            <Card.Title>{this.props.comment.author}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
+            <Card.Title className="roboto-bold-font" >
+              {this.props.comment.author}
+              <div className="float-right" >
+                <CommentUpvote comment_id={this.props.comment.id} comment_downvoted={comment_downvoted} comment_upvoted={this.handleCommentUpvoteClick} />
+                {' '}
+                <CommentDownvote comment_id={this.props.comment.id} comment_upvoted={comment_upvoted} comment_downvoted={this.handleCommentDownvoteClick} />
+              </div>
+            </Card.Title>
+            <Card.Subtitle className="mb-2 text-muted roboto-regular-font">
               { new Date(this.props.comment.created_date).toDateString() }
             </Card.Subtitle>
 
-            <Card.Text>
+            <Card.Text className="roboto-regular-font" >
               <RichText text={this.props.comment.body} />
             </Card.Text>
-
-            <CommentUpvote comment_id={this.props.comment.id} comment_downvoted={comment_downvoted} comment_upvoted={this.handleCommentUpvoteClick} />
-            {' '}
-            <CommentDownvote comment_id={this.props.comment.id} comment_upvoted={comment_upvoted} comment_downvoted={this.handleCommentDownvoteClick} />
 
           </Card.Body>
         </Card>

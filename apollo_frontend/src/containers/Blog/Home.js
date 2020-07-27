@@ -17,13 +17,10 @@ import {
 import { connect } from "react-redux";
 import { Event, PageView } from "../GlobalMisc/Tracking";
 
-
-// found at https://www.npmjs.com/package/react-bootstrap-icons
-import { StarFill  } from 'react-bootstrap-icons';
-
 import RichText from '../GlobalMisc/RichText';
 import LoaderSpinner from '../GlobalMisc/LoaderSpinner'
 import RegisterEmail from './Misc/RegisterEmail';
+import PinnedArticle from './Misc/PinnedArticle';
 
 import {
   all_articles_url ,
@@ -48,8 +45,7 @@ class Home extends React.Component {
     this.setState({
       loading: true ,
     })
-    // ReactGA.initialize('UA-163650811-1');
-    // PageView();
+    PageView();
 
     this.handleGetArticles();
   }
@@ -114,14 +110,14 @@ class Home extends React.Component {
       <React.Fragment>
         <Container>
           <Row>
-            <h1 className="verdana-font">
+            <h1 className="ubuntu-bold-font">
               The Apollo Blog
             </h1>
           </Row>
           <Row>
             {/*this nav with the class is used to make the text grey*/}
             <nav className="navbar-light">
-              <Navbar.Text><h5 className="verdana-font ">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
+              <Navbar.Text><h5 className="ubuntu-bold-font">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
             </nav>
           </Row>
           <Row>
@@ -135,24 +131,10 @@ class Home extends React.Component {
         <ListGroup variant="flush" className="bg-app">
 
             {/* cannot put this inside the "loading === true" ternary below for some reason*/
-            loading === false &&
-              /*This prevents the pinned_article from displaying if loading is false... it runs parallel to the logic of LoaderSpinner in the following ternary -> If loading, display the LoaderSpinner and don't display pinned article   */
-              pinned_article !== null &&
-                <ListGroup.Item className="bg-app" >
-                  <Link to={'blog/article/'+pinned_article.id} className="article-link" onClick={() => Event("Routing", "Opening Pinned Article; id = " + pinned_article.id, "From Home Page")}>
-                    <Card className="width-100-percent " id={pinned_article.id}>
-                      <Card.Body>
-                        <Card.Title>{pinned_article.title} <StarFill color="royalblue" className="float-right font-size-1-25em" /></Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">
-                          By {pinned_article.author}, <Badge>{new Date(pinned_article.created_date).toDateString() } </Badge>
-                        </Card.Subtitle>
-                        <Card.Text >
-                          <RichText text={pinned_article.body +"..." } />
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Link>
-                </ListGroup.Item>
+              loading === false &&
+                /*This prevents the pinned_article from displaying if loading is false... it runs parallel to the logic of LoaderSpinner in the following ternary -> If loading, display the LoaderSpinner and don't display pinned article   */
+                pinned_article !== null &&
+                  <PinnedArticle pinned_article={pinned_article} />
             }
             {
               loading === true ?
@@ -162,11 +144,18 @@ class Home extends React.Component {
                   articles.map(article =>  (
                       <ListGroup.Item className="bg-app">
                         <Link to={'blog/article/'+article.id} className="article-link" onClick={()=> Event("Routing", "Opening Pinned Article;; id = " + article.id, "From Home Page")}>
-                          <Card className="width-100-percent" id={article.id}>
+                          <Card
+                            className="width-100-percent border-radius-25px "
+                            id={article.id}
+                          >
                             <Card.Body>
-                              <Card.Title>{article.title}</Card.Title>
-                              <Card.Subtitle className="mb-2 text-muted">By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge></Card.Subtitle>
-                              <Card.Text >
+                              <Card.Title className="roboto-bold-font">
+                                {article.title}
+                              </Card.Title>
+                              <Card.Subtitle className="mb-2 text-muted roboto-regular-font">
+                                By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge>
+                              </Card.Subtitle>
+                              <Card.Text className="roboto-regular-font" >
                                 <RichText text={article.body.substring(0, 200) + '...'} />
                               </Card.Text>
                             </Card.Body>

@@ -29,6 +29,8 @@ class UserInformation extends React.Component {
     // selected_button : "change_password" , //changes whenever a user selected a button. is on the top button by default
 
   }
+
+
   componentDidMount(){
     this.setState({
       loading: true ,
@@ -36,6 +38,7 @@ class UserInformation extends React.Component {
 
     this.handleGetAccount() ;
   }
+
 
   handleGetAccount = () => {
     this.setState({
@@ -79,37 +82,43 @@ class UserInformation extends React.Component {
 
     return(
       <Container>
-        <Card>
+        <Card className="border-radius-25px  ">
           <Card.Body>
-            <Card.Title><h5>Account Information</h5></Card.Title>
+            <Card.Title>
+              <h5
+                className="ubuntu-bold-font"
+              >
+                Account Information
+              </h5>
+            </Card.Title>
             <hr />
             {
               loading ?
                 <LoaderSpinner />
               :
                 <Row>
-                    <Col sm={{ span: 4 }}>
-                      <b>Email:</b>
+                    <Col sm={{ span: 4 }} className="open-sans-bold-font">
+                      Email:
                     </Col>
-                    <Col sm={{ span: 8 }}>
+                    <Col sm={{ span: 8 }} className="open-sans-regular-font">
                       {account_info['email']}
                     </Col>
-                    <Col sm={{ span: 4 }}>
-                      <b>Username:</b>
+                    <Col sm={{ span: 4 }} className="open-sans-bold-font">
+                      Username:
                     </Col>
-                    <Col sm={{ span: 8 }}>
+                    <Col sm={{ span: 8 }} className="open-sans-regular-font">
                       {account_info['username']}
                     </Col>
-                    <Col sm={{ span: 4 }}>
-                      <b>Joined:</b>
+                    <Col sm={{ span: 4 }} className="open-sans-bold-font">
+                      Joined:
                     </Col>
-                    <Col sm={{ span: 8 }}>
+                    <Col sm={{ span: 8 }} className="open-sans-regular-font">
                       {!loading && new Date(account_info['date_joined']).toDateString()}
                     </Col>
-                    <Col sm={{ span: 4 }}>
-                      <b>Last Login:</b>
+                    <Col sm={{ span: 4 }} className="open-sans-bold-font">
+                      Last Login:
                     </Col>
-                    <Col sm={{ span: 8 }}>
+                    <Col sm={{ span: 8 }} className="open-sans-regular-font">
                       {!loading && new Date(account_info['last_login']).toDateString()}
                     </Col>
                 </Row>

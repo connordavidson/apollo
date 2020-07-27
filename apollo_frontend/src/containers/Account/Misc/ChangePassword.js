@@ -148,32 +148,38 @@ class ChangePassword extends React.Component {
 
 
       <Container>
-        <Card>
+        <Card className="border-radius-25px " >
           <Card.Body>
-            <Card.Title><h5>Change Your Password</h5></Card.Title>
+            <Card.Title>
+              <h5
+                className="ubuntu-bold-font"
+              >
+                Change Your Password
+              </h5>
+            </Card.Title>
             <hr />
             <Form.Group >
-              <Form.Label>Old Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter old password"
+                placeholder="Old Password"
                 onChange={this.handleOldPassword}
+                className="mb-2 s1-txt3 placeholder0 wrap-input100 "
               />
             </Form.Group>
             <Form.Group >
-              <Form.Label>New Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="New Password"
                 onChange={this.handlePassword}
+                className="mb-2 s1-txt3 placeholder0 wrap-input100 "
                />
             </Form.Group>
             <Form.Group >
-              <Form.Label>Confirm New Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="Confirm New Password"
                 onChange={this.handleConfirmPassword}
+                className="mb-2 s1-txt3 placeholder0 wrap-input100 "
                />
             </Form.Group>
             <Form.Group >
@@ -185,6 +191,7 @@ class ChangePassword extends React.Component {
                     disabled={
                       !(this.handleValidated())
                     }
+                    className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                   >
                     <ButtonLoaderSpinner />
                   </Button>
@@ -196,6 +203,7 @@ class ChangePassword extends React.Component {
                       !(this.handleValidated())
                     }
                     onClick={this.handleChangePasswordWithGA}
+                    className="mb-2 s1-txt4 flex-c-m size3-without-width how-btn "
                   >
                     Change Your Password
                   </Button>

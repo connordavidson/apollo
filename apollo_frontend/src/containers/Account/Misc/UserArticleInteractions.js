@@ -214,9 +214,15 @@ class UserArticleInteractions extends React.Component {
 
     return(
       <Container>
-        <Card>
+        <Card className="border-radius-25px  " >
           <Card.Body>
-            <Card.Title><h5>Article Interactions</h5></Card.Title>
+            <Card.Title>
+              <h5
+                className="ubuntu-bold-font"
+              >
+                Article Interactions
+              </h5>
+            </Card.Title>
             <hr />
             {
             loading ?
@@ -224,43 +230,43 @@ class UserArticleInteractions extends React.Component {
             :
               <React.Fragment>
                 <Row>
-                    <Col sm={{ span: 6 }}>
-                      <b>Articles Read:</b>
+                    <Col sm={{ span: 6 }} className="open-sans-bold-font">
+                      Articles Read:
                     </Col>
-                    <Col sm={{ span: 6 }}>
-                      <em>{articles_read}</em>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={{ span: 6 }}>
-                      <b>Articles Upvoted:</b>
-                    </Col>
-                    <Col sm={{ span: 6 }}>
-                      <em>{article_upvotes}</em>
+                    <Col sm={{ span: 6 }} className="open-sans-italic-font">
+                      {articles_read}
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={{ span: 6 }}>
-                      <b>Articles Downvoted:</b>
+                    <Col sm={{ span: 6 }} className="open-sans-bold-font">
+                      Articles Upvoted:
                     </Col>
-                    <Col sm={{ span: 6 }}>
-                      <em>{article_downvotes}</em>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={{ span: 6 }}>
-                      <b>Comments Upvoted:</b>
-                    </Col>
-                    <Col sm={{ span: 6 }}>
-                      <em>{comment_upvotes}</em>
+                    <Col sm={{ span: 6 }} className="open-sans-italic-font">
+                      {article_upvotes}
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={{ span: 6 }}>
-                      <b>Comments Downvoted:</b>
+                    <Col sm={{ span: 6 }} className="open-sans-bold-font">
+                      Articles Downvoted:
                     </Col>
-                    <Col sm={{ span: 6 }}>
-                      <em>{comment_downvotes}</em>
+                    <Col sm={{ span: 6 }} className="open-sans-italic-font">
+                      {article_downvotes}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={{ span: 6 }} className="open-sans-bold-font">
+                      Comments Upvoted:
+                    </Col>
+                    <Col sm={{ span: 6 }} className="open-sans-italic-font">
+                      {comment_upvotes}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={{ span: 6 }} className="open-sans-bold-font">
+                      Comments Downvoted:
+                    </Col>
+                    <Col sm={{ span: 6 }} className="open-sans-italic-font">
+                      {comment_downvotes}
                     </Col>
                 </Row>
               </React.Fragment>

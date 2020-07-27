@@ -18,6 +18,8 @@ from rest_framework.generics import (
     UpdateAPIView ,
 
 )
+#to pull in the email templates
+from django.template import loader
 
 from rest_framework.permissions import (
     AllowAny ,
@@ -373,13 +375,23 @@ class CreateEmailAddressView(CreateAPIView):
             # found this at https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#pulling-it-all-together
             serializer = EmailAddressSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save()
-                subject = 'Thank you for registering with Apollo!'
+                subject = 'Thank you for registering your email at Apollo!'
                 message = '''We appreciate it and will send you emails to keep you updated with the progress of our site!
                 Sincerely, The Team at Apollo'''
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [email_address,]
-                send_mail(subject, message, email_from, recipient_list)
+                # got from this answer -> https://stackoverflow.com/a/29467274/12921499
+                html_message = loader.render_to_string(
+                            'create_email_address_html.html',
+                            {
+                                'email_address': email_address,
+
+                            }
+                        )
+
+                send_mail(subject, message, email_from, recipient_list, html_message=html_message )
+                #save the email address after sending the email (shouldn't be an error bc  serializer.is_valid() == true )
+                serializer.save()
 
                 return Response(serializer.data, status=HTTP_201_CREATED)
         else :
@@ -420,7 +432,7 @@ class CreatePromotionalEmailView(CreateAPIView):
             #This is necessary because using email_recipient_list will show every other recipient in the "To: " field
             for email in email_recipient_list :
                 email_from = settings.EMAIL_HOST_USER
-                # #sends email with html email (passed in from frontend.) and passes the html message as the "default" message 
+                # #sends email with html email (passed in from frontend.) and passes the html message as the "default" message
                 send_mail(subject, body, email_from, [email,] , html_message=body)
 
             return Response(serializer.data, status=HTTP_201_CREATED)

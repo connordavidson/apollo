@@ -142,21 +142,24 @@ class SetNewPassword extends React.Component {
           <h5>Enter New Password </h5>
             <hr />
             <FormGroup controlId="password" bsSize="large">
-              Password
               <FormControl
+                placeholder="Password"
                 required
                 value={password}
                 onChange={this.handlePassword}
                 type="password"
+                className="mb-2 s1-txt3 placeholder0 wrap-input100 "
               />
             </FormGroup>
             <FormGroup controlId="confirm_password" bsSize="large">
               Confirm Password
               <FormControl
+                placeholder="Confirm Password"
                 required
                 value={confirm_password}
                 onChange={this.handleConfirmPassword}
                 type="password"
+                className="mb-2 s1-txt3 placeholder0 wrap-input100 "
               />
             </FormGroup>
 

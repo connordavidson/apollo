@@ -83,7 +83,6 @@ class VerifyEmail extends React.Component {
         password ,
         email_confirmed ,
 
-
     } = this.state
 
     return(
@@ -92,7 +91,11 @@ class VerifyEmail extends React.Component {
 
         <div className="account-form bg-app">
 
-          <h3>Account Verification</h3>
+          <h3
+            className="ubuntu-bold-font"
+          >
+            Account Verification
+          </h3>
           <hr />
 
           {
@@ -100,12 +103,16 @@ class VerifyEmail extends React.Component {
               <LoaderSpinner />
             :
               email_confirmed &&
-                <Alert variant="success">Your account has been confirmed! <NavLink to="/login" onClick={() => Event("Routing", "Opening Login Page", "From Verify Email Page") }>Login </NavLink></Alert>
+                <Alert variant="success">
+                  Your account has been confirmed! <NavLink to="/login" onClick={() => Event("Routing", "Opening Login Page", "From Verify Email Page") }>Login </NavLink>
+                </Alert>
           }
 
           {
             error &&
-              <Alert variant="danger">There was an error with confirming your account. The link you tried may be expired or incorrect. You can try to <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Verify Email Page") }>signup </NavLink> again.</Alert>
+              <Alert variant="danger">
+                There was an error with confirming your account. The link you tried may be expired or incorrect. You can try to <NavLink to="/signup" onClick={() => Event("Routing", "Opening Signup Page", "From Verify Email Page") }>signup </NavLink> again.
+              </Alert>
           }
         </div>
 

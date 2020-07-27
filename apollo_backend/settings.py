@@ -95,9 +95,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apollo_backend.wsgi.application'
 
+# #redirects to https on GET request -> https://stackoverflow.com/a/49112565/12921499
+# SECURE_SSL_REDIRECT = True
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     ##connect to local sqlite db
     # 'default': {
