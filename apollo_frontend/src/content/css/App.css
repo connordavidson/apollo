@@ -421,6 +421,9 @@ a.article-link:active
 }
 
 
+/*
+* CJD20200728 -> 150px is roughly the sum of (the distance from the top of the page + footer height). Having min-height set to 100vh makes the div the height of the page.. but it is not set at the top of the page so without the subtraction, it will be hanging off the bottom of the screen and the footer will not be visible
+*/
 .main-app-container {
   min-height: calc(100vh - 150px); /*comes from https://css-tricks.com/couple-takes-sticky-footer/#there-is-calc-reduced-height-wrappers*/
 }
