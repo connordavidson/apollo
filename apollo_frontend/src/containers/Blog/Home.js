@@ -6,7 +6,6 @@ import {
   Container ,
   Card ,
   ListGroup ,
-  Button,
   Col ,
   Badge ,
   Alert ,
@@ -19,7 +18,6 @@ import { Event, PageView } from "../GlobalMisc/Tracking";
 
 import RichText from '../GlobalMisc/RichText';
 import LoaderSpinner from '../GlobalMisc/LoaderSpinner'
-import RegisterEmail from './Misc/RegisterEmail';
 import PinnedArticle from './Misc/PinnedArticle';
 
 import {
@@ -93,7 +91,6 @@ class Home extends React.Component {
       error ,
       articles ,
       pinned_article ,
-      username ,
 
     } = this.state
 

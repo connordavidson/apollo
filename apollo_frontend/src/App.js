@@ -27,15 +27,13 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className="bg-app" >
+      <div className="bg-app " >
         <Router >
-
-            <NavigationBar/>
-              <Container >
-                <BaseRouter/>
-              </Container>
-            <Footer />
-
+          <NavigationBar/>
+            <Container className=" main-app-container " >
+              <BaseRouter/>
+            </Container>
+          <Footer />
         </Router>
       </div>
     )
