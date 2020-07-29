@@ -240,9 +240,11 @@ p > strong {
   border-radius: 25px;
 }
 
-.border-width-0px {
-  border-width: 0px;
+
+.border-radius-25px-top-corners {
+  border-radius: 25px 25px 0px 0px;
 }
+
 
 
 

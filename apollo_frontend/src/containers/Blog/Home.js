@@ -11,6 +11,7 @@ import {
   Alert ,
   Row ,
   Navbar ,
+  CardDeck ,
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
@@ -19,6 +20,9 @@ import { Event, PageView } from "../GlobalMisc/Tracking";
 import RichText from '../GlobalMisc/RichText';
 import LoaderSpinner from '../GlobalMisc/LoaderSpinner'
 import PinnedArticle from './Misc/PinnedArticle';
+import HomeCardDeck from './Misc/HomeCardDeck';
+
+
 
 import {
   all_articles_url ,
@@ -133,39 +137,50 @@ class Home extends React.Component {
                 pinned_article !== null &&
                   <PinnedArticle pinned_article={pinned_article} />
             }
+
+            {
+              articles.length > 0 &&
+                <ListGroup.Item className="bg-app">
+                  <HomeCardDeck articles={articles.slice(0, 4)} />
+                </ListGroup.Item>
+            }
+            
             {
               loading === true ?
                 <LoaderSpinner />
               :
                 articles.length > 0 ?
-                  articles.map(article =>  (
-                      <ListGroup.Item className="bg-app">
-                        <Link to={'blog/article/'+article.id} className="article-link" onClick={()=> Event("Routing", "Opening Pinned Article;; id = " + article.id, "From Home Page")}>
-                          <Card
-                            className="width-100-percent border-radius-25px "
-                            id={article.id}
-                          >
-                            <Card.Body>
-                              <Card.Title className="roboto-bold-font">
-                                {article.title}
-                              </Card.Title>
-                              <Card.Subtitle className="mb-2 text-muted roboto-regular-font">
-                                By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge>
-                              </Card.Subtitle>
-                              <Card.Text className="roboto-regular-font" >
-                                <RichText text={article.body.substring(0, 200) + '...'} />
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Link>
-                      </ListGroup.Item>
+                    articles.slice(3, -1).map(article =>  (
+
+                        <ListGroup.Item className="bg-app">
+                          <Link to={'blog/article/'+article.id} className="article-link" onClick={()=> Event("Routing", "Opening Pinned Article;; id = " + article.id, "From Home Page")}>
+                            <Card
+                              className="width-100-percent border-radius-25px "
+                              id={article.id}
+                            >
+                              <Card.Body>
+                                <Card.Title className="roboto-bold-font">
+                                  {article.title}
+                                </Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted roboto-regular-font">
+                                  By {article.author}, <Badge>{new Date(article.created_date).toDateString() } </Badge>
+                                </Card.Subtitle>
+                                <Card.Text className="roboto-regular-font" >
+                                  <RichText text={article.body.substring(0, 200) + '...'} />
+                                </Card.Text>
+                              </Card.Body>
+                            </Card>
+                          </Link>
+                        </ListGroup.Item>
+
+                      )
                     )
-                  )
                 :
                   <Alert variant="dark">
                     There was an error retrieving our articles
                   </Alert>
           }
+
         </ListGroup>
       </ React.Fragment>
     )
