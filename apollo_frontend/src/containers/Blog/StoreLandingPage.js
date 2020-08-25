@@ -18,9 +18,9 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { Event, PageView } from "../GlobalMisc/Tracking";
+import { CheckCircle  } from 'react-bootstrap-icons';
 
-import { ConeStriped , CheckCircle  } from 'react-bootstrap-icons';
+import { Event, PageView } from "../GlobalMisc/Tracking";
 
 import TwitterLogo      from    '../GlobalMisc/TwitterLogo';
 import RedditLogo       from    '../GlobalMisc/RedditLogo';
@@ -29,6 +29,8 @@ import EmailLogo        from    '../GlobalMisc/EmailLogo';
 import FacebookLogo     from    '../GlobalMisc/FacebookLogo';
 
 import ButtonLoaderSpinner    from    '../GlobalMisc/ButtonLoaderSpinner'
+
+import RocketToMoon     from    '../GlobalMisc/RocketToMoon/RocketToMoon';
 
 
 import {
@@ -130,138 +132,142 @@ class StoreLandingPage extends React.Component {
     const linkedin_link = "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.apollostore.co/store"
 
     return(
-      <React.Fragment>
+
         <Container>
+          <Row >
+            <Col xs={{ span: 6}} >
 
-          <Col xs={{ span: 8, offset: 2 }}>
-            <br />
-            <br />
-            <br />
-            <br />
-            <Row>
-              <h3 className="l1-txt1 txt-center p-b-10">
-                Under
-              </h3>
-            </Row>
-            <Row>
-              <h3 className="l1-txt1 txt-center p-b-10">
-                Construction
-              </h3>
-            </Row>
-            <Row>
-              {/*this nav with the class is used to make the text grey*/}
-              <nav className="navbar-light">
-                <Navbar.Text><h6 className=" ubuntu-regular-font font-size-24px">This part of our website is currently under development, sign up below for updates!</h6></Navbar.Text>
-              </nav>
-            </Row>
+              <RocketToMoon />
 
-            <hr />
+            </Col >
 
-            <br />
-            <br />
 
-            <Form>
-              <Form.Row className="align-items-center">
-                <Col xs={9}>
+            <Col xs={{ span: 6  }}>
+              <br />
+              <br />
+              <br />
+              <br />
+              <Row>
+                <h3 className="l1-txt1 txt-center p-b-10">
+                  Under
+                </h3>
+              </Row>
+              <Row>
+                <h3 className="l1-txt1 txt-center p-b-10">
+                  Construction
+                </h3>
+              </Row>
+              <Row>
+                {/*this nav with the class is used to make the text grey*/}
+                <nav className="navbar-light">
+                  <Navbar.Text><h6 className=" ubuntu-regular-font font-size-24px">This part of our website is currently under development, sign up below for updates!</h6></Navbar.Text>
+                </nav>
+              </Row>
 
-                  <Form.Label htmlFor="inlineFormInput" srOnly>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    onChange={this.handleEmail}
-                    value={email}
-                    className="mb-2 s1-txt3 placeholder0 wrap-input100 "
-                    placeholder="Email"
-                  />
-                </Col>
+              <hr />
 
-                <Col xs={3}>
-                  {
-                    email_submitted ?
-                      <CheckCircle className="text-success font-size-4em" />
-                    :
-                      loading ?
-                        <Button
-                          disabled={true}
-                          type="submit"
-                          className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
-                        >
-                          <ButtonLoaderSpinner />
-                        </Button>
+              <br />
+              <br />
+
+              <Form>
+                <Form.Row className="align-items-center">
+                  <Col xs={9}>
+
+                    <Form.Label htmlFor="inlineFormInput" srOnly>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      onChange={this.handleEmail}
+                      value={email}
+                      className="mb-2 s1-txt3 placeholder0 wrap-input100 "
+                      placeholder="Email"
+                    />
+                  </Col>
+
+                  <Col xs={3}>
+                    {
+                      email_submitted ?
+                        <CheckCircle className="text-success font-size-4em" />
                       :
-                        <Button
-                          disabled={this.handleEmailValidated()}
-                          onClick={this.handlePostEmailWithGA }
-                          type="submit"
-                          className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
-                        >
-                          Submit
-                        </Button>
-                  }
+                        loading ?
+                          <Button
+                            disabled={true}
+                            type="submit"
+                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
+                          >
+                            <ButtonLoaderSpinner />
+                          </Button>
+                        :
+                          <Button
+                            disabled={this.handleEmailValidated()}
+                            onClick={this.handlePostEmailWithGA }
+                            type="submit"
+                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
+                          >
+                            Submit
+                          </Button>
+                    }
 
+                  </Col>
+
+                </Form.Row>
+              </Form>
+
+              <br />
+              <br />
+              <br />
+              <br />
+
+              <h6 className="txt-center">Share us on social media with the links below.</h6>
+              <br />
+              <Row    >
+                <Col xs={{ span: 4, offset: 4 }} >
+                  <div class="float-right width-300px" >
+                    <a
+                      class=" float-right margin-right-5-percent "
+                      target="_blank"
+                      href={twitter_link}
+                      onClick={ () => Event("Store Page Sharing", "Sharing Store Page via Twitter Link", "From Store Page") }
+                    >
+                      <TwitterLogo />
+                    </a>
+
+                    <a
+                      class=" float-right margin-right-5-percent "
+                      target="_blank"
+                      href={reddit_link}
+                      onClick={ () => Event("Store Page Sharing", "Sharing Store Page via Reddit Link", "From Store Page") }
+                    >
+                      <RedditLogo />
+                    </a>
+
+                    <a
+                      class=" float-right margin-right-5-percent "
+                      target="_blank"
+                      href={linkedin_link}
+                      onClick={ () => Event("Store Page Sharing", "Sharing Store Page via Linkedin Link", "From Store Page") }
+                    >
+                      <LinkedInLogo />
+                    </a>
+
+                    <a
+                      class=" float-right margin-right-5-percent "
+                      target="_blank"
+                      href={email_link}
+                      onClick={ () => Event("Store Page Sharing", "Sharing Store Page via Email Link", "From Store Page") }
+                    >
+                      <EmailLogo />
+                    </a>
+                  </div>
                 </Col>
-
-              </Form.Row>
-            </Form>
-
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <h6 className="txt-center">Share us on social media with the links below.</h6>
-            <br />
-            <Row    >
-              <Col xs={{ span: 4, offset: 4 }} >
-                <div class="float-right width-300px" >
-                  <a
-                    class=" float-right margin-right-5-percent "
-                    target="_blank"
-                    href={twitter_link}
-                    onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
-                  >
-                    <TwitterLogo />
-                  </a>
-
-                  <a
-                    class=" float-right margin-right-5-percent "
-                    target="_blank"
-                    href={reddit_link}
-                    onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
-                  >
-                    <RedditLogo />
-                  </a>
-
-                  <a
-                    class=" float-right margin-right-5-percent "
-                    target="_blank"
-                    href={linkedin_link}
-                    onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
-                  >
-                    <LinkedInLogo />
-                  </a>
-
-                  <a
-                    class=" float-right margin-right-5-percent "
-                    target="_blank"
-                    href={email_link}
-                    onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
-                  >
-                    <EmailLogo />
-                  </a>
-                </div>
-              </Col>
-            </Row>
-            <br />
-            <br />
-            <br />
-            <br />
-          </Col>
-
+              </Row>
+              <br />
+              <br />
+              <br />
+              <br />
+            </Col>
+          </Row >
         </Container>
 
-
-
-      </React.Fragment>
     )
   }
 

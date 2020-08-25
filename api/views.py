@@ -147,10 +147,14 @@ class ArticlePageView(RetrieveAPIView):
     permission_classes = (AllowAny, )
     serializer_class = ArticleSerializer
     def get_queryset(self):
+        #grab the id from the parameters
         id = self.kwargs['pk']
-        qs = Article.objects.all()
-        if id is None :
+        #gets all the articles that are not marked as "deleted"
+        qs = Article.objects.all().filter(deleted=False)
+        #checks if the id param or the article for the given id is null. if so, return 404.
+        if id is None or qs.filter(id=id) is None :
             return Http404("Article not found")
+        #return the article with the given id.
         return qs.filter(id=id)
 
 

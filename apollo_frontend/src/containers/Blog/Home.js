@@ -110,6 +110,7 @@ class Home extends React.Component {
 
       <React.Fragment>
         <Container>
+
           <Row>
             <h1 className="ubuntu-bold-font">
               The Apollo Blog
@@ -131,7 +132,8 @@ class Home extends React.Component {
 
         <ListGroup variant="flush" className="bg-app">
 
-            {/* cannot put this inside the "loading === true" ternary below for some reason*/
+            {
+              /* cannot put this inside the "loading === true" ternary below for some reason*/
               loading === false &&
                 /*This prevents the pinned_article from displaying if loading is false... it runs parallel to the logic of LoaderSpinner in the following ternary -> If loading, display the LoaderSpinner and don't display pinned article   */
                 pinned_article !== null &&
@@ -144,7 +146,7 @@ class Home extends React.Component {
                   <HomeCardDeck articles={articles.slice(0, 4)} />
                 </ListGroup.Item>
             }
-            
+
             {
               loading === true ?
                 <LoaderSpinner />
@@ -175,6 +177,7 @@ class Home extends React.Component {
 
                       )
                     )
+
                 :
                   <Alert variant="dark">
                     There was an error retrieving our articles
@@ -182,6 +185,7 @@ class Home extends React.Component {
           }
 
         </ListGroup>
+
       </ React.Fragment>
     )
   }

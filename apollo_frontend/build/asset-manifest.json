@@ -1,27 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.945457cd.chunk.css",
-    "main.js": "/static/js/main.eb03d819.chunk.js",
-    "main.js.map": "/static/js/main.eb03d819.chunk.js.map",
+    "main.css": "/static/css/main.b13f3d08.chunk.css",
+    "main.js": "/static/js/main.4892bfd0.chunk.js",
+    "main.js.map": "/static/js/main.4892bfd0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.17a5e51f.js",
     "runtime-main.js.map": "/static/js/runtime-main.17a5e51f.js.map",
     "static/css/2.b8a0abed.chunk.css": "/static/css/2.b8a0abed.chunk.css",
-    "static/js/2.0b74c6df.chunk.js": "/static/js/2.0b74c6df.chunk.js",
-    "static/js/2.0b74c6df.chunk.js.map": "/static/js/2.0b74c6df.chunk.js.map",
+    "static/js/2.cf6bfe09.chunk.js": "/static/js/2.cf6bfe09.chunk.js",
+    "static/js/2.cf6bfe09.chunk.js.map": "/static/js/2.cf6bfe09.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7142328e75e9ef0744dcff03d54d921a.js": "/precache-manifest.7142328e75e9ef0744dcff03d54d921a.js",
+    "precache-manifest.fae5134b5771bc191bfd12cb67c71311.js": "/precache-manifest.fae5134b5771bc191bfd12cb67c71311.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.b8a0abed.chunk.css.map": "/static/css/2.b8a0abed.chunk.css.map",
-    "static/css/main.945457cd.chunk.css.map": "/static/css/main.945457cd.chunk.css.map",
-    "static/js/2.0b74c6df.chunk.js.LICENSE.txt": "/static/js/2.0b74c6df.chunk.js.LICENSE.txt",
+    "static/css/main.b13f3d08.chunk.css.map": "/static/css/main.b13f3d08.chunk.css.map",
+    "static/js/2.cf6bfe09.chunk.js.LICENSE.txt": "/static/js/2.cf6bfe09.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/Ubuntu-Regular.2505bfbd.ttf",
-    "static/media/apollo_calibri_light_grey_bkg.png": "/static/media/apollo_calibri_light_grey_bkg.485e3a5a.png"
+    "static/media/apollo_calibri_light_grey_bkg_tall.png": "/static/media/apollo_calibri_light_grey_bkg_tall.e14bb4be.png",
+    "static/media/planet-earth-global-svgrepo-com (1).svg": "/static/media/planet-earth-global-svgrepo-com (1).fb57098d.svg",
+    "static/media/rocket-svg-png-icon-free-download-432545-onlinewebfontscom-free-png-rocket-980_980.png": "/static/media/rocket-svg-png-icon-free-download-432545-onlinewebfontscom-free-png-rocket-980_980.e509dfa0.png",
+    "static/media/rocket_to_moon.png": "/static/media/rocket_to_moon.7a32adfe.png"
   },
   "entrypoints": [
     "static/js/runtime-main.17a5e51f.js",
     "static/css/2.b8a0abed.chunk.css",
-    "static/js/2.0b74c6df.chunk.js",
-    "static/css/main.945457cd.chunk.css",
-    "static/js/main.eb03d819.chunk.js"
+    "static/js/2.cf6bfe09.chunk.js",
+    "static/css/main.b13f3d08.chunk.css",
+    "static/js/main.4892bfd0.chunk.js"
   ]
 }

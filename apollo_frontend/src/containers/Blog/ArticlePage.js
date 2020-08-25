@@ -26,6 +26,7 @@ import FacebookLogo     from    '../GlobalMisc/FacebookLogo';
 
 import RichText         from    '../GlobalMisc/RichText';
 import LoaderSpinner    from    '../GlobalMisc/LoaderSpinner';
+import Error404    from    '../GlobalMisc/Error404';
 
 import RegisterEmail    from    './Misc/RegisterEmail';
 import CommentSection   from    './Misc/CommentSection' ;
@@ -55,6 +56,7 @@ class ArticlePage extends React.Component  {
   }
 
   componentDidMount(){
+    
     //resize event listener so the app knows when to remove the left sidebar. found at => https://gist.github.com/nma/33f8057e4899bdb55440a693a02c431b
     window.addEventListener("resize", this.updateWindowDimensions.bind(this));
     this.updateWindowDimensions();
@@ -62,6 +64,7 @@ class ArticlePage extends React.Component  {
     this.setState({
       loading: true ,
     })
+
     PageView();
     this.handleGetArticle() ;
     this.handleCreateUserReadArticle() ;
@@ -88,8 +91,10 @@ class ArticlePage extends React.Component  {
         })
       })
       .catch(error => {
+        console.log(error.response.status)
+
         this.setState({
-          error: error ,
+          error: error.response.status ,
           loading : false
         })
       })
@@ -150,6 +155,7 @@ class ArticlePage extends React.Component  {
     const {
       article_data ,
       loading ,
+      error ,
       article_upvoted ,
       article_downvoted ,
       window_width ,
@@ -160,6 +166,8 @@ class ArticlePage extends React.Component  {
       authenticated ,
 
     } = this.props
+
+    console.log(error)
 
     // console.log("window_width : " + window_width)
     // console.log(commenter_name)
@@ -197,140 +205,78 @@ class ArticlePage extends React.Component  {
     return (
 
       <React.Fragment>
-        <Row>
+        {
+          error == 404 || error ?
+            (
+              <Error404 />
+            )
+            :
+            (
+              <Row>
+                {
+                  window_width  &&
+                    <Col lg={2} >
 
-          {
-            window_width  &&
-              <Col lg={2} >
-
-                <ListGroup
-                  variant="flush"
-                  className="sticky-top BeforeScroll "
-                >
-                  <div id="apollo_widget_left_sidebar">
-                    <ListGroup.Item className="bg-app border-width-0px ">
-                      <h4
-                        className="roboto-regular-font"
-                        onClick={this.handleHomeButtonClickWithGA }
-                        style={{cursor: 'pointer'}}
+                      <ListGroup
+                        variant="flush"
+                        className="sticky-top BeforeScroll "
                       >
-                          Apollo
-                      </h4>
+                        <div id="apollo_widget_left_sidebar">
+                          <ListGroup.Item className="bg-app border-width-0px ">
+                            <h4
+                              className="roboto-regular-font"
+                              onClick={this.handleHomeButtonClickWithGA }
+                              style={{cursor: 'pointer'}}
+                            >
+                                Apollo
+                            </h4>
 
-                    </ListGroup.Item>
+                          </ListGroup.Item>
 
-                    <ListGroup.Item className="bg-app border-width-0px ">
+                          <ListGroup.Item className="bg-app border-width-0px ">
 
-                      {
-                        !loading &&
-                          <React.Fragment>
-                            <ArticleUpvote article_id={article_data['id']} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                            <ArticleDownvote article_id={article_data['id']} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                          </React.Fragment>
-                      }
+                            {
+                              !loading &&
+                                <React.Fragment>
+                                  <ArticleUpvote article_id={this.props.match.params.article_id} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                                  <ArticleDownvote article_id={this.props.match.params.article_id} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                                </React.Fragment>
+                            }
 
-                      <br />
-
-                      <a
-                        class="margin-top-5-percent"
-                        target="_blank"
-                        href={twitter_link}
-                        onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
-                      >
-                        <TwitterLogo />
-                      </a>
-                      <br />
-                      <br />
-                      <a
-                        class="margin-top-5-percent"
-                        target="_blank"
-                        href={reddit_link}
-                        onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
-                      >
-                        <RedditLogo />
-                      </a>
-                      <br />
-                      <br />
-                      <a
-                        class="margin-top-5-percent"
-                        target="_blank"
-                        href={linkedin_link}
-                        onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
-                      >
-                        <LinkedInLogo />
-                      </a>
-                      <br />
-                      <br />
-                      <a
-                        class="margin-top-5-percent"
-                        target="_blank"
-                        href={email_link}
-                        onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
-                      >
-                        <EmailLogo />
-                      </a>
-
-                      {
-                        !authenticated &&
-                          <React.Fragment>
                             <br />
-                            <br />
-                            <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
-                              <Button
-                                variant="outline-secondary"
-                                size="sm"
-                                className="roboto-bold-font"
-                              >
-                                Signup
-                              </Button>
-                            </Link>
-
-                          </React.Fragment>
-                      }
-                    </ListGroup.Item>
-                  </div>
-                </ListGroup>
-
-              </Col>
-          }
-          <Col lg={8} md={12}  >
-
-            {
-              loading ?
-                <LoaderSpinner />
-              :
-                <React.Fragment>
-                  {
-                    article_data  ?
-                      <React.Fragment>
-                        <h1 className="roboto-bold-font">
-                          {  article_data['title'] }
-                        </h1>
-
-                        <h6 className="padding-left-10px roboto-regular-font">
-                          By { article_data['author']}, <Badge>{ article_date }</Badge>
-                          <div class="float-right width-300px" >
 
                             <a
-                              class=" float-right margin-right-5-percent "
+                              class="margin-top-5-percent"
+                              target="_blank"
+                              href={twitter_link}
+                              onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
+                            >
+                              <TwitterLogo />
+                            </a>
+                            <br />
+                            <br />
+                            <a
+                              class="margin-top-5-percent"
                               target="_blank"
                               href={reddit_link}
                               onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
                             >
                               <RedditLogo />
                             </a>
-
+                            <br />
+                            <br />
                             <a
-                              class=" float-right margin-right-5-percent "
+                              class="margin-top-5-percent"
                               target="_blank"
                               href={linkedin_link}
                               onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
                             >
                               <LinkedInLogo />
                             </a>
-
+                            <br />
+                            <br />
                             <a
-                              class=" float-right margin-right-5-percent "
+                              class="margin-top-5-percent"
                               target="_blank"
                               href={email_link}
                               onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
@@ -338,42 +284,111 @@ class ArticlePage extends React.Component  {
                               <EmailLogo />
                             </a>
 
-                            <a
-                              class=" float-right margin-right-5-percent "
-                              target="_blank"
-                              href={twitter_link}
-                              onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") }
-                            >
-                              <TwitterLogo />
-                            </a>
+                            {
+                              !authenticated &&
+                                <React.Fragment>
+                                  <br />
+                                  <br />
+                                  <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                                    <Button
+                                      variant="outline-secondary"
+                                      size="sm"
+                                      className="roboto-bold-font"
+                                    >
+                                      Signup
+                                    </Button>
+                                  </Link>
 
-
-
-
-                          </div>
-                        </h6>
-
-                        <hr />
-
-                        {/*Displays the body of the article in Rich Text*/}
-                        <div id="article_body">
-                          <RichText text={article_data['body']} classes=" font-size-19px "/>
+                                </React.Fragment>
+                            }
+                          </ListGroup.Item>
                         </div>
+                      </ListGroup>
 
-                      </React.Fragment>
+                    </Col>
+                }
+                <Col lg={8} md={12}  >
+
+                  {
+                    loading ?
+                      <LoaderSpinner />
                     :
-                      <Alert variant="dark">There was an issue loading this article</Alert>
+                      <React.Fragment>
+                        {
+                          article_data  ?
+                            <React.Fragment>
+                              <h1 className="roboto-bold-font">
+                                {  article_data['title'] }
+                              </h1>
+
+                              <h6 className="padding-left-10px roboto-regular-font">
+                                By { article_data['author']}, <Badge>{ article_date }</Badge>
+                                <div class="float-right width-300px" >
+
+                                  <a
+                                    class=" float-right margin-right-5-percent "
+                                    target="_blank"
+                                    href={reddit_link}
+                                    onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
+                                  >
+                                    <RedditLogo />
+                                  </a>
+
+                                  <a
+                                    class=" float-right margin-right-5-percent "
+                                    target="_blank"
+                                    href={linkedin_link}
+                                    onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
+                                  >
+                                    <LinkedInLogo />
+                                  </a>
+
+                                  <a
+                                    class=" float-right margin-right-5-percent "
+                                    target="_blank"
+                                    href={email_link}
+                                    onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
+                                  >
+                                    <EmailLogo />
+                                  </a>
+
+                                  <a
+                                    class=" float-right margin-right-5-percent "
+                                    target="_blank"
+                                    href={twitter_link}
+                                    onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Title", "From Article Page") }
+                                  >
+                                    <TwitterLogo />
+                                  </a>
+
+
+
+
+                                </div>
+                              </h6>
+
+                              <hr />
+
+                              {/*Displays the body of the article in Rich Text*/}
+                              <div id="article_body">
+                                <RichText text={article_data['body']} classes=" font-size-19px "/>
+                              </div>
+
+                            </React.Fragment>
+                          :
+                            <Alert variant="dark">There was an issue loading this article</Alert>
+                        }
+
+                        <br />
+
+                      <CommentSection  article_id={this.props.match.params.article_id}/>
+
+                    </React.Fragment>
                   }
-
-                  <br />
-
-                <CommentSection  article_id={this.props.match.params.article_id}/>
-
-              </React.Fragment>
-            }
-          </Col>
-        </Row>
-
+                </Col>
+              </Row>
+            )
+        }
       </React.Fragment>
     );
   }

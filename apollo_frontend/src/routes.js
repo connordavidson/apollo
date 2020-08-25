@@ -14,10 +14,13 @@ import Signup               from './containers/Account/Signup';
 import Profile              from './containers/Account/Profile';
 import ForgotPassword       from './containers/Account/ForgotPassword';
 import SetNewPassword       from './containers/Account/SetNewPassword';
-import Careers              from './containers/Careers';
 import VerifyEmail          from './containers/Account/VerifyEmail';
 
 import UserEmailPreferences from './containers/Account/Misc/UserEmailPreferences';
+
+import Contribute           from './containers/Contribute';
+
+import Error404             from './containers/GlobalMisc/Error404';
 
 
 const BaseRouter = () => (
@@ -37,10 +40,14 @@ const BaseRouter = () => (
     <Route exact path="/send-email" component={SendEmail} />
     <Route exact path="/reset" component={ForgotPassword} />
     <Route exact path="/reset/:uid/:token" component={SetNewPassword}/>
-    <Route exact path="/careers" component={Careers} />
+    <Route exact path="/contribute" component={Contribute} />
     <Route exact path="/verify-email/:key" component={VerifyEmail}/>
 
     <Route exact path="/email-prefs" component={UserEmailPreferences}/>
+
+    {/* has to be last.. handles incorrect URLs
+    <Route exact path="*" component={Error404} />
+    */}
 
   </Hoc>
 );

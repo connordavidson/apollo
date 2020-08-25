@@ -18,8 +18,8 @@ import RichText from '../../GlobalMisc/RichText';
 
 import "../../../content/css/App.css";
 
-import apollo_calibri_light_grey_bkg from "../../../content/images/apollo_calibri_light_grey_bkg.png" ;
-
+import apollo_calibri_light_grey_bkg from  "../../../content/images/apollo_calibri_light_grey_bkg_tall.png" ;
+//"../images/apollo_calibri_light_grey_bkg.png" ;
 
 class HomeCard extends React.Component {
 
@@ -31,11 +31,13 @@ class HomeCard extends React.Component {
           href={'blog/article/'+this.props.article.id}
           className="article-link border-radius-25px "
         >
+
           <Card.Img
             variant="top"
             src={apollo_calibri_light_grey_bkg}
             className="border-radius-25px-top-corners "
           />
+
           <Card.Body>
             <Card.Title className="roboto-bold-font">
               {this.props.article.title}

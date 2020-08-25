@@ -64,7 +64,13 @@
   line-height: 1.5;
 }
 
-
+.l1-txt1-fs-40px {
+  font-family: Ubuntu-Bold;
+  font-size: 30px;
+  /*color: #fff;*/
+  line-height: 1.2;
+  text-transform: uppercase;
+}
 
 /* ------------------------------------ */
 .txt-center {text-align: center;}
@@ -405,6 +411,11 @@ a.article-link:active
 
 
 
+.centered-ul{
+  display : table ;
+  margin: 0 auto ;
+}
+
 
 
 
@@ -428,7 +439,46 @@ a.article-link:active
 */
 .main-app-container {
   min-height: calc(100vh - 150px); /*comes from https://css-tricks.com/couple-takes-sticky-footer/#there-is-calc-reduced-height-wrappers*/
+
 }
+
+/*
+* custom-container is created to widen the container in app.js... in order to allow adding "decorations" in the margins 
+*/
+.custom-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+@media (min-width: 576px) {
+    .custom-container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .custom-container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-container {
+        max-width: 1190px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .custom-container {
+        max-width: 1440px;
+    }
+}
+
+
 
 .footer {
    height: 50px;
