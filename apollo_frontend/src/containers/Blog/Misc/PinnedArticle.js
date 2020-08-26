@@ -27,7 +27,7 @@ class PinnedArticle extends React.Component {
       <ListGroup.Item className="bg-app" >
         <Link
           to={'blog/article/'+this.props.pinned_article.id}
-          className="article-link"
+          className="plain-link"
           onClick={() => Event("Routing", "Opening Pinned Article; id = " + this.props.pinned_article.id, "From Home Page")}
         >
           <Card

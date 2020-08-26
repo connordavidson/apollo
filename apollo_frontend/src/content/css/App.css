@@ -254,22 +254,22 @@ p > strong {
 
 
 
-a.article-link:link
+a.plain-link:link
 {
    color: black;
    text-decoration: none;
 }
-a.article-link:visited
+a.plain-link:visited
 {
    color: black;
    text-decoration: none;
 }
-a.article-link:hover
+a.plain-link:hover
 {
    color: black;
    text-decoration: none;
 }
-a.article-link:active
+a.plain-link:active
 {
    color: black;
    text-decoration: none;
@@ -443,7 +443,7 @@ a.article-link:active
 }
 
 /*
-* custom-container is created to widen the container in app.js... in order to allow adding "decorations" in the margins 
+* custom-container is created to widen the container in app.js... in order to allow adding "decorations" in the margins
 */
 .custom-container {
     width: 100%;

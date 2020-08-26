@@ -29,7 +29,7 @@ class HomeCard extends React.Component {
         <Card
           as="a"
           href={'blog/article/'+this.props.article.id}
-          className="article-link border-radius-25px "
+          className="plain-link border-radius-25px "
         >
 
           <Card.Img

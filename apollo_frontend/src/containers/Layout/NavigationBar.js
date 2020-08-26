@@ -18,13 +18,13 @@ import {
 class NavigationBar extends React.Component {
 
   handleHomeButtonClickWithGA = () => {
-    this.props.history.push('/') ;
+    // this.props.history.push('/') ;
     Event("Routing", "Opening Home Page", "From Navbar")
   }
 
   handleLogoutClickWithGA = () => {
-    this.props.history.push('/') ;
     this.props.logout()
+    this.props.history.push('/') ;
     Event("Logout", "Logging out", "From Navbar"  )
   }
 
@@ -40,6 +40,7 @@ class NavigationBar extends React.Component {
             <Navbar.Brand
               onClick={this.handleHomeButtonClickWithGA   }
               style={{cursor: 'pointer'}}
+              href="/"
             >
               <h4 className="ubuntu-regular-font">
                 Apollo

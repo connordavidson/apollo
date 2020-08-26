@@ -135,18 +135,21 @@ class StoreLandingPage extends React.Component {
 
         <Container>
           <Row >
+            {/*
             <Col xs={{ span: 6}} >
 
-              <RocketToMoon />
+
 
             </Col >
+            */}
 
+            <Col xs={{ span: 8, offset: 2 }}>
 
-            <Col xs={{ span: 6  }}>
+              {/*<br />*/}
+              <RocketToMoon />
+              {/*<br />
               <br />
-              <br />
-              <br />
-              <br />
+              <br />*/}
               <Row>
                 <h3 className="l1-txt1 txt-center p-b-10">
                   Under
@@ -169,9 +172,9 @@ class StoreLandingPage extends React.Component {
               <br />
               <br />
 
-              <Form>
+              {/*<Form>*/}
                 <Form.Row className="align-items-center">
-                  <Col xs={9}>
+                  <Col xs={7} s={9}>
 
                     <Form.Label htmlFor="inlineFormInput" srOnly>Email</Form.Label>
                     <Form.Control
@@ -183,7 +186,7 @@ class StoreLandingPage extends React.Component {
                     />
                   </Col>
 
-                  <Col xs={3}>
+                  <Col xs={5} s={3}>
                     {
                       email_submitted ?
                         <CheckCircle className="text-success font-size-4em" />
@@ -208,9 +211,8 @@ class StoreLandingPage extends React.Component {
                     }
 
                   </Col>
-
                 </Form.Row>
-              </Form>
+              {/*</Form>*/}
 
               <br />
               <br />
@@ -264,6 +266,7 @@ class StoreLandingPage extends React.Component {
               <br />
               <br />
               <br />
+
             </Col>
           </Row >
         </Container>

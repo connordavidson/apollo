@@ -56,7 +56,7 @@ class ArticlePage extends React.Component  {
   }
 
   componentDidMount(){
-    
+
     //resize event listener so the app knows when to remove the left sidebar. found at => https://gist.github.com/nma/33f8057e4899bdb55440a693a02c431b
     window.addEventListener("resize", this.updateWindowDimensions.bind(this));
     this.updateWindowDimensions();
@@ -289,7 +289,7 @@ class ArticlePage extends React.Component  {
                                 <React.Fragment>
                                   <br />
                                   <br />
-                                  <Link to="/signup" className="article-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                                  <Link to="/signup" className="plain-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
                                     <Button
                                       variant="outline-secondary"
                                       size="sm"
