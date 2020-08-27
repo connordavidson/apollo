@@ -181,7 +181,7 @@ class StoreLandingPage extends React.Component {
                       type="email"
                       onChange={this.handleEmail}
                       value={email}
-                      className="mb-2 s1-txt3 placeholder0 wrap-input100 "
+                      className="mb-2 s1-txt3 placeholder0 wrap-input100 width-100-percent "
                       placeholder="Email"
                     />
                   </Col>
@@ -195,7 +195,7 @@ class StoreLandingPage extends React.Component {
                           <Button
                             disabled={true}
                             type="submit"
-                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
+                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
                           >
                             <ButtonLoaderSpinner />
                           </Button>
@@ -204,7 +204,7 @@ class StoreLandingPage extends React.Component {
                             disabled={this.handleEmailValidated()}
                             onClick={this.handlePostEmailWithGA }
                             type="submit"
-                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn "
+                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
                           >
                             Submit
                           </Button>

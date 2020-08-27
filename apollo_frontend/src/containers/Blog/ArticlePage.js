@@ -52,14 +52,10 @@ class ArticlePage extends React.Component  {
     article_data: [] , //stores the article information
     article_upvoted : false , //determines if the article is upvoted or not.
     article_downvoted : false , //determines if the article is downvoted or not.
-    window_width : null , // stores the width of the window. used to determine if the left sidebar should be hidden
+    // window_width : null , // stores the width of the window. used to determine if the left sidebar should be hidden
   }
 
   componentDidMount(){
-
-    //resize event listener so the app knows when to remove the left sidebar. found at => https://gist.github.com/nma/33f8057e4899bdb55440a693a02c431b
-    window.addEventListener("resize", this.updateWindowDimensions.bind(this));
-    this.updateWindowDimensions();
 
     this.setState({
       loading: true ,
@@ -71,12 +67,6 @@ class ArticlePage extends React.Component  {
 
 
   }
-
-
-  updateWindowDimensions() {
-      this.setState({ window_width: window.innerWidth >= 992, height: window.innerHeight });
-  }
-
 
 
   handleGetArticle = () => {
@@ -158,7 +148,6 @@ class ArticlePage extends React.Component  {
       error ,
       article_upvoted ,
       article_downvoted ,
-      window_width ,
 
     } = this.state
 
@@ -169,7 +158,6 @@ class ArticlePage extends React.Component  {
 
     console.log(error)
 
-    // console.log("window_width : " + window_width)
     // console.log(commenter_name)
 
     // console.log(  article_data['comments'] )
@@ -213,100 +201,100 @@ class ArticlePage extends React.Component  {
             :
             (
               <Row>
-                {
-                  window_width  &&
-                    <Col lg={2} >
 
-                      <ListGroup
-                        variant="flush"
-                        className="sticky-top BeforeScroll "
-                      >
-                        <div id="apollo_widget_left_sidebar">
-                          <ListGroup.Item className="bg-app border-width-0px ">
-                            <h4
-                              className="roboto-regular-font"
-                              onClick={this.handleHomeButtonClickWithGA }
-                              style={{cursor: 'pointer'}}
-                            >
-                                Apollo
-                            </h4>
+                <Col lg={2} className="hide-md" >
 
-                          </ListGroup.Item>
+                  <ListGroup
+                    variant="flush"
+                    className="sticky-top BeforeScroll "
+                  >
+                    <div id="apollo_widget_left_sidebar">
+                      <ListGroup.Item className="bg-app border-width-0px ">
+                        <h4
+                          className="roboto-regular-font"
+                          onClick={this.handleHomeButtonClickWithGA }
+                          style={{cursor: 'pointer'}}
+                        >
+                            Apollo
+                        </h4>
 
-                          <ListGroup.Item className="bg-app border-width-0px ">
+                      </ListGroup.Item>
 
-                            {
-                              !loading &&
-                                <React.Fragment>
-                                  <ArticleUpvote article_id={this.props.match.params.article_id} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
-                                  <ArticleDownvote article_id={this.props.match.params.article_id} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
-                                </React.Fragment>
-                            }
+                      <ListGroup.Item className="bg-app border-width-0px ">
 
-                            <br />
+                        {
+                          !loading &&
+                            <React.Fragment>
+                              <ArticleUpvote article_id={this.props.match.params.article_id} article_downvoted={article_downvoted} article_upvoted={this.handleArticleUpvoteClick} />
+                              <ArticleDownvote article_id={this.props.match.params.article_id} article_upvoted={article_upvoted} article_downvoted={this.handleArticleDownvoteClick} />
+                            </React.Fragment>
+                        }
 
-                            <a
-                              class="margin-top-5-percent"
-                              target="_blank"
-                              href={twitter_link}
-                              onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
-                            >
-                              <TwitterLogo />
-                            </a>
-                            <br />
-                            <br />
-                            <a
-                              class="margin-top-5-percent"
-                              target="_blank"
-                              href={reddit_link}
-                              onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
-                            >
-                              <RedditLogo />
-                            </a>
-                            <br />
-                            <br />
-                            <a
-                              class="margin-top-5-percent"
-                              target="_blank"
-                              href={linkedin_link}
-                              onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
-                            >
-                              <LinkedInLogo />
-                            </a>
-                            <br />
-                            <br />
-                            <a
-                              class="margin-top-5-percent"
-                              target="_blank"
-                              href={email_link}
-                              onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
-                            >
-                              <EmailLogo />
-                            </a>
+                        <br />
+                        <br />
 
-                            {
-                              !authenticated &&
-                                <React.Fragment>
-                                  <br />
-                                  <br />
-                                  <Link to="/signup" className="plain-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
-                                    <Button
-                                      variant="outline-secondary"
-                                      size="sm"
-                                      className="roboto-bold-font"
-                                    >
-                                      Signup
-                                    </Button>
-                                  </Link>
+                        <a
+                          class="margin-top-5-percent"
+                          target="_blank"
+                          href={twitter_link}
+                          onClick={ () => Event("Article Sharing", "Sharing Article via Twitter Link in Left Sidebar", "From Article Page") }
+                        >
+                          <TwitterLogo />
+                        </a>
+                        <br />
+                        <br />
+                        <a
+                          class="margin-top-5-percent"
+                          target="_blank"
+                          href={reddit_link}
+                          onClick={ () => Event("Article Sharing", "Sharing Article via Reddit Link in Left Sidebar", "From Article Page") }
+                        >
+                          <RedditLogo />
+                        </a>
+                        <br />
+                        <br />
+                        <a
+                          class="margin-top-5-percent"
+                          target="_blank"
+                          href={linkedin_link}
+                          onClick={ () => Event("Article Sharing", "Sharing Article via Linkedin Link in Left Sidebar", "From Article Page") }
+                        >
+                          <LinkedInLogo />
+                        </a>
+                        <br />
+                        <br />
+                        <a
+                          class="margin-top-5-percent"
+                          target="_blank"
+                          href={email_link}
+                          onClick={ () => Event("Article Sharing", "Sharing Article via Email Link in Left Sidebar", "From Article Page") }
+                        >
+                          <EmailLogo />
+                        </a>
 
-                                </React.Fragment>
-                            }
-                          </ListGroup.Item>
-                        </div>
-                      </ListGroup>
+                        {
+                          !authenticated &&
+                            <React.Fragment>
+                              <br />
+                              <br />
+                              <Link to="/signup" className="plain-link" onClick={() => Event("Routing", "Opening Signup Page", "From Article Page") }>
+                                <Button
+                                  variant="outline-secondary"
+                                  size="sm"
+                                  className="roboto-bold-font"
+                                >
+                                  Signup
+                                </Button>
+                              </Link>
 
-                    </Col>
-                }
+                            </React.Fragment>
+                        }
+                      </ListGroup.Item>
+                    </div>
+                  </ListGroup>
+
+                </Col>
+
                 <Col lg={8} md={12}  >
 
                   {

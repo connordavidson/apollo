@@ -252,6 +252,9 @@ p > strong {
 }
 
 
+.border-width-0px {
+  border-width : 0px ;
+}
 
 
 a.plain-link:link
@@ -523,4 +526,19 @@ a.plain-link:active
 .AfterScroll {
   /* display:block; */
   visibility: visible;
+}
+
+
+/* hides .hide-md if the screen is smaller than (or equal to) a Bootstrap md width screen  */
+@media (max-width: 992px) {
+  .hide-md {
+    display : none ;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .padding-top-test {
+    padding-top : 20% ;
+  }
 }

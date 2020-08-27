@@ -27,12 +27,14 @@ function Error404() {
   return(
 
       <Container>
-        <Row>
-          <Col xs="6">
-            <Error404GraphicSVG />
-          </Col>
-          {/*<Col xs={{ span: 8, offset: 2 }}>*/}
-          <Col xs={{ span: 6 }}>
+
+
+        <Row className="padding-top-test">
+
+          {/*
+            * align-self-center : keeps it horizontally aligned with the svg to the left as the width of the window shrinks
+          */}
+          <Col lg={{ span: 6 }} className="align-self-center">
             <br />
             <br />
             <br />
@@ -68,6 +70,10 @@ function Error404() {
 
             <br />
             <br />
+
+          </Col>
+          <Col  lg={{ span: 6 , order: "first" }} className="align-self-center" >
+            <Error404GraphicSVG />
           </Col>
         </Row>
       </Container>
