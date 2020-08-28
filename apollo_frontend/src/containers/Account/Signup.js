@@ -118,6 +118,10 @@ class  Signup extends React.Component  {
     if(error){
       var errors = error.response.data
     }
+    console.log("errors : ")
+    console.log(errors)
+    console.log(error.response.data) 
+    console.log("/*---------------------*/")
 
     if(token){
       return <Redirect to='/' />

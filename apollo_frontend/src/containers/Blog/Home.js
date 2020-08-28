@@ -122,11 +122,7 @@ class Home extends React.Component {
               <Navbar.Text><h5 className="ubuntu-bold-font">Updates, news, and stories from the future of ecommerce</h5></Navbar.Text>
             </nav>
           </Row>
-          <Row>
-            <Col >
 
-            </Col>
-          </Row>
         </Container>
         <hr />
 
@@ -155,7 +151,7 @@ class Home extends React.Component {
                     articles.slice(3, -1).map(article =>  (
 
                         <ListGroup.Item className="bg-app">
-                          <Link to={'blog/article/'+article.id} className="plain-link" onClick={()=> Event("Routing", "Opening Pinned Article;; id = " + article.id, "From Home Page")}>
+                          <Link to={'blog/article/'+article.id} className="plain-link" onClick={()=> Event("Routing", "Opening Article; id = " + article.id, "From Home Page")}>
                             <Card
                               className="width-100-percent border-radius-25px "
                               id={article.id}

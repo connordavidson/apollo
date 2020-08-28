@@ -9,17 +9,15 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { Event } from "../../GlobalMisc/Tracking";
+import { Event } from "containers/GlobalMisc/Tracking";
 
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 import { StarFill  } from 'react-bootstrap-icons';
 
-import RichText from '../../GlobalMisc/RichText';
+// import RichText from '../../GlobalMisc/RichText';
+import  RichText  from "containers/GlobalMisc/RichText";
 
-import "../../../content/css/App.css";
-
-import apollo_calibri_light_grey_bkg from  "../../../content/images/apollo_calibri_light_grey_bkg_tall.png" ;
-//"../images/apollo_calibri_light_grey_bkg.png" ;
+import "content/css/App.css";
 
 class HomeCard extends React.Component {
 
@@ -34,7 +32,7 @@ class HomeCard extends React.Component {
 
           <Card.Img
             variant="top"
-            src={apollo_calibri_light_grey_bkg}
+            src={require("content/images/apollo_calibri_light_grey_bkg_md.png") }
             className="border-radius-25px-top-corners "
           />
 
@@ -52,11 +50,8 @@ class HomeCard extends React.Component {
 
         </Card>
 
-
-
     )
   }
-
 }
 
 

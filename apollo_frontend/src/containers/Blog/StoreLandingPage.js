@@ -47,9 +47,9 @@ import "../../content/css/App.css";
 class StoreLandingPage extends React.Component {
 
   state = {
-    error: null , //stores the error that comes from the backend
+    error : null , //stores the error that comes from the backend
     loading : false , //to determine if the page is loading
-    email: "" , //stores the email from the "add email" widget
+    email : "" , //stores the email from the "add email" widget
     email_submitted : null , //stores the response value after a user submits their email
 
   }
@@ -124,6 +124,8 @@ class StoreLandingPage extends React.Component {
 
     } = this.state
 
+    console.log(email_submitted)
+
     const twitter_link = "https://twitter.com/intent/tweet?text=check%20out%20this%20new%20ecommerce%20startup!%20https%3A%2F%2Fwww.apollostore.co/store"
     const facebook_link = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse "
     //" https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A3000%2Fblog%2Farticle%2F"+article_data['id']
@@ -135,21 +137,11 @@ class StoreLandingPage extends React.Component {
 
         <Container>
           <Row >
-            {/*
-            <Col xs={{ span: 6}} >
 
+            <Col xs={{span: 12}} lg={{ span: 8, offset: 2 }}>
 
-
-            </Col >
-            */}
-
-            <Col xs={{ span: 8, offset: 2 }}>
-
-              {/*<br />*/}
               <RocketToMoon />
-              {/*<br />
-              <br />
-              <br />*/}
+              {/*
               <Row>
                 <h3 className="l1-txt1 txt-center p-b-10">
                   Under
@@ -160,10 +152,21 @@ class StoreLandingPage extends React.Component {
                   Construction
                 </h3>
               </Row>
+              */}
+              <Row>
+                <h3 className="l1-txt1 txt-center p-b-10">
+                  Coming
+                </h3>
+              </Row>
+              <Row>
+                <h3 className="l1-txt1 txt-center p-b-10">
+                  Soon
+                </h3>
+              </Row>
               <Row>
                 {/*this nav with the class is used to make the text grey*/}
                 <nav className="navbar-light">
-                  <Navbar.Text><h6 className=" ubuntu-regular-font font-size-24px">This part of our website is currently under development, sign up below for updates!</h6></Navbar.Text>
+                  <Navbar.Text><h6 className=" ubuntu-regular-font font-size-24px">This part of our website is currently under development, sign up below for early access and special promotions!</h6></Navbar.Text>
                 </nav>
               </Row>
 
@@ -188,29 +191,36 @@ class StoreLandingPage extends React.Component {
 
                   <Col xs={5} s={3}>
                     {
-                      email_submitted ?
-                        <CheckCircle className="text-success font-size-4em" />
-                      :
-                        loading ?
-                          <Button
-                            disabled={true}
-                            type="submit"
-                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
-                          >
-                            <ButtonLoaderSpinner />
-                          </Button>
-                        :
-                          <Button
-                            disabled={this.handleEmailValidated()}
-                            onClick={this.handlePostEmailWithGA }
-                            type="submit"
-                            className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
-                          >
-                            Submit
-                          </Button>
-                    }
 
+                      loading ?
+                        <Button
+                          disabled={true}
+                          type="submit"
+                          className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
+                        >
+                          <ButtonLoaderSpinner />
+                        </Button>
+                      :
+                        <Button
+                          disabled={this.handleEmailValidated() || email_submitted}
+                          onClick={this.handlePostEmailWithGA }
+                          type="submit"
+                          className="mb-2 flex-c-m s1-txt4 size3 where1 how-btn width-100-percent "
+                        >
+                          Submit
+                        </Button>
+                    }
                   </Col>
+                </Form.Row>
+                <Form.Row >
+                    {
+                      email_submitted &&
+                        <Col sm={{ span: 5, offset: 7 }} xs={{ span: 8, offset: 4 }} >
+                          <small className="ubuntu-regular-font color-green " >
+                            Submitted! You'll receive an email shortly
+                          </small>
+                        </Col>
+                    }
                 </Form.Row>
               {/*</Form>*/}
 

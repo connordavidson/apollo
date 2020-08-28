@@ -82,7 +82,7 @@ class ArticlePage extends React.Component  {
       })
       .catch(error => {
         console.log(error.response.status)
-
+        Event("Error", "Loading Article Data", "Error code : " + error.response.status )
         this.setState({
           error: error.response.status ,
           loading : false
