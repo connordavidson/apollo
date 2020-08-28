@@ -9,15 +9,14 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { Event } from "containers/GlobalMisc/Tracking";
-
 // found at https://www.npmjs.com/package/react-bootstrap-icons
 import { StarFill  } from 'react-bootstrap-icons';
 
-// import RichText from '../../GlobalMisc/RichText';
+import { Event } from "containers/GlobalMisc/Tracking";
 import  RichText  from "containers/GlobalMisc/RichText";
 
 import "content/css/App.css";
+
 
 class HomeCard extends React.Component {
 

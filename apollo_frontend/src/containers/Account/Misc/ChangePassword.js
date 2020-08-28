@@ -9,14 +9,14 @@ import {
   Card ,
 
 } from 'react-bootstrap';
+
+import { Event }              from    'containers/GlobalMisc/Tracking';
+import ButtonLoaderSpinner    from    'containers/GlobalMisc/ButtonLoaderSpinner';
+
 import {
   change_password_url ,
 
-} from "../../../backend-urls.js" ;
-
-import { Event }              from    '../../GlobalMisc/Tracking';
-import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner';
-
+} from "backend-urls.js" ;
 
 class ChangePassword extends React.Component {
 

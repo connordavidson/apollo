@@ -9,18 +9,16 @@ import {
 
 } from "react-bootstrap";
 
-import { Event, PageView}   from    '../GlobalMisc/Tracking';
-import LoaderSpinner        from    '../GlobalMisc/LoaderSpinner'
-import ButtonLoaderSpinner  from    '../GlobalMisc/ButtonLoaderSpinner'
+import { Event, PageView}   from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner        from    'containers/GlobalMisc/LoaderSpinner'
+import ButtonLoaderSpinner  from    'containers/GlobalMisc/ButtonLoaderSpinner'
 
+import "content/css/App.css";
 
-
-
-import "../../content/css/App.css";
 import {
   reset_password_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 class ForgotPassword extends React.Component {

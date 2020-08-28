@@ -9,18 +9,18 @@ import {
   Card ,
 
 } from 'react-bootstrap';
+
+import { Event }              from    'containers/GlobalMisc/Tracking';
+import ButtonLoaderSpinner    from    'containers/GlobalMisc/ButtonLoaderSpinner';
+import LoaderSpinner          from    'containers/GlobalMisc/LoaderSpinner';
+
 import {
   get_user_email_preferences_url ,
   update_user_email_preferences_url ,
 
-} from "../../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
-
-import { Event }              from    '../../GlobalMisc/Tracking';
-import ButtonLoaderSpinner    from    '../../GlobalMisc/ButtonLoaderSpinner';
-import LoaderSpinner          from    '../../GlobalMisc/LoaderSpinner';
-
-//stores the values of the
+//stores the values of the user's preferences
 var changed_prefs_data = {}
 
 class UserEmailPreferences extends React.Component {
@@ -175,7 +175,7 @@ class UserEmailPreferences extends React.Component {
 
     return(
       <Container>
-      
+
         <Card className="border-radius-25px  " >
           <Card.Body>
             <Card.Title>

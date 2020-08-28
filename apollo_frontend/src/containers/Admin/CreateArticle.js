@@ -12,17 +12,16 @@ import {
 } from 'react-bootstrap';
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
-
 //for ReactQuill. found at https://github.com/zenoamaro/react-quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 
-import "../../content/css/App.css";
+import "content/css/App.css";
 import {
   create_article_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 

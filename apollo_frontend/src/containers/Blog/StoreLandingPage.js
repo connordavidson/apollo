@@ -17,28 +17,28 @@ import {
   FormControl ,
 
 } from 'react-bootstrap';
-import { connect } from "react-redux";
-import { CheckCircle  } from 'react-bootstrap-icons';
+import { connect }            from "react-redux";
+import { CheckCircle  }       from 'react-bootstrap-icons';
 
-import { Event, PageView } from "../GlobalMisc/Tracking";
+import { Event, PageView }    from "containers/GlobalMisc/Tracking";
 
-import TwitterLogo      from    '../GlobalMisc/TwitterLogo';
-import RedditLogo       from    '../GlobalMisc/RedditLogo';
-import LinkedInLogo     from    '../GlobalMisc/LinkedInLogo';
-import EmailLogo        from    '../GlobalMisc/EmailLogo';
-import FacebookLogo     from    '../GlobalMisc/FacebookLogo';
+import TwitterLogo            from    'containers/GlobalMisc/TwitterLogo';
+import RedditLogo             from    'containers/GlobalMisc/RedditLogo';
+import LinkedInLogo           from    'containers/GlobalMisc/LinkedInLogo';
+import EmailLogo              from    'containers/GlobalMisc/EmailLogo';
+import FacebookLogo           from    'containers/GlobalMisc/FacebookLogo';
 
-import ButtonLoaderSpinner    from    '../GlobalMisc/ButtonLoaderSpinner'
+import ButtonLoaderSpinner    from    'containers/GlobalMisc/ButtonLoaderSpinner'
 
-import RocketToMoon     from    '../GlobalMisc/RocketToMoon/RocketToMoon';
+import RocketToMoon           from    'containers/GlobalMisc/RocketToMoon/RocketToMoon';
 
 
 import {
   create_email_address_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
-import "../../content/css/App.css";
+import "content/css/App.css";
 
 
 
@@ -47,9 +47,9 @@ import "../../content/css/App.css";
 class StoreLandingPage extends React.Component {
 
   state = {
-    error : null , //stores the error that comes from the backend
-    loading : false , //to determine if the page is loading
-    email : "" , //stores the email from the "add email" widget
+    error           : null , //stores the error that comes from the backend
+    loading         : false , //to determine if the page is loading
+    email           : "" , //stores the email from the "add email" widget
     email_submitted : null , //stores the response value after a user submits their email
 
   }

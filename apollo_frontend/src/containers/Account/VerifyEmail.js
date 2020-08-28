@@ -10,16 +10,15 @@ import {
 } from "react-bootstrap";
 import { NavLink, Redirect }  from    "react-router-dom";
 
-import { Event, PageView}     from    '../GlobalMisc/Tracking';
+import { Event, PageView}     from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner          from    'containers/GlobalMisc/LoaderSpinner'
 
-import LoaderSpinner          from    '../GlobalMisc/LoaderSpinner'
 
-
-import "../../content/css/App.css";
+import "content/css/App.css";
 import {
   verify_email_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 class VerifyEmail extends React.Component {

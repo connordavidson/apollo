@@ -15,17 +15,15 @@ import {
   FormControl ,
 
 } from 'react-bootstrap';
-import { CheckCircle  } from 'react-bootstrap-icons';
+import { CheckCircle  }       from 'react-bootstrap-icons';
 
-import { Event, PageView} from './GlobalMisc/Tracking';
-
-import TwitterLogo      from    './GlobalMisc/TwitterLogo';
-import RedditLogo       from    './GlobalMisc/RedditLogo';
-import LinkedInLogo     from    './GlobalMisc/LinkedInLogo';
-import EmailLogo        from    './GlobalMisc/EmailLogo';
-import FacebookLogo     from    './GlobalMisc/FacebookLogo';
-
-import ButtonLoaderSpinner    from    './GlobalMisc/ButtonLoaderSpinner'
+import { Event, PageView }     from 'containers/GlobalMisc/Tracking';
+import TwitterLogo            from    'containers/GlobalMisc/TwitterLogo';
+import RedditLogo             from    'containers/GlobalMisc/RedditLogo';
+import LinkedInLogo           from    'containers/GlobalMisc/LinkedInLogo';
+import EmailLogo              from    'containers/GlobalMisc/EmailLogo';
+import FacebookLogo           from    'containers/GlobalMisc/FacebookLogo';
+import ButtonLoaderSpinner    from    'containers/GlobalMisc/ButtonLoaderSpinner'
 
 
 

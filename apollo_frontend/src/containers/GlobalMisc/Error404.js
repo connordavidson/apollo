@@ -16,8 +16,8 @@ import {
 
 } from 'react-bootstrap';
 
-import Error404GraphicSVG from "./Error404GraphicSVG" ;
-import { Event, PageView} from './Tracking';
+import Error404GraphicSVG from "containers/GlobalMisc/Error404GraphicSVG" ;
+import { Event, PageView } from 'containers/GlobalMisc/Tracking';
 //should get triggered if the user enteres a URL that is nonexistant..
 //if they enter "apollo.com/buystuff" it'll redirect here. try something with wildcards?? idk
 // or with something like this.  <Route exact path="*" component={Error} />

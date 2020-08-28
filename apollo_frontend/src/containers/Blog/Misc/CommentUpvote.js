@@ -5,19 +5,17 @@ import {
   Badge ,
 
 } from 'react-bootstrap';
+import { connect } from "react-redux";
 import { ChevronUp } from 'react-bootstrap-icons';
 
-
-import { Event } from '../../GlobalMisc/Tracking';
-
-import { connect } from "react-redux";
+import { Event } from 'containers/GlobalMisc/Tracking';
 
 import {
   create_comment_upvote_url ,
   remove_comment_upvote_url ,
   get_comment_upvotes_url ,
 
-} from "../../../backend-urls.js" ;
+} from "backend-urls.js" ;
 //should get triggered if the user enteres a URL that is nonexistant..
 //if they enter "apollo.com/buystuff" it'll redirect here. try something with wildcards?? idk
 // or with something like this.  <Route exact path="*" component={Error} />

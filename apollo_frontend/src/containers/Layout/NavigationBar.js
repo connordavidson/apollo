@@ -6,13 +6,13 @@ import {
   Container ,
 
 } from 'react-bootstrap';
-import { Event } from "../GlobalMisc/Tracking";
+import { Event } from "containers/GlobalMisc/Tracking";
 
 import { connect } from "react-redux";
 import {
   logoutUser ,
 
-} from "../../store/actions/auth";
+} from "store/actions/auth";
 
 
 class NavigationBar extends React.Component {

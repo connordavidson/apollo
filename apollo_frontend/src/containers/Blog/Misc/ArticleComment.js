@@ -5,13 +5,12 @@ import {
 } from 'react-bootstrap';
 
 
-import CommentUpvote      from    './CommentUpvote'
-import CommentDownvote    from    './CommentDownvote'
+import CommentUpvote      from    'containers/Blog/Misc/CommentUpvote'
+import CommentDownvote    from    'containers/Blog/Misc/CommentDownvote'
+import RichText           from    'containers/GlobalMisc/RichText'
 
-import RichText           from    '../../GlobalMisc/RichText'
 
-
-import "../../../content/css/App.css";
+import "content/css/App.css";
 
 
 

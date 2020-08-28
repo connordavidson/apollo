@@ -9,15 +9,16 @@ import {
 
 } from "react-bootstrap";
 
-import { Event, PageView}   from    '../GlobalMisc/Tracking';
 
-import LoaderSpinner        from    '../GlobalMisc/LoaderSpinner'
+import { Event, PageView}   from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner        from    'containers/GlobalMisc/LoaderSpinner'
 
-import "../../content/css/App.css";
+import "content/css/App.css";
+
 import {
   set_new_password_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 class SetNewPassword extends React.Component {

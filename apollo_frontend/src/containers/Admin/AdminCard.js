@@ -16,8 +16,8 @@ import {Link} from "react-router-dom";
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
 
-import { Event }        from    '../GlobalMisc/Tracking';
-import LoaderSpinner    from    '../GlobalMisc/LoaderSpinner';
+import { Event }        from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner    from    'containers/GlobalMisc/LoaderSpinner';
 
 
 

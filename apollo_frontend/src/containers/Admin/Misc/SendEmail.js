@@ -14,19 +14,18 @@ import {
 import { connect }            from "react-redux";
 import {withRouter}           from 'react-router';
 
-import {
-  get_user_email_preferences_url ,
-  create_promotional_email_url ,
-
-} from "../../../backend-urls.js" ;
-
-import { PageView , Event }   from    '../../GlobalMisc/Tracking';
-import LoaderSpinner          from    "../../GlobalMisc/LoaderSpinner"
-
 //for ReactQuill. found at https://github.com/zenoamaro/react-quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+import { PageView , Event }   from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner          from    "containers/GlobalMisc/LoaderSpinner"
+
+import {
+  get_user_email_preferences_url ,
+  create_promotional_email_url ,
+
+} from "backend-urls.js" ;
 
 
 

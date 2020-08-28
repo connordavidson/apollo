@@ -6,7 +6,7 @@ import {
 
 } from 'react-bootstrap';
 
-import "../../content/css/App.css";
+import "content/css/App.css";
 
 
 function Footer() {

@@ -15,21 +15,21 @@ import {
 
 } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { Event, PageView } from "../GlobalMisc/Tracking";
+import { Event, PageView } from "containers/GlobalMisc/Tracking";
 
-import RichText from '../GlobalMisc/RichText';
-import LoaderSpinner from '../GlobalMisc/LoaderSpinner'
-import PinnedArticle from './Misc/PinnedArticle';
-import HomeCardDeck from './Misc/HomeCardDeck';
+import RichText from 'containers/GlobalMisc/RichText';
+import LoaderSpinner from 'containers/GlobalMisc/LoaderSpinner'
+import PinnedArticle from 'containers/Blog/Misc/PinnedArticle';
+import HomeCardDeck from 'containers/Blog/Misc/HomeCardDeck';
 
 
 
 import {
   all_articles_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
-import "../../content/css/App.css";
+import "content/css/App.css";
 
 
 

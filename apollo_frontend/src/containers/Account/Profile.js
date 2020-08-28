@@ -17,21 +17,21 @@ import {
 import { connect } from "react-redux";
 import {withRouter} from 'react-router';
 
-import ChangePassword           from    './Misc/ChangePassword' ;
-import UserInformation          from    './Misc/UserInformation';
-import UserEmailPreferences     from    './Misc/UserEmailPreferences';
-import UserArticleInteractions  from    './Misc/UserArticleInteractions';
+import ChangePassword           from    'containers/Account/Misc/ChangePassword' ;
+import UserInformation          from    'containers/Account/Misc/UserInformation';
+import UserEmailPreferences     from    'containers/Account/Misc/UserEmailPreferences';
+import UserArticleInteractions  from    'containers/Account/Misc/UserArticleInteractions';
 
-import AdminCard                from    '../Admin/AdminCard.js' ;
+import AdminCard                from    'containers/Admin/AdminCard.js' ;
 
-import { PageView , Event }     from    '../GlobalMisc/Tracking';
-import LoaderSpinner            from    '../GlobalMisc/LoaderSpinner';
-
+import { PageView , Event }     from    'containers/GlobalMisc/Tracking';
+import LoaderSpinner            from    'containers/GlobalMisc/LoaderSpinner';
 
 import {
   get_user_details_url ,
 
-} from "../../backend-urls.js" ;
+} from "backend-urls.js" ;
+
 
 
 class Profile extends React.Component {

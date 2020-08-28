@@ -8,15 +8,15 @@ import {
   Badge ,
 
 } from 'react-bootstrap';
-import { connect } from "react-redux";
-import { Event } from "../../GlobalMisc/Tracking";
+import { connect }      from "react-redux";
+import { Event }        from "containers/GlobalMisc/Tracking";
 
 // found at https://www.npmjs.com/package/react-bootstrap-icons
-import { StarFill  } from 'react-bootstrap-icons';
+import { StarFill  }    from 'react-bootstrap-icons';
 
-import RichText from '../../GlobalMisc/RichText';
+import RichText         from 'containers/GlobalMisc/RichText';
 
-import "../../../content/css/App.css";
+import "content/css/App.css";
 
 
 

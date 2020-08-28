@@ -1,8 +1,8 @@
 import React from 'react';
-import MoonSVG from './MoonSVG' ;
-import StarsSVG from './StarsSVG' ;
-import EarthSVG from './EarthSVG' ;
-import RocketSVG from './RocketSVG' ;
+import MoonSVG from 'containers/GlobalMisc/RocketToMoon/MoonSVG' ;
+import StarsSVG from 'containers/GlobalMisc/RocketToMoon/StarsSVG' ;
+import EarthSVG from 'containers/GlobalMisc/RocketToMoon/EarthSVG' ;
+import RocketSVG from 'containers/GlobalMisc/RocketToMoon/RocketSVG' ;
 
 
 function RocketToMoon() {

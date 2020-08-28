@@ -11,33 +11,31 @@ import {
   Badge ,
 
 } from 'react-bootstrap';
+import { connect }            from      "react-redux";
 
 //for ReactQuill (comment box). found at https://github.com/zenoamaro/react-quill
 import ReactQuill             from      'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-import { connect }            from      "react-redux";
 
-import ArticleComment         from      './ArticleComment'
-import CommentUpvote          from      './CommentUpvote'
-import CommentDownvote        from      './CommentDownvote'
-
-
-import LoaderSpinner          from      '../../GlobalMisc/LoaderSpinner'
-import ButtonLoaderSpinner    from      '../../GlobalMisc/ButtonLoaderSpinner'
-import { Event }              from      '../../GlobalMisc/Tracking';
-import RichText               from      '../../GlobalMisc/RichText'
+import ArticleComment         from      'containers/Blog/Misc/ArticleComment'
+import CommentUpvote          from      'containers/Blog/Misc/CommentUpvote'
+import CommentDownvote        from      'containers/Blog/Misc/CommentDownvote'
+import LoaderSpinner          from      'containers/GlobalMisc/LoaderSpinner'
+import ButtonLoaderSpinner    from      'containers/GlobalMisc/ButtonLoaderSpinner'
+import { Event }              from      'containers/GlobalMisc/Tracking';
+import RichText               from      'containers/GlobalMisc/RichText'
 
 
 
-import "../../../content/css/App.css";
+import "content/css/App.css";
 
 import {
   create_comment_url ,
   create_upvote_url ,
   comments_url ,
 
-} from "../../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 

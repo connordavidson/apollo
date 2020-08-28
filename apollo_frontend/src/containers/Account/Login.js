@@ -9,14 +9,14 @@ import {
   Form ,
 
 } from "react-bootstrap";
-import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
-import {withRouter} from 'react-router';
-import { Event, PageView} from '../GlobalMisc/Tracking';
+import { connect }            from "react-redux";
+import { NavLink, Redirect }  from "react-router-dom";
 
+import {withRouter}           from 'react-router';
+import { Event, PageView}     from 'containers/GlobalMisc/Tracking';
 
-import "../../content/css/App.css";
-import { authLogin } from "../../store/actions/auth";
+import "content/css/App.css";
+import { authLogin }          from "store/actions/auth";
 
 
 

@@ -9,14 +9,12 @@ import {
 
 } from 'react-bootstrap';
 
-
-import LoaderSpinner    from    '../../GlobalMisc/LoaderSpinner';
-
+import LoaderSpinner    from    'containers/GlobalMisc/LoaderSpinner';
 
 import {
   get_user_details_url ,
 
-} from "../../../backend-urls.js" ;
+} from "backend-urls.js" ;
 
 
 

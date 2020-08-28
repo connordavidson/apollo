@@ -8,13 +8,15 @@ import {
   Alert ,
 
 } from "react-bootstrap";
-import { NavLink, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { NavLink, Redirect }  from "react-router-dom";
+import { connect }            from "react-redux";
 
-import { Event, PageView} from '../GlobalMisc/Tracking';
-import "../../content/css/App.css";
-import { authSignup } from "../../store/actions/auth";
-import ButtonLoaderSpinner from '../GlobalMisc/ButtonLoaderSpinner'
+import { Event, PageView}       from 'containers/GlobalMisc/Tracking';
+import ButtonLoaderSpinner      from 'containers/GlobalMisc/ButtonLoaderSpinner'
+
+import { authSignup }           from "store/actions/auth" ;
+
+import "content/css/App.css";
 
 class  Signup extends React.Component  {
   state = {
@@ -120,7 +122,7 @@ class  Signup extends React.Component  {
     }
     console.log("errors : ")
     console.log(errors)
-    console.log(error.response.data) 
+    console.log(error.response.data)
     console.log("/*---------------------*/")
 
     if(token){
